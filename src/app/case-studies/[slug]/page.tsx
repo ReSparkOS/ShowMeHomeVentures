@@ -111,38 +111,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-8">
             The Numbers
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Card className="border-slate-200 bg-white">
               <CardHeader className="pb-2">
-                <CardDescription>Before Value</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="font-semibold text-slate-900">{study.beforeValue}</p>
-              </CardContent>
-            </Card>
-            <Card className="border-slate-200 bg-white">
-              <CardHeader className="pb-2">
-                <CardDescription>Renovation Cost</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="font-semibold text-slate-900">
-                  {study.renovationCost}
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="border-slate-200 bg-white">
-              <CardHeader className="pb-2">
-                <CardDescription>Offer Price</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="font-semibold text-emerald-700">
-                  {study.offerPrice}
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="border-slate-200 bg-white">
-              <CardHeader className="pb-2">
-                <CardDescription>After Value</CardDescription>
+                <CardDescription>After-Repair Value (ARV)</CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="font-semibold text-slate-900">{study.afterValue}</p>
@@ -150,13 +122,36 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </Card>
             <Card className="border-slate-200 bg-white">
               <CardHeader className="pb-2">
-                <CardDescription>Timeline</CardDescription>
+                <CardDescription>Estimated Repairs</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="font-semibold text-red-600">
+                  - {study.renovationCost}
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="border-blue-200 bg-blue-50">
+              <CardHeader className="pb-2">
+                <CardDescription className="text-blue-700">Our Cash Offer</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="font-semibold text-blue-800">
+                  {study.offerPrice}
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="border-slate-200 bg-white">
+              <CardHeader className="pb-2">
+                <CardDescription>Days to Close</CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="font-semibold text-slate-900">{study.timeline}</p>
               </CardContent>
             </Card>
           </div>
+          <p className="mt-4 text-sm text-slate-500">
+            Formula: 70% of ARV minus repair costs = our offer. As-is value estimate: {study.beforeValue}.
+          </p>
         </div>
       </section>
 
@@ -169,10 +164,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             <CardContent className="pt-6">
               <p className="text-slate-700 leading-relaxed">
                 Every case study above reflects our Open-Book Certainty Offer™ in
-                action: we showed the seller the math (ARV, renovation costs, holding
-                costs, risk buffer), locked a real closing date in writing, and
-                honored the No Surprise Pledge. No re-trades, no hidden fees. Just
-                transparency and a close date you could count on.
+                action: we showed the seller exactly how we calculated the offer — 70%
+                of after-repair value minus estimated repair costs. We locked a real
+                closing date in writing and honored the No Surprise Pledge. No
+                re-trades, no hidden fees. Just transparency and a close date you
+                could count on.
               </p>
               <p className="mt-4 text-slate-700 leading-relaxed">
                 Ready for the same approach?{" "}

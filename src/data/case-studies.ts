@@ -35,10 +35,10 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "We closed in 14 days. The siblings split the proceeds and walked away with no lingering responsibilities. No open houses, no strangers walking through their childhood home. One sibling later said, 'We didn't have to agree on repairs or agents—we just had to agree on your number. That made everything easier.'",
     timeline: "14 days",
-    beforeValue: "$85,000–95,000 (as-is estimate)",
-    afterValue: "$165,000–175,000 (after renovation)",
-    renovationCost: "$35,000–45,000",
-    offerPrice: "$72,000–78,000",
+    beforeValue: "$85,000–$95,000 (as-is estimate)",
+    afterValue: "$170,000 (after renovation)",
+    renovationCost: "$40,000",
+    offerPrice: "$79,000 (70% of $170K minus $40K repairs)",
     images: [
       "/images/case-studies/phelps-grove-before.jpg",
       "/images/case-studies/phelps-grove-after.jpg",
@@ -61,10 +61,10 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "The seller walked away with a clean break and no more landlord headaches. We closed on schedule, assumed the leases, and completed the repairs after taking ownership. The owner said, 'I thought I'd have to evict someone and fix everything. You just took it. Best decision I made.'",
     timeline: "21 days",
-    beforeValue: "$90,000–100,000 (as-is, tenant-occupied)",
-    afterValue: "$145,000–155,000 (after repairs)",
-    renovationCost: "$28,000–35,000",
-    offerPrice: "$68,000–74,000",
+    beforeValue: "$90,000–$100,000 (as-is, tenant-occupied)",
+    afterValue: "$150,000 (after repairs)",
+    renovationCost: "$30,000",
+    offerPrice: "$75,000 (70% of $150K minus $30K repairs)",
     images: [
       "/images/case-studies/westside-duplex-exterior.jpg",
       "/images/case-studies/westside-duplex-interior.jpg",
@@ -87,10 +87,10 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "We closed in 19 days. The foreclosure was canceled. The family moved in with relatives and later said they were grateful to have avoided the long-term credit hit. 'You gave us a real date and you hit it. That's what we needed.'",
     timeline: "19 days",
-    beforeValue: "$75,000–85,000 (as-is)",
-    afterValue: "$130,000–140,000 (after repairs)",
-    renovationCost: "$22,000–28,000",
-    offerPrice: "$62,000–68,000",
+    beforeValue: "$75,000–$85,000 (as-is)",
+    afterValue: "$135,000 (after repairs)",
+    renovationCost: "$25,000",
+    offerPrice: "$69,500 (70% of $135K minus $25K repairs)",
     images: [
       "/images/case-studies/grant-beach-before.jpg",
     ],
@@ -112,10 +112,10 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "We closed in 17 days. The heir used the proceeds to cover estate expenses and never had to set foot in Springfield. We brought the property into compliance and later sold it to a young family. The heir said, 'I didn't know what to do. You took it off my plate completely.'",
     timeline: "17 days",
-    beforeValue: "$70,000–80,000 (as-is, violations)",
-    afterValue: "$155,000–165,000 (after full rehab)",
-    renovationCost: "$45,000–55,000",
-    offerPrice: "$58,000–64,000",
+    beforeValue: "$70,000–$80,000 (as-is, violations)",
+    afterValue: "$160,000 (after full rehab)",
+    renovationCost: "$50,000",
+    offerPrice: "$62,000 (70% of $160K minus $50K repairs)",
     images: [
       "/images/case-studies/roundtree-before.jpg",
       "/images/case-studies/roundtree-after.jpg",
