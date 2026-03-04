@@ -78,6 +78,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95,
     },
     {
+      url: `${SITE_URL}/we-buy-houses-springfield-mo`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${SITE_URL}/cash-home-buyers-springfield-mo`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
       url: `${SITE_URL}/get-offer`,
       lastModified: now,
       changeFrequency: "monthly",

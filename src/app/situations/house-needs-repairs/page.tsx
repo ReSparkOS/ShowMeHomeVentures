@@ -5,7 +5,7 @@ import { Hero } from "@/components/sections/hero";
 import { CtaSection } from "@/components/sections/cta-section";
 import { CaseStudyCards } from "@/components/sections/case-study-cards";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
-import { JsonLd, faqSchema, serviceSchema } from "@/components/seo/json-ld";
+import { JsonLd, faqSchema, serviceSchema, breadcrumbSchema } from "@/components/seo/json-ld";
 import { createMetadata } from "@/lib/metadata";
 import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
 
@@ -29,6 +29,14 @@ export default function HouseNeedsRepairsPage() {
           description: situation.description,
           areaServed: "Springfield, MO and the Ozarks region",
         })}
+      />
+
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Selling Situations", url: "/situations" },
+          { name: situation.shortTitle, url: `/situations/${situation.slug}` },
+        ])}
       />
 
       <Hero
@@ -119,6 +127,22 @@ export default function HouseNeedsRepairsPage() {
       <CaseStudyCards limit={1} featuredOnly={true} />
 
       <FaqAccordion faqs={situation.faqs} title="House Needs Repairs FAQs" />
+
+      <section className="py-16 border-y border-slate-200 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-xl font-bold text-slate-900">
+            We Serve All of Southwest Missouri
+          </h2>
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            <Link href="/areas/springfield-mo" className="text-blue-700 hover:underline">Springfield, MO</Link>
+            <Link href="/areas/ozark-mo" className="text-blue-700 hover:underline">Ozark, MO</Link>
+            <Link href="/areas/nixa-mo" className="text-blue-700 hover:underline">Nixa, MO</Link>
+            <Link href="/areas/republic-mo" className="text-blue-700 hover:underline">Republic, MO</Link>
+            <Link href="/areas/battlefield-mo" className="text-blue-700 hover:underline">Battlefield, MO</Link>
+            <Link href="/areas" className="font-medium text-blue-700 hover:underline">View all areas →</Link>
+          </div>
+        </div>
+      </section>
 
       <CtaSection
         heading="Ready to Sell Your House As-Is?"

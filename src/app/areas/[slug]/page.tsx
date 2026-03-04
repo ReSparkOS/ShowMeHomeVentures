@@ -200,6 +200,28 @@ export default async function AreaPage({ params }: AreaPageProps) {
         </div>
       </section>
 
+      <section className="py-16 border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-xl font-bold text-slate-900">
+            Common Selling Situations in {area.city}
+          </h2>
+          <p className="mt-2 text-sm text-slate-600">
+            No matter your situation, we can help. We buy houses in {area.city} from homeowners dealing with:
+          </p>
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            <Link href="/situations/inherited-house" className="text-blue-700 hover:underline">Inherited property</Link>
+            <Link href="/situations/house-needs-repairs" className="text-blue-700 hover:underline">Houses needing repairs</Link>
+            <Link href="/situations/foreclosure-options" className="text-blue-700 hover:underline">Foreclosure</Link>
+            <Link href="/situations/divorce" className="text-blue-700 hover:underline">Divorce</Link>
+            <Link href="/situations/tenants" className="text-blue-700 hover:underline">Tenant-occupied rentals</Link>
+            <Link href="/situations/vacant-property" className="text-blue-700 hover:underline">Vacant properties</Link>
+            <Link href="/situations/hoarder-house" className="text-blue-700 hover:underline">Hoarder houses</Link>
+            <Link href="/situations/code-violations" className="text-blue-700 hover:underline">Code violations</Link>
+            <Link href="/situations" className="font-medium text-blue-700 hover:underline">View all situations →</Link>
+          </div>
+        </div>
+      </section>
+
       <FaqAccordion
         faqs={areaFaqs}
         title={`Frequently Asked Questions About Selling in ${area.city}`}
