@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes enter {
+    from {
+      opacity: var(--tw-enter-opacity, 1);
+      transform: translate3d(
+          var(--tw-enter-translate-x, 0),
+          var(--tw-enter-translate-y, 0),
+          0
+        )
+        scale3d(
+          var(--tw-enter-scale, 1),
+          var(--tw-enter-scale, 1),
+          var(--tw-enter-scale, 1)
+        )
+        rotate(var(--tw-enter-rotate, 0));
+    }
+  }
+
+  @keyframes exit {
+    to {
+      opacity: var(--tw-exit-opacity, 1);
+      transform: translate3d(
+          var(--tw-exit-translate-x, 0),
+          var(--tw-exit-translate-y, 0),
+          0
+        )
+        scale3d(
+          var(--tw-exit-scale, 1),
+          var(--tw-exit-scale, 1),
+          var(--tw-exit-scale, 1)
+        )
+        rotate(var(--tw-exit-rotate, 0));
+    }
+  }
+
+  --animate-enter: enter 150ms ease-out;
+  --animate-exit: exit 150ms ease-in;
+}
+
+/* Light theme only — no dark mode */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  color: #0f172a; /* slate-900 */
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9; /* slate-100 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8; /* slate-400 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b; /* slate-500 */
+}
+
+/* Accordion animation utilities */
+@utility accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+@utility accordion-up {
+  animation: accordion-up 0.2s ease-out;
+}
+
+/* Animation utilities for Radix UI components */
+@utility animate-in {
+  animation-name: enter;
+  animation-duration: 150ms;
+  animation-timing-function: ease-out;
+  --tw-enter-opacity: initial;
+  --tw-enter-scale: initial;
+  --tw-enter-rotate: initial;
+  --tw-enter-translate-x: initial;
+  --tw-enter-translate-y: initial;
+}
+
+@utility animate-out {
+  animation-name: exit;
+  animation-duration: 150ms;
+  animation-timing-function: ease-in;
+  --tw-exit-opacity: initial;
+  --tw-exit-scale: initial;
+  --tw-exit-rotate: initial;
+  --tw-exit-translate-x: initial;
+  --tw-exit-translate-y: initial;
+}
+
+@utility fade-in-0 {
+  --tw-enter-opacity: 0;
+}
+
+@utility fade-out-0 {
+  --tw-exit-opacity: 0;
+}
+
+@utility zoom-in-95 {
+  --tw-enter-scale: 0.95;
+}
+
+@utility zoom-out-95 {
+  --tw-exit-scale: 0.95;
+}
+
+@utility slide-in-from-top-2 {
+  --tw-enter-translate-y: -0.5rem;
+}
+
+@utility slide-in-from-bottom-2 {
+  --tw-enter-translate-y: 0.5rem;
+}
+
+@utility slide-in-from-left-2 {
+  --tw-enter-translate-x: -0.5rem;
+}
+
+@utility slide-in-from-right-2 {
+  --tw-enter-translate-x: 0.5rem;
+}
+
+/* Dialog enter/exit animations - use valid utility names */
+@utility slide-out-to-left-half {
+  --tw-exit-translate-x: -50%;
+}
+
+@utility slide-out-to-top-48 {
+  --tw-exit-translate-y: -48%;
+}
+
+@utility slide-in-from-left-half {
+  --tw-enter-translate-x: -50%;
+}
+
+@utility slide-in-from-top-48 {
+  --tw-enter-translate-y: -48%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
