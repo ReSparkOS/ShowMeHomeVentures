@@ -14,6 +14,7 @@ import { JsonLd, serviceSchema, faqSchema, breadcrumbSchema } from "@/components
 import { createMetadata } from "@/lib/metadata";
 import { LeadForm } from "@/components/forms/lead-form";
 import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
+import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
 import {
   Card,
   CardContent,
@@ -126,7 +127,7 @@ export default function HomePage() {
           <LeadFormDialog
             triggerText="Get My Open-Book Offer"
             triggerSize="lg"
-            triggerClassName="bg-slate-900 hover:bg-slate-800"
+            triggerClassName="bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-900/25"
           />
         }
       />
@@ -161,76 +162,91 @@ export default function HomePage() {
       </section>
 
       {/* Lead form section */}
-      <section
-        id="get-offer"
-        className="py-20 lg:py-28 bg-slate-50 scroll-mt-24"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Get Your Open-Book Offer in 3 Easy Steps
-            </h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Tell us about your property. We&apos;ll reach out within 2 hours
-              during business hours with a transparent offer and a closing plan.
-            </p>
+      <AnimateOnScroll animation="fade-up">
+        <section
+          id="get-offer"
+          className="py-20 lg:py-28 bg-slate-50 scroll-mt-24"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                Get Your Open-Book Offer in 3 Easy Steps
+              </h2>
+              <p className="mt-4 text-lg text-slate-600">
+                Tell us about your property. We&apos;ll reach out within 2 hours
+                during business hours with a transparent offer and a closing plan.
+              </p>
+            </div>
+            <div className="max-w-4xl mx-auto">
+              <LeadForm />
+            </div>
           </div>
-          <div className="max-w-4xl mx-auto">
-            <LeadForm />
-          </div>
-        </div>
-      </section>
+        </section>
+      </AnimateOnScroll>
 
       {/* Open-Book Certainty Offer - 3 Pillars */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            The Open-Book Certainty Offer™
-          </h2>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
-            Three pillars that make our offer different: transparency, certainty,
-            and a real commitment.
-          </p>
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {pillars.map((pillar) => {
-              const Icon = pillar.icon;
-              return (
-                <Card
-                  key={pillar.title}
-                  className="border-slate-200 bg-white"
-                >
-                  <CardHeader>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-700">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="mt-4 text-xl">{pillar.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base text-slate-600">
-                      {pillar.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              );
-            })}
+      <AnimateOnScroll animation="fade-up">
+        <section className="py-20 lg:py-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              The Open-Book Certainty Offer™
+            </h2>
+            <p className="mt-4 max-w-2xl text-lg text-slate-600">
+              Three pillars that make our offer different: transparency, certainty,
+              and a real commitment.
+            </p>
+            <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {pillars.map((pillar, i) => {
+                const Icon = pillar.icon;
+                return (
+                  <AnimateOnScroll key={pillar.title} animation="fade-up" delay={i * 150}>
+                    <Card className="h-full border-slate-200 bg-white group">
+                      <CardHeader>
+                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-700 transition-colors group-hover:bg-blue-700 group-hover:text-white">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                        <CardTitle className="mt-4 text-xl">{pillar.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <CardDescription className="text-base text-slate-600">
+                          {pillar.description}
+                        </CardDescription>
+                      </CardContent>
+                    </Card>
+                  </AnimateOnScroll>
+                );
+              })}
+            </div>
+            <p className="mt-10 text-center">
+              <Link
+                href="/open-book-certainty-offer"
+                className="font-semibold text-blue-700 hover:text-blue-800 hover:underline"
+              >
+                Learn more about the Open-Book Certainty Offer →
+              </Link>
+            </p>
           </div>
-          <p className="mt-10 text-center">
-            <Link
-              href="/open-book-certainty-offer"
-              className="font-semibold text-blue-700 hover:text-blue-800 hover:underline"
-            >
-              Learn more about the Open-Book Certainty Offer →
-            </Link>
-          </p>
-        </div>
-      </section>
+        </section>
+      </AnimateOnScroll>
 
-      <OfferBreakdown />
-      <PledgeBox />
-      <CaseStudyCards limit={3} featuredOnly />
-      <SituationsGrid />
-      <TestimonialGrid limit={3} featuredOnly />
-      <FaqAccordion faqs={homepageFaqs} title="Frequently Asked Questions" />
+      <AnimateOnScroll animation="fade-up">
+        <OfferBreakdown />
+      </AnimateOnScroll>
+      <AnimateOnScroll animation="fade-up">
+        <PledgeBox />
+      </AnimateOnScroll>
+      <AnimateOnScroll animation="fade-up">
+        <CaseStudyCards limit={3} featuredOnly />
+      </AnimateOnScroll>
+      <AnimateOnScroll animation="fade-up">
+        <SituationsGrid />
+      </AnimateOnScroll>
+      <AnimateOnScroll animation="fade-up">
+        <TestimonialGrid limit={3} featuredOnly />
+      </AnimateOnScroll>
+      <AnimateOnScroll animation="fade-up">
+        <FaqAccordion faqs={homepageFaqs} title="Frequently Asked Questions" />
+      </AnimateOnScroll>
       <CtaSection />
     </>
   );

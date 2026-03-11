@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 import { testimonials } from "@/data/testimonials";
 import {
   Card,
@@ -39,9 +39,10 @@ export function TestimonialGrid({
           {items.map((testimonial) => (
             <Card
               key={testimonial.id}
-              className="flex flex-col border-slate-200 bg-white"
+              className="relative flex flex-col border-slate-200 bg-white overflow-hidden"
             >
-              <CardHeader className="pb-2">
+              <Quote className="absolute top-4 right-4 h-8 w-8 text-slate-100" />
+              <CardHeader className="pb-2 relative">
                 <div className="flex gap-1">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <Star
@@ -54,15 +55,20 @@ export function TestimonialGrid({
                   {testimonial.situation}
                 </Badge>
               </CardHeader>
-              <CardContent className="flex-1 pt-0">
-                <blockquote className="text-slate-600">
+              <CardContent className="flex-1 pt-0 relative">
+                <blockquote className="text-slate-600 italic leading-relaxed">
                   &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
-                <footer className="mt-4">
-                  <p className="font-medium text-slate-900">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-sm text-slate-500">{testimonial.location}</p>
+                <footer className="mt-5 flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">
+                    {testimonial.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-900">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-sm text-slate-500">{testimonial.location}</p>
+                  </div>
                 </footer>
               </CardContent>
             </Card>

@@ -285,6 +285,46 @@ export function LeadForm({ className }: LeadFormProps) {
   return (
     <div className={cn("flex flex-col gap-6 md:flex-row", className)}>
       <div className="flex-1">
+        {/* Step progress indicator */}
+        <div className="mb-6">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <div className={cn(
+                "flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors duration-300",
+                step >= 1
+                  ? "bg-emerald-700 text-white"
+                  : "bg-slate-200 text-slate-500"
+              )}>
+                {step > 1 ? (
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : "1"}
+              </div>
+              <span className={cn("text-sm font-medium", step >= 1 ? "text-slate-900" : "text-slate-400")}>
+                Property Info
+              </span>
+            </div>
+            <div className={cn(
+              "h-0.5 flex-1 rounded-full transition-colors duration-500",
+              step >= 2 ? "bg-emerald-700" : "bg-slate-200"
+            )} />
+            <div className="flex items-center gap-2">
+              <div className={cn(
+                "flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors duration-300",
+                step >= 2
+                  ? "bg-emerald-700 text-white"
+                  : "bg-slate-200 text-slate-500"
+              )}>
+                2
+              </div>
+              <span className={cn("text-sm font-medium", step >= 2 ? "text-slate-900" : "text-slate-400")}>
+                Your Details
+              </span>
+            </div>
+          </div>
+        </div>
+
         {step === 1 ? (
           <form onSubmit={handleStep1Continue} className="space-y-4">
             <input

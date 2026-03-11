@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export interface CaseStudyCardsProps {
@@ -51,33 +50,41 @@ export function CaseStudyCards({
         </p>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((study) => (
-            <Card
+            <Link
               key={study.slug}
-              className="flex flex-col border-slate-200 overflow-hidden"
+              href={`/case-studies/${study.slug}`}
+              className="group"
             >
-              <CardHeader className="pb-2">
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">{study.situation}</Badge>
-                  <Badge variant="outline">{study.location}</Badge>
-                </div>
-                <CardTitle className="mt-3 text-lg">{study.title}</CardTitle>
-                <Badge variant="outline" className="w-fit">
-                  {study.timeline}
-                </Badge>
-              </CardHeader>
-              <CardContent className="flex-1 pt-0">
-                <CardDescription className="line-clamp-3 text-slate-600">
-                  {study.challenge}
-                </CardDescription>
-              </CardContent>
-              <CardFooter>
-                <Button asChild variant="link" className="p-0 h-auto font-semibold">
-                  <Link href={`/case-studies/${study.slug}`}>
-                    Read Case Study →
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
+              <Card className="flex h-full flex-col border-slate-200 overflow-hidden">
+                {/* Color accent bar */}
+                <div className="h-1 bg-gradient-to-r from-emerald-500 to-blue-500" />
+                <CardHeader className="pb-2">
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="secondary">{study.situation}</Badge>
+                    <Badge variant="outline">{study.location}</Badge>
+                  </div>
+                  <CardTitle className="mt-3 text-lg group-hover:text-emerald-700 transition-colors">
+                    {study.title}
+                  </CardTitle>
+                  <Badge variant="outline" className="w-fit">
+                    {study.timeline}
+                  </Badge>
+                </CardHeader>
+                <CardContent className="flex-1 pt-0">
+                  <CardDescription className="line-clamp-3 text-slate-600">
+                    {study.challenge}
+                  </CardDescription>
+                </CardContent>
+                <CardFooter>
+                  <span className="text-sm font-semibold text-emerald-700 group-hover:underline flex items-center gap-1">
+                    Read Case Study
+                    <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </CardFooter>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>

@@ -131,12 +131,18 @@ export function OfferBreakdown() {
 
           <div className="mt-10 grid gap-8 lg:grid-cols-2">
             {/* Our Offer */}
-            <Card className="border-blue-200 bg-white">
-              <CardHeader className="border-b border-blue-100 bg-blue-50/50">
-                <CardTitle className="text-lg text-blue-800">
+            <Card className="relative border-2 border-emerald-500 bg-white shadow-lg shadow-emerald-100">
+              <div className="absolute -top-3.5 left-6">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-700 px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm">
+                  <CheckCircle2 className="h-3.5 w-3.5" />
+                  Recommended
+                </span>
+              </div>
+              <CardHeader className="border-b border-emerald-100 bg-emerald-50/60 pt-8">
+                <CardTitle className="text-lg text-emerald-900">
                   Our Cash Offer
                 </CardTitle>
-                <CardDescription className="text-blue-700">
+                <CardDescription className="text-emerald-700">
                   Sell as-is, close fast, no hidden costs
                 </CardDescription>
               </CardHeader>
@@ -148,23 +154,23 @@ export function OfferBreakdown() {
                       className="flex items-center justify-between px-6 py-3"
                     >
                       <span className="text-sm text-slate-700">{item.label}</span>
-                      <span className="text-sm font-medium text-slate-900">{item.value}</span>
+                      <span className="text-sm font-semibold text-slate-900">{item.value}</span>
                     </div>
                   ))}
                 </div>
               </CardContent>
-              <CardFooter className="border-t border-blue-100 bg-blue-50/50 px-6 py-4">
+              <CardFooter className="border-t border-emerald-100 bg-emerald-50/60 px-6 py-5">
                 <div className="flex w-full items-center justify-between">
                   <span className="font-semibold text-slate-900">You walk away with</span>
-                  <span className="text-xl font-bold text-emerald-700">$100,000</span>
+                  <span className="text-2xl font-bold text-emerald-700">$100,000</span>
                 </div>
               </CardFooter>
             </Card>
 
             {/* Traditional Listing */}
-            <Card className="border-slate-200 bg-white">
+            <Card className="border border-slate-200 bg-white opacity-90">
               <CardHeader className="border-b border-slate-100 bg-slate-50/50">
-                <CardTitle className="text-lg text-slate-700">
+                <CardTitle className="text-lg text-slate-600">
                   Traditional Listing
                 </CardTitle>
                 <CardDescription className="text-slate-500">
@@ -189,10 +195,10 @@ export function OfferBreakdown() {
                   ))}
                 </div>
               </CardContent>
-              <CardFooter className="border-t border-slate-100 bg-slate-50/50 px-6 py-4">
+              <CardFooter className="border-t border-slate-100 bg-slate-50/50 px-6 py-5">
                 <div className="flex w-full items-center justify-between">
                   <span className="font-semibold text-slate-900">You walk away with</span>
-                  <span className="text-xl font-bold text-slate-700">~$125,500</span>
+                  <span className="text-2xl font-bold text-slate-500">~$125,500</span>
                 </div>
               </CardFooter>
             </Card>

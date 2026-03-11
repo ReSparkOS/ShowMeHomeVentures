@@ -39,9 +39,10 @@ export function PledgeBox() {
   return (
     <section className="py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="border-emerald-200 bg-white shadow-lg">
+        <Card className="relative overflow-hidden border-emerald-200 bg-white shadow-lg">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-emerald-600 to-blue-600" />
           <CardHeader>
-            <Badge variant="default" className="w-fit">
+            <Badge variant="default" className="w-fit bg-emerald-700 hover:bg-emerald-800">
               Our Pledge
             </Badge>
             <CardTitle className="mt-3 text-2xl sm:text-3xl">
