@@ -6,12 +6,16 @@ export interface NavItem {
 
 export const mainNavigation: NavItem[] = [
   {
+    label: "About",
+    href: "/about",
+  },
+  {
     label: "How It Works",
     href: "/how-it-works",
   },
   {
     label: "Our Offer",
-    href: "/our-offer",
+    href: "/open-book-certainty-offer",
     children: [
       {
         label: "Open-Book Certainty Offer™",
@@ -28,20 +32,16 @@ export const mainNavigation: NavItem[] = [
     href: "/situations",
   },
   {
-    label: "Areas We Serve",
-    href: "/areas",
+    label: "Service Areas",
+    href: "/service-areas",
   },
   {
-    label: "Case Studies",
-    href: "/case-studies",
+    label: "FAQ",
+    href: "/faq",
   },
   {
-    label: "Reviews",
-    href: "/reviews",
-  },
-  {
-    label: "Resources",
-    href: "/resources",
+    label: "Contact",
+    href: "/contact",
   },
 ];
 
@@ -54,11 +54,11 @@ export const footerNavigation: FooterSection[] = [
   {
     title: "Company",
     links: [
+      { label: "About Us", href: "/about" },
       { label: "How It Works", href: "/how-it-works" },
       { label: "Open-Book Certainty Offer™", href: "/open-book-certainty-offer" },
       { label: "No Surprise Pledge", href: "/no-surprise-pledge" },
-      { label: "Case Studies", href: "/case-studies" },
-      { label: "Reviews", href: "/reviews" },
+      { label: "FAQ", href: "/faq" },
       { label: "Contact", href: "/contact" },
     ],
   },
@@ -76,20 +76,22 @@ export const footerNavigation: FooterSection[] = [
     ],
   },
   {
-    title: "Areas We Serve",
+    title: "Service Areas",
     links: [
-      { label: "Springfield, MO", href: "/areas/springfield" },
-      { label: "Ozark, MO", href: "/areas/ozark" },
-      { label: "Nixa, MO", href: "/areas/nixa" },
-      { label: "Republic, MO", href: "/areas/republic" },
-      { label: "Battlefield, MO", href: "/areas/battlefield" },
+      { label: "Springfield, MO", href: "/areas/springfield-mo" },
+      { label: "Ozark, MO", href: "/areas/ozark-mo" },
+      { label: "Nixa, MO", href: "/areas/nixa-mo" },
+      { label: "Republic, MO", href: "/areas/republic-mo" },
+      { label: "Battlefield, MO", href: "/areas/battlefield-mo" },
+      { label: "All Service Areas", href: "/service-areas" },
     ],
   },
   {
     title: "Resources",
     links: [
       { label: "Blog & Guides", href: "/resources" },
-      { label: "Sell Your House Fast", href: "/sell-your-house-fast" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Reviews", href: "/reviews" },
       { label: "Get an Offer", href: "/get-offer" },
     ],
   },

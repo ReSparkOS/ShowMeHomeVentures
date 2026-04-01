@@ -21,12 +21,21 @@ export function Footer() {
                 Get a transparent, no-obligation offer today.
               </p>
             </div>
-            <Link
-              href="/get-offer"
-              className="inline-flex items-center rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
-            >
-              Get My Free Offer
-            </Link>
+            <div className="flex items-center gap-4">
+              <a
+                href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
+                className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 transition-colors hover:text-emerald-300"
+              >
+                <Phone className="h-4 w-4" />
+                {siteConfig.phone}
+              </a>
+              <Link
+                href="/get-offer"
+                className="inline-flex items-center rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
+              >
+                Get My Free Offer
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -42,6 +51,10 @@ export function Footer() {
               {siteConfig.name}
             </Link>
             <p className="mt-2 text-sm text-slate-400">{siteConfig.tagline}</p>
+            <p className="mt-3 text-sm text-slate-400">
+              Serving Springfield, MO and surrounding Southwest Missouri communities
+              including Ozark, Nixa, Republic, Battlefield, and Rogersville.
+            </p>
             <address className="mt-5 not-italic space-y-3">
               <div className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
@@ -94,12 +107,21 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 border-t border-slate-800 pt-8">
-          <p className="text-center text-sm text-slate-500">
-            © {new Date().getFullYear()} Show-Me Home Ventures. All rights
-            reserved.
-          </p>
-          <p className="mt-1 text-center text-xs text-slate-500">
-            Open-Book Certainty Offer™ is a trademark of Show-Me Home Ventures.
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+            <p className="text-sm text-slate-500">
+              © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            </p>
+            <div className="flex gap-4 text-sm text-slate-500">
+              <Link href="/privacy" className="hover:text-slate-400 transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-slate-400 transition-colors">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
+          <p className="mt-2 text-center text-xs text-slate-500">
+            Open-Book Certainty Offer™ is a trademark of {siteConfig.name}.
           </p>
           <p className="mt-4 text-center text-xs text-slate-500 max-w-3xl mx-auto">
             We are pledged to the letter and spirit of U.S. policy for the
