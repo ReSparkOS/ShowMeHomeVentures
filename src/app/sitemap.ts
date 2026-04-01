@@ -2,10 +2,18 @@ import type { MetadataRoute } from "next";
 import { situations } from "@/data/situations";
 import { areas } from "@/data/areas";
 import { caseStudies } from "@/data/case-studies";
-import { getAllPosts } from "@/lib/mdx";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://showmehomeventures.com";
+
+const resourceSlugs = [
+  "foreclosure-options-missouri",
+  "how-to-sell-inherited-house-missouri",
+  "selling-house-during-divorce-missouri",
+  "avoid-house-buying-scams",
+  "what-is-fair-cash-offer",
+  "sell-house-as-is-springfield-mo",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
@@ -148,9 +156,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const resourcePages: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
-    url: `${SITE_URL}/resources/${post.slug}`,
-    lastModified: post.frontmatter.date || now,
+  const resourcePages: MetadataRoute.Sitemap = resourceSlugs.map((slug) => ({
+    url: `${SITE_URL}/resources/${slug}`,
+    lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
