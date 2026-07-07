@@ -3,6 +3,7 @@ import { Hero, CtaSection } from "@/components/sections";
 import { JsonLd, breadcrumbSchema } from "@/components/seo";
 import { createMetadata } from "@/lib/metadata";
 import { caseStudies } from "@/data/case-studies";
+import { Section, SectionHeading } from "@/components/ui/section";
 import {
   Card,
   CardContent,
@@ -11,7 +12,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { siteConfig } from "@/lib/utils";
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>;
@@ -63,127 +63,123 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <Hero
         heading={study.title}
         subheading={`${study.situation} • ${study.location}`}
-        primaryCta={{ text: "Get My Open-Book Offer", href: "/contact" }}
+        primaryCta={{ text: "Get My Cash Offer", href: "/get-offer" }}
         secondaryCta={{ text: "View All Case Studies", href: "/case-studies" }}
       />
 
-      <section className="py-12 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-2 mb-8">
+      <Section>
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-8 flex flex-wrap gap-2">
             <Badge variant="secondary">{study.situation}</Badge>
             <Badge variant="outline">{study.propertyType}</Badge>
             <Badge variant="outline">{study.location}</Badge>
           </div>
 
-          <div className="space-y-10">
-            <Card className="border-slate-200 bg-white">
+          <div className="space-y-8">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-xl">The Challenge</CardTitle>
+                <CardTitle className="font-display text-xl">The challenge</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600 leading-relaxed">{study.challenge}</p>
+                <p className="leading-relaxed text-navy-600">{study.challenge}</p>
               </CardContent>
             </Card>
 
-            <Card className="border-slate-200 bg-white">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-xl">The Solution</CardTitle>
+                <CardTitle className="font-display text-xl">The solution</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600 leading-relaxed">{study.solution}</p>
+                <p className="leading-relaxed text-navy-600">{study.solution}</p>
               </CardContent>
             </Card>
 
-            <Card className="border-slate-200 bg-white">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-xl">The Outcome</CardTitle>
+                <CardTitle className="font-display text-xl">The outcome</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600 leading-relaxed">{study.outcome}</p>
+                <p className="leading-relaxed text-navy-600">{study.outcome}</p>
               </CardContent>
             </Card>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="py-12 lg:py-16 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-8">
-            The Numbers
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Card className="border-slate-200 bg-white">
+      <Section tone="paper">
+        <div className="mx-auto max-w-4xl">
+          <SectionHeading as="h2" title="The numbers" />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <Card>
               <CardHeader className="pb-2">
                 <CardDescription>After-Repair Value (ARV)</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="font-semibold text-slate-900">{study.afterValue}</p>
+                <p className="font-semibold text-navy-950">{study.afterValue}</p>
               </CardContent>
             </Card>
-            <Card className="border-slate-200 bg-white">
+            <Card>
               <CardHeader className="pb-2">
                 <CardDescription>Estimated Repairs</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="font-semibold text-red-600">
+                <p className="font-semibold text-navy-700">
                   - {study.renovationCost}
                 </p>
               </CardContent>
             </Card>
-            <Card className="border-blue-200 bg-blue-50">
+            <Card className="border-brand-200 bg-brand-50">
               <CardHeader className="pb-2">
-                <CardDescription className="text-blue-700">Our Cash Offer</CardDescription>
+                <CardDescription className="text-brand-700">
+                  Our Cash Offer
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="font-semibold text-blue-800">
-                  {study.offerPrice}
-                </p>
+                <p className="font-semibold text-brand-800">{study.offerPrice}</p>
               </CardContent>
             </Card>
-            <Card className="border-slate-200 bg-white">
+            <Card>
               <CardHeader className="pb-2">
                 <CardDescription>Days to Close</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="font-semibold text-slate-900">{study.timeline}</p>
+                <p className="font-semibold text-navy-950">{study.timeline}</p>
               </CardContent>
             </Card>
           </div>
-          <p className="mt-4 text-sm text-slate-500">
-            Formula: 70% of ARV minus repair costs = our offer. As-is value estimate: {study.beforeValue}.
+          <p className="mt-4 text-sm text-navy-600">
+            Formula: 70% of ARV minus repair costs = our offer. As-is value estimate:{" "}
+            {study.beforeValue}.
           </p>
         </div>
-      </section>
+      </Section>
 
-      <section className="py-12 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-6">
-            The Open-Book Process Applied
-          </h2>
-          <Card className="border-emerald-200 bg-emerald-50">
+      <Section>
+        <div className="mx-auto max-w-4xl">
+          <SectionHeading as="h2" title="The Open-Book process applied" />
+          <Card className="mt-8 border-brand-200 bg-brand-50">
             <CardContent className="pt-6">
-              <p className="text-slate-700 leading-relaxed">
-                Every case study above reflects our Open-Book Certainty Offer™ in
-                action: we showed the seller exactly how we calculated the offer — 70%
-                of after-repair value minus estimated repair costs. We locked a real
-                closing date in writing and honored the No Surprise Pledge. No
-                re-trades, no hidden fees. Just transparency and a close date you
-                could count on.
+              <p className="leading-relaxed text-navy-700">
+                This case study reflects our Open-Book Certainty Offer™ in action: we
+                showed the seller exactly how we calculated the offer, 70% of
+                after-repair value minus estimated repair costs. We locked the closing
+                date in writing and stood behind our No Surprise Pledge. No re-trades,
+                no hidden fees.
               </p>
-              <p className="mt-4 text-slate-700 leading-relaxed">
+              <p className="mt-4 leading-relaxed text-navy-700">
                 Ready for the same approach?{" "}
                 <a
                   href="/contact"
-                  className="font-medium text-emerald-700 hover:underline"
+                  className="font-medium text-brand-700 hover:underline"
                 >
-                  Get your Open-Book Certainty Offer
+                  Get your Open-Book offer
                 </a>
                 .
               </p>
             </CardContent>
           </Card>
         </div>
-      </section>
+      </Section>
 
       <CtaSection />
     </>

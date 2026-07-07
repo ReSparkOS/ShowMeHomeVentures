@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://showmehomeventures.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://showmehv.com";
 const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export interface CreateMetadataOptions {
@@ -25,7 +25,11 @@ export function createMetadata({
     ? resolvedOgImage
     : `${SITE_URL}${resolvedOgImage}`;
 
-  const fullTitle = `${title} | Show-Me Home Ventures`;
+  // Skip the brand suffix when the title already carries it, so no page
+  // renders "… | Show-Me Home Ventures | Show-Me Home Ventures".
+  const fullTitle = title.includes("Show-Me Home Ventures")
+    ? title
+    : `${title} | Show-Me Home Ventures`;
   const baseKeywords = [
     "sell house fast Springfield MO",
     "cash home buyers Springfield Missouri",

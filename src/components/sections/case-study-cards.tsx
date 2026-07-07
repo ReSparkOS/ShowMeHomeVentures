@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/data/case-studies";
+import { Section, SectionHeading } from "@/components/ui/section";
 import {
   Card,
   CardContent,
@@ -9,7 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 
 export interface CaseStudyCardsProps {
   limit?: number;
@@ -39,55 +40,50 @@ export function CaseStudyCards({
   }
 
   return (
-    <section className="py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          Real Stories, Real Results
-        </h2>
-        <p className="mt-4 max-w-2xl text-lg text-slate-600">
-          See how the Open-Book Certainty Offer™ has helped homeowners in
-          Springfield and the Ozarks.
-        </p>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((study) => (
-            <Link
-              key={study.slug}
-              href={`/case-studies/${study.slug}`}
-              className="group"
-            >
-              <Card className="flex h-full flex-col border-slate-200 overflow-hidden">
-                {/* Color accent bar */}
-                <div className="h-1 bg-gradient-to-r from-emerald-500 to-blue-500" />
-                <CardHeader className="pb-2">
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">{study.situation}</Badge>
-                    <Badge variant="outline">{study.location}</Badge>
-                  </div>
-                  <CardTitle className="mt-3 text-lg group-hover:text-emerald-700 transition-colors">
-                    {study.title}
-                  </CardTitle>
-                  <Badge variant="outline" className="w-fit">
-                    {study.timeline}
-                  </Badge>
-                </CardHeader>
-                <CardContent className="flex-1 pt-0">
-                  <CardDescription className="line-clamp-3 text-slate-600">
-                    {study.challenge}
-                  </CardDescription>
-                </CardContent>
-                <CardFooter>
-                  <span className="text-sm font-semibold text-emerald-700 group-hover:underline flex items-center gap-1">
-                    Read Case Study
-                    <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </CardFooter>
-              </Card>
-            </Link>
-          ))}
-        </div>
+    <Section>
+      <SectionHeading
+        eyebrow="Case studies"
+        title="How sellers used our offer"
+        lead="See how our Open-Book offer has helped homeowners across Springfield and the Ozarks."
+      />
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((study) => (
+          <Link
+            key={study.slug}
+            href={`/case-studies/${study.slug}`}
+            className="group"
+          >
+            <Card className="flex h-full flex-col border-navy-100">
+              <CardHeader className="pb-2">
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary">{study.situation}</Badge>
+                  <Badge variant="outline">{study.location}</Badge>
+                </div>
+                <CardTitle className="mt-3 text-lg transition-colors group-hover:text-brand-700">
+                  {study.title}
+                </CardTitle>
+                <Badge variant="outline" className="w-fit">
+                  {study.timeline}
+                </Badge>
+              </CardHeader>
+              <CardContent className="flex-1 pt-0">
+                <CardDescription className="line-clamp-3 text-navy-600">
+                  {study.challenge}
+                </CardDescription>
+              </CardContent>
+              <CardFooter>
+                <span className="flex items-center gap-1 text-sm font-semibold text-brand-700 group-hover:underline">
+                  Read case study
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                    aria-hidden
+                  />
+                </span>
+              </CardFooter>
+            </Card>
+          </Link>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

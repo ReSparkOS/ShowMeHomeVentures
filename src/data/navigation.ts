@@ -6,19 +6,33 @@ export interface NavItem {
 
 export const mainNavigation: NavItem[] = [
   {
-    label: "About",
-    href: "/about",
-  },
-  {
     label: "How It Works",
     href: "/how-it-works",
+  },
+  {
+    label: "Sell Your House",
+    href: "/sell-your-house-fast",
+    children: [
+      {
+        label: "Sell Your House Fast",
+        href: "/sell-your-house-fast",
+      },
+      {
+        label: "We Buy Houses Springfield",
+        href: "/we-buy-houses-springfield-mo",
+      },
+      {
+        label: "Cash Home Buyers Springfield",
+        href: "/cash-home-buyers-springfield-mo",
+      },
+    ],
   },
   {
     label: "Our Offer",
     href: "/open-book-certainty-offer",
     children: [
       {
-        label: "Open-Book Certainty Offer™",
+        label: "Open-Book Certainty Offer",
         href: "/open-book-certainty-offer",
       },
       {
@@ -36,8 +50,15 @@ export const mainNavigation: NavItem[] = [
     href: "/service-areas",
   },
   {
-    label: "FAQ",
-    href: "/faq",
+    label: "About",
+    href: "/about",
+    children: [
+      { label: "About Us", href: "/about" },
+      { label: "Reviews", href: "/reviews" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Guides & Resources", href: "/resources" },
+      { label: "FAQ", href: "/faq" },
+    ],
   },
   {
     label: "Contact",
@@ -83,23 +104,26 @@ export const footerNavigation: FooterSection[] = [
       { label: "Nixa, MO", href: "/areas/nixa-mo" },
       { label: "Republic, MO", href: "/areas/republic-mo" },
       { label: "Battlefield, MO", href: "/areas/battlefield-mo" },
+      { label: "Rogersville, MO", href: "/areas/rogersville-mo" },
       { label: "All Service Areas", href: "/service-areas" },
+    ],
+  },
+  {
+    title: "Sell Your House",
+    links: [
+      { label: "Sell Your House Fast", href: "/sell-your-house-fast" },
+      { label: "We Buy Houses Springfield MO", href: "/we-buy-houses-springfield-mo" },
+      { label: "Cash Home Buyers Springfield MO", href: "/cash-home-buyers-springfield-mo" },
+      { label: "Get a Cash Offer", href: "/get-offer" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Blog & Guides", href: "/resources" },
+      { label: "Guides & Resources", href: "/resources" },
       { label: "Case Studies", href: "/case-studies" },
       { label: "Reviews", href: "/reviews" },
-      { label: "Get an Offer", href: "/get-offer" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Service", href: "/terms" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
 ];

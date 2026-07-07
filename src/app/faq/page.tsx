@@ -11,13 +11,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Section } from "@/components/ui/section";
 import { JsonLd, faqSchema, breadcrumbSchema } from "@/components/seo";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata = createMetadata({
-  title: "Frequently Asked Questions | Selling Your House in Springfield, MO",
+  title: "FAQ | Selling Your Springfield House",
   description:
-    "FAQ answers about selling to Show-Me Home Ventures: how the process works, costs, closing timeline, offer transparency, and why we’re a legitimate local cash buyer in Springfield, MO.",
+    "Answers about selling your house to Show-Me Home Ventures: how the process works, costs, closing timeline, offer transparency, and our local Springfield team.",
   path: "/faq",
   keywords: [
     "FAQ sell house Springfield MO",
@@ -127,80 +128,83 @@ const allFaqForSchema: FaqItem[] = [
   ...specificSituationsFaqs,
 ];
 
-const linkClass = "font-medium text-blue-700 hover:underline";
+const linkClass = "font-medium text-brand-700 hover:underline";
 
 function AboutOurOfferFaqSection() {
   return (
-    <section className="py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          About Our Offer
-        </h2>
-        <div className="mt-12">
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="offer-0">
-              <AccordionTrigger className="text-left font-medium">
-                How do you determine your offer price?
-              </AccordionTrigger>
-              <AccordionContent className="text-slate-600">
-                <p>
-                  We use a transparent formula: roughly{" "}
-                  <strong className="text-slate-900">70% of the after repair value (ARV)</strong>, minus
-                  estimated repair costs. Every line item is shown in our{" "}
-                  <Link href="/open-book-certainty-offer" className={linkClass}>
-                    Open-Book Certainty Offer
-                  </Link>{" "}
-                  breakdown so you can see how we arrived at the number—not a black-box number.
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="offer-1">
-              <AccordionTrigger className="text-left font-medium">
-                Are there any fees or commissions?
-              </AccordionTrigger>
-              <AccordionContent className="text-slate-600">
-                <p>
-                  There are no agent commissions and no fees we charge you. We cover standard closing
-                  costs as described in your agreement. What we agree you’ll receive is what the closing
-                  statement reflects—no surprise deductions from us.
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="offer-2">
-              <AccordionTrigger className="text-left font-medium">
-                What is the Open-Book Certainty Offer?
-              </AccordionTrigger>
-              <AccordionContent className="text-slate-600">
-                <p>
-                  It’s our transparent offer format: we show after repair value (ARV), repair estimates,
-                  and our offer in one clear breakdown.{" "}
-                  <Link href="/open-book-certainty-offer" className={linkClass}>
-                    Learn more about our Open-Book Certainty Offer
-                  </Link>{" "}
-                  and how we show you the math behind the number.
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="offer-3">
-              <AccordionTrigger className="text-left font-medium">
-                Will your offer change at closing?
-              </AccordionTrigger>
-              <AccordionContent className="text-slate-600">
-                <p>
-                  No. Our{" "}
-                  <Link href="/no-surprise-pledge" className={linkClass}>
-                    No Surprise Pledge
-                  </Link>{" "}
-                  means the cash amount we agree to in writing is what you should expect at closing—we
-                  don’t re-trade or tack on surprise fees. If something unusual shows up on title, we’ll
-                  discuss it openly before closing, not as a last-minute ambush.
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
+    <Section tone="paper">
+      <h2 className="font-display text-3xl font-semibold tracking-tight text-navy-950 sm:text-4xl">
+        About our offer
+      </h2>
+      <div className="mt-12">
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="offer-0">
+            <AccordionTrigger className="text-left font-medium">
+              How do you determine your offer price?
+            </AccordionTrigger>
+            <AccordionContent className="text-navy-600">
+              <p>
+                We use a transparent formula: roughly{" "}
+                <strong className="text-navy-950">
+                  70% of the after repair value (ARV)
+                </strong>
+                , minus estimated repair costs. Every line item is shown in our{" "}
+                <Link href="/open-book-certainty-offer" className={linkClass}>
+                  Open-Book Certainty Offer
+                </Link>{" "}
+                breakdown so you can see how we arrived at the number, not a
+                black-box number.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="offer-1">
+            <AccordionTrigger className="text-left font-medium">
+              Are there any fees or commissions?
+            </AccordionTrigger>
+            <AccordionContent className="text-navy-600">
+              <p>
+                There are no agent commissions and no fees we charge you. We
+                cover standard closing costs as described in your agreement. What
+                we agree you’ll receive is what the closing statement
+                reflects—no surprise deductions from us.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="offer-2">
+            <AccordionTrigger className="text-left font-medium">
+              What is the Open-Book offer?
+            </AccordionTrigger>
+            <AccordionContent className="text-navy-600">
+              <p>
+                It’s our transparent offer format: we show after repair value
+                (ARV), repair estimates, and our offer in one clear breakdown.{" "}
+                <Link href="/open-book-certainty-offer" className={linkClass}>
+                  Learn more about our Open-Book offer
+                </Link>{" "}
+                and how we show you the math behind the number.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="offer-3">
+            <AccordionTrigger className="text-left font-medium">
+              Will your offer change at closing?
+            </AccordionTrigger>
+            <AccordionContent className="text-navy-600">
+              <p>
+                No. Our{" "}
+                <Link href="/no-surprise-pledge" className={linkClass}>
+                  No Surprise Pledge
+                </Link>{" "}
+                means the cash amount we agree to in writing is what you should
+                expect at closing—we don’t re-trade or tack on surprise fees. If
+                something unusual shows up on title, we’ll discuss it openly
+                before closing, not as a last-minute ambush.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
-    </section>
+    </Section>
   );
 }
 
@@ -221,15 +225,19 @@ export default function FaqPage() {
         secondaryCta={{ text: "How It Works", href: "/how-it-works" }}
       />
 
-      <FaqAccordion faqs={aboutProcessFaqs} title="About the Process" />
+      <FaqAccordion faqs={aboutProcessFaqs} title="About the process" />
       <AboutOurOfferFaqSection />
-      <FaqAccordion faqs={trustFaqs} title="Trust & Legitimacy" />
-      <FaqAccordion faqs={specificSituationsFaqs} title="Specific Situations" />
+      <FaqAccordion faqs={trustFaqs} title="Trust & legitimacy" />
+      <FaqAccordion
+        faqs={specificSituationsFaqs}
+        title="Specific situations"
+        className="bg-paper"
+      />
 
       <CtaSection
         heading="Still have questions?"
-        subheading="Tell us about your property and timeline—we’ll explain the process, walk through the numbers, and help you decide if a cash sale is the right fit. No pressure, no obligation until you’re ready."
-        ctaText="Get started"
+        subheading="Tell us about your property and timeline. We’ll explain the process, walk through the numbers, and help you decide if a cash sale is the right fit. No pressure, no obligation until you’re ready."
+        ctaText="Get My Cash Offer"
         ctaHref="/get-offer"
       />
     </>

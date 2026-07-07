@@ -14,14 +14,14 @@ export default function TermsPage() {
   return (
     <div className="py-16 lg:py-24">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900">
+        <h1 className="font-display text-4xl font-semibold tracking-tight text-navy-950">
           Terms of Service
         </h1>
-        <p className="mt-4 text-slate-600">
+        <p className="mt-4 text-navy-600">
           Last updated: February 2025
         </p>
 
-        <div className="mt-12 prose prose-slate max-w-none prose-headings:font-semibold prose-headings:text-slate-900 prose-p:text-slate-600 prose-li:text-slate-600">
+        <div className="mt-12 prose prose-slate max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:text-navy-950 prose-p:text-navy-700 prose-li:text-navy-700">
           <p>
             Please read these Terms of Service (&quot;Terms&quot;) carefully
             before using the website or services of {siteConfig.name}
@@ -30,7 +30,7 @@ export default function TermsPage() {
             Terms.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             1. Acceptance of Terms
           </h2>
           <p>
@@ -41,7 +41,7 @@ export default function TermsPage() {
             or services.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             2. Services Description
           </h2>
           <p>
@@ -53,7 +53,7 @@ export default function TermsPage() {
             availability and our discretion.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             3. User Responsibilities
           </h2>
           <p>
@@ -78,7 +78,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             4. No Guaranteed Outcomes
           </h2>
           <p>
@@ -91,7 +91,7 @@ export default function TermsPage() {
             parties.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             5. Limitation of Liability
           </h2>
           <p>
@@ -107,7 +107,7 @@ export default function TermsPage() {
             liability, so some of the above may not apply to you.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             6. Indemnification
           </h2>
           <p>
@@ -122,7 +122,7 @@ export default function TermsPage() {
             status.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             7. Governing Law
           </h2>
           <p>
@@ -134,7 +134,7 @@ export default function TermsPage() {
             personal jurisdiction of such courts.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             8. Changes to Terms
           </h2>
           <p>
@@ -145,7 +145,7 @@ export default function TermsPage() {
             of the revised Terms.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             9. Contact Information
           </h2>
           <p>
@@ -159,7 +159,7 @@ export default function TermsPage() {
             Phone:{" "}
             <a
               href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
-              className="text-emerald-700 hover:underline"
+              className="text-brand-700 hover:underline"
             >
               {siteConfig.phone}
             </a>
@@ -167,7 +167,7 @@ export default function TermsPage() {
             Email:{" "}
             <a
               href={`mailto:${siteConfig.email}`}
-              className="text-emerald-700 hover:underline"
+              className="text-brand-700 hover:underline"
             >
               {siteConfig.email}
             </a>

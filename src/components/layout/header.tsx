@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/layout/logo";
 import { siteConfig } from "@/lib/utils";
 import { mainNavigation } from "@/data/navigation";
 import { cn } from "@/lib/utils";
@@ -81,8 +81,8 @@ function DropdownNavItem({
       <button
         type="button"
         className={cn(
-          "inline-flex h-9 items-center justify-center gap-1 rounded-md px-3 text-sm font-medium transition-colors hover:bg-slate-100 hover:text-slate-900",
-          open ? "bg-slate-100 text-slate-900" : "text-slate-700"
+          "inline-flex h-9 items-center justify-center gap-1 whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors hover:bg-navy-50 hover:text-navy-950",
+          open ? "bg-navy-50 text-navy-950" : "text-navy-700"
         )}
         onClick={() => setOpen((prev) => !prev)}
         onFocus={() => {
@@ -104,7 +104,7 @@ function DropdownNavItem({
 
       {open && (
         <div
-          className="absolute left-0 top-full z-50 mt-1.5 w-[220px] overflow-hidden rounded-md border border-slate-200 bg-white shadow-lg"
+          className="absolute left-0 top-full z-50 mt-1.5 w-[220px] overflow-hidden rounded-lg border border-navy-100 bg-white shadow-lg shadow-navy-950/5"
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
         >
@@ -113,7 +113,7 @@ function DropdownNavItem({
               <Link
                 href={href}
                 onClick={() => setOpen(false)}
-                className="block rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                className="block rounded-md px-3 py-2 text-sm text-navy-700 hover:bg-navy-50 hover:text-navy-950"
               >
                 View all
               </Link>
@@ -123,7 +123,7 @@ function DropdownNavItem({
                 <Link
                   href={child.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                  className="block rounded-md px-3 py-2 text-sm text-navy-700 hover:bg-navy-50 hover:text-navy-950"
                 >
                   {child.label}
                 </Link>
@@ -146,24 +146,15 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/80">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 w-full border-b border-navy-100 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
+      <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link
           href="/"
           aria-label="Show-Me Home Ventures home"
           className="shrink-0"
         >
-          <Image
-            src="/brand/show-me-home-ventures-logo.png"
-            alt="Show-Me Home Ventures"
-            width={520}
-            height={130}
-            priority
-            sizes="(max-width: 640px) 140px, (max-width: 1024px) 160px, 180px"
-            className="h-auto w-[140px] sm:w-[160px] lg:w-[180px]"
-          />
-          <span className="sr-only">Show-Me Home Ventures</span>
+          <Logo />
         </Link>
 
         {/* Desktop Navigation */}
@@ -182,10 +173,10 @@ export function Header() {
                 href={item.href}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
                 className={cn(
-                  "inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-slate-100 hover:text-slate-900",
+                  "inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors hover:bg-navy-50 hover:text-navy-950",
                   isActive(pathname, item.href)
-                    ? "text-blue-700 font-semibold"
-                    : "text-slate-700"
+                    ? "font-semibold text-brand-700"
+                    : "text-navy-700"
                 )}
               >
                 {item.label}
@@ -198,25 +189,21 @@ export function Header() {
         <div className="flex shrink-0 items-center gap-3">
           <a
             href={formatPhoneLink(siteConfig.phone)}
-            className="hidden items-center gap-1.5 text-sm text-slate-600 transition-colors hover:text-blue-700 sm:flex"
+            className="hidden items-center gap-1.5 text-sm font-medium text-navy-700 transition-colors hover:text-brand-700 xl:flex"
             onClick={() => trackPhoneClick("header_desktop")}
           >
             <Phone className="h-4 w-4" aria-hidden />
             {siteConfig.phone}
           </a>
-          <Button
-            asChild
-            size="sm"
-            className="hidden bg-slate-900 hover:bg-slate-800 sm:inline-flex"
-          >
-            <Link href="/get-offer" onClick={() => trackCtaClick("Get Your Offer", "header")}>Get Your Offer</Link>
+          <Button asChild variant="accent" size="sm" className="hidden sm:inline-flex">
+            <Link href="/get-offer" onClick={() => trackCtaClick("Get My Offer", "header")}>Get My Offer</Link>
           </Button>
 
           {/* Mobile hamburger */}
           <button
             type="button"
             onClick={() => setMobileOpen((o) => !o)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md text-slate-700 hover:bg-slate-100 lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md text-navy-700 hover:bg-navy-50 lg:hidden"
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
@@ -232,27 +219,27 @@ export function Header() {
       {/* Mobile menu (Sheet-like overlay) */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 top-16 z-30 lg:hidden"
+          className="fixed inset-0 top-[68px] z-30 lg:hidden"
           aria-hidden
           onClick={() => setMobileOpen(false)}
         >
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-navy-950/25" />
         </div>
       )}
       <div
         className={cn(
-          "absolute left-0 right-0 top-16 z-40 max-h-[calc(100vh-4rem)] overflow-y-auto border-b border-slate-200 bg-white shadow-lg transition-all lg:hidden",
+          "absolute left-0 right-0 top-[68px] z-40 max-h-[calc(100vh-68px)] overflow-y-auto border-b border-navy-100 bg-white shadow-lg transition-all lg:hidden",
           mobileOpen ? "block" : "hidden"
         )}
       >
         <nav className="flex flex-col p-4">
           {mainNavigation.map((item) =>
             item.children ? (
-              <div key={item.href} className="border-b border-slate-100 py-3">
+              <div key={item.href} className="border-b border-navy-50 py-3">
                 <Link
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block py-2 font-medium text-slate-900"
+                  className="block py-2 font-medium text-navy-950"
                 >
                   {item.label}
                 </Link>
@@ -262,7 +249,7 @@ export function Header() {
                       key={child.href}
                       href={child.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block py-1.5 text-sm text-slate-600 hover:text-blue-700"
+                      className="block py-1.5 text-sm text-navy-600 hover:text-brand-700"
                     >
                       {child.label}
                     </Link>
@@ -276,18 +263,18 @@ export function Header() {
                 onClick={() => setMobileOpen(false)}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
                 className={cn(
-                  "block border-b border-slate-100 py-3 font-medium hover:text-blue-700",
-                  isActive(pathname, item.href) ? "text-blue-700" : "text-slate-900"
+                  "block border-b border-navy-50 py-3 font-medium hover:text-brand-700",
+                  isActive(pathname, item.href) ? "text-brand-700" : "text-navy-950"
                 )}
               >
                 {item.label}
               </Link>
             )
           )}
-          <div className="mt-4 flex flex-col gap-2 border-t border-slate-200 pt-4">
+          <div className="mt-4 flex flex-col gap-2 border-t border-navy-100 pt-4">
             <a
               href={formatPhoneLink(siteConfig.phone)}
-              className="flex items-center gap-2 text-slate-700 hover:text-blue-700"
+              className="flex items-center gap-2 text-navy-700 hover:text-brand-700"
               onClick={() => { setMobileOpen(false); trackPhoneClick("header_mobile"); }}
             >
               <Phone className="h-4 w-4" />
@@ -295,11 +282,12 @@ export function Header() {
             </a>
             <Button
               asChild
+              variant="accent"
               size="sm"
-              className="w-full bg-slate-900 hover:bg-slate-800"
+              className="w-full"
               onClick={() => setMobileOpen(false)}
             >
-              <Link href="/get-offer">Get Your Offer</Link>
+              <Link href="/get-offer">Get My Offer</Link>
             </Button>
           </div>
         </nav>

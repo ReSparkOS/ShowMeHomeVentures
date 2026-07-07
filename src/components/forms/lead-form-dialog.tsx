@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -22,7 +23,7 @@ export interface LeadFormDialogProps {
 
 export function LeadFormDialog({
   triggerText = "Get My Open-Book Offer",
-  triggerVariant = "default",
+  triggerVariant = "accent",
   triggerSize = "default",
   triggerClassName,
 }: LeadFormDialogProps) {
@@ -34,14 +35,19 @@ export function LeadFormDialog({
         <Button
           variant={triggerVariant}
           size={triggerSize}
-          className={cn("bg-emerald-700 hover:bg-emerald-800", triggerClassName)}
+          className={cn(triggerClassName)}
         >
           {triggerText}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-xl">
         <DialogHeader>
-          <DialogTitle>Get Your Open-Book Offer</DialogTitle>
+          <DialogTitle className="font-display tracking-tight">
+            Get your Open-Book offer
+          </DialogTitle>
+          <DialogDescription>
+            Takes about 2 minutes. No obligation.
+          </DialogDescription>
         </DialogHeader>
         <LeadForm className="mt-2" />
       </DialogContent>

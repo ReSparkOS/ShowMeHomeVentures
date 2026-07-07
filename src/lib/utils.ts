@@ -23,7 +23,7 @@ export const siteConfig = {
   tagline: "An Offer You Can Understand. A Close Date You Can Trust.",
   description:
     "Show-Me Home Ventures delivers the Open-Book Certainty Offer™—transparent numbers and a real closing plan for homeowners in Springfield, MO and the Ozarks region.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://showmehomeventures.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://showmehv.com",
   phone: process.env.NEXT_PUBLIC_PHONE || "417-258-5577",
   email: process.env.NEXT_PUBLIC_EMAIL || "jordanrhodes@kw.com",
   address: {
@@ -37,8 +37,7 @@ export const siteConfig = {
     saturday: "Sat 9am–2pm",
     sunday: "Sun Closed",
   },
-  social: {
-    facebook: "https://facebook.com/showmehomeventures",
-    google: "https://g.page/showmehomeventures",
-  },
+  // Add real profile URLs here (Google Business Profile, Facebook) once they
+  // exist — placeholder links in schema sameAs actively hurt trust.
+  social: {} as { facebook?: string; google?: string },
 };

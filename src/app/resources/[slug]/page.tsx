@@ -88,37 +88,37 @@ export default async function ResourcePage({ params }: ResourcePageProps) {
       <JsonLd data={articleSchemaData} />
 
       <article className="py-12 lg:py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="mb-8 text-sm text-slate-600" aria-label="Breadcrumb">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <nav className="mb-8 text-sm text-navy-600" aria-label="Breadcrumb">
             <ol className="flex flex-wrap items-center gap-1">
               <li>
-                <Link href="/" className="hover:text-emerald-700">
+                <Link href="/" className="hover:text-brand-700">
                   Home
                 </Link>
               </li>
               <li aria-hidden>/</li>
               <li>
-                <Link href="/resources" className="hover:text-emerald-700">
+                <Link href="/resources" className="hover:text-brand-700">
                   Resources
                 </Link>
               </li>
               <li aria-hidden>/</li>
-              <li className="text-slate-900 font-medium truncate max-w-[200px]">
+              <li className="max-w-[200px] truncate font-medium text-navy-950">
                 {frontmatter.title}
               </li>
             </ol>
           </nav>
 
           <header className="mb-10">
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            <h1 className="font-display text-3xl font-semibold tracking-tight text-navy-950 sm:text-4xl">
               {frontmatter.title}
             </h1>
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-navy-600">
               <time dateTime={frontmatter.date}>
                 {formatDate(frontmatter.date)}
               </time>
               <span aria-hidden>·</span>
-              <span>{frontmatter.author}</span>
+              <span>Show-Me Home Ventures Team</span>
               {frontmatter.readTime && (
                 <>
                   <span aria-hidden>·</span>
@@ -137,27 +137,14 @@ export default async function ResourcePage({ params }: ResourcePageProps) {
             )}
           </header>
 
-          <div className="prose prose-slate max-w-none prose-headings:text-slate-900 prose-a:text-emerald-700 prose-a:no-underline hover:prose-a:underline">
+          <div className="prose prose-slate max-w-none prose-headings:text-navy-900 prose-a:text-brand-700 prose-a:no-underline hover:prose-a:underline">
             {compiledContent}
           </div>
 
-          <div className="mt-12 rounded-lg border border-emerald-200 bg-emerald-50 p-6">
-            <h3 className="text-lg font-semibold text-slate-900">
-              Ready for an offer you can understand?
-            </h3>
-            <p className="mt-2 text-slate-700">
-              Get your Open-Book Certainty Offer™—transparent numbers, a real
-              closing date, and no surprises.
-            </p>
-            <div className="mt-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center rounded-lg bg-emerald-700 px-6 py-3 text-white font-medium hover:bg-emerald-800 transition-colors"
-              >
-                Get My Open-Book Offer
-              </Link>
-            </div>
-          </div>
+          <p className="mt-12 rounded-xl border border-navy-100 bg-paper px-6 py-5 text-sm leading-relaxed text-navy-600">
+            Reviewed for accuracy by the Show-Me Home Ventures team. This article
+            is general information, not legal advice.
+          </p>
         </div>
       </article>
 

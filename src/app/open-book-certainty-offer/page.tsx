@@ -7,8 +7,9 @@ import {
   FaqAccordion,
   CtaSection,
 } from "@/components/sections";
-import { JsonLd, serviceSchema, faqSchema, breadcrumbSchema } from "@/components/seo";
+import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo";
 import { createMetadata } from "@/lib/metadata";
+import { Section, SectionHeading } from "@/components/ui/section";
 import {
   Card,
   CardContent,
@@ -19,9 +20,9 @@ import {
 import { Eye, Calendar, Shield } from "lucide-react";
 
 export const metadata = createMetadata({
-  title: "Open-Book Certainty Offer™ | Sell House Fast Springfield MO Fair Offer",
+  title: "Open-Book Certainty Offer Explained",
   description:
-    "A fair offer you can understand + a close date you can trust. We show you the exact math—ARV, renovation costs, risk buffer—and lock your closing date in writing. No surprises.",
+    "See the exact math behind your cash offer: after-repair value, repair costs, and a risk buffer. Then lock a closing date in writing. No re-trades, no fees.",
   path: "/open-book-certainty-offer",
   keywords: [
     "transparent cash offer Springfield MO",
@@ -32,7 +33,7 @@ export const metadata = createMetadata({
 
 const pillarDetails = [
   {
-    title: "Open-Book Numbers",
+    title: "Open-book numbers",
     icon: Eye,
     description:
       "Most investors give you a number and expect you to trust it. We show you the math.",
@@ -46,7 +47,7 @@ const pillarDetails = [
       "Your offer = ARV minus these costs. Every line item is visible and explained in plain language.",
   },
   {
-    title: "A Real Close Date",
+    title: "A real close date",
     icon: Calendar,
     description:
       "We don't string you along with 'we'll see' or 'maybe next month.'",
@@ -128,7 +129,6 @@ export default function OpenBookCertaintyOfferPage() {
             "A transparent home-buying process: we show you exactly how we calculate your offer, lock a real closing date in writing, and back it with the No Surprise Pledge.",
         })}
       />
-      <JsonLd data={faqSchema(openBookFaqs)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", url: "/" },
@@ -138,7 +138,7 @@ export default function OpenBookCertaintyOfferPage() {
       <Hero
         heading="The Open-Book Certainty Offer™"
         subheading="A fair offer you can understand + a close date you can trust."
-        primaryCta={{ text: "Get My Open-Book Offer", href: "/contact" }}
+        primaryCta={{ text: "Get My Cash Offer", href: "/get-offer" }}
         secondaryCta={{
           text: "Read the No Surprise Pledge",
           href: "/no-surprise-pledge",
@@ -146,79 +146,74 @@ export default function OpenBookCertaintyOfferPage() {
       />
 
       {/* Deep dive: 3 Pillars */}
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            The Three Pillars in Detail
-          </h2>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
-            More than a catchy name—each pillar is a concrete commitment.
-          </p>
-          <div className="mt-12 space-y-12">
-            {pillarDetails.map((pillar) => {
-              const Icon = pillar.icon;
-              return (
-                <Card
-                  key={pillar.title}
-                  className="border-slate-200 bg-white overflow-hidden"
-                >
-                  <CardHeader>
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
-                        <Icon className="h-7 w-7" />
-                      </div>
-                      <div>
-                        <CardTitle className="text-2xl">{pillar.title}</CardTitle>
-                        <CardDescription className="mt-2 text-base text-slate-600">
-                          {pillar.description}
-                        </CardDescription>
-                      </div>
+      <Section tone="paper">
+        <SectionHeading
+          eyebrow="What backs the offer"
+          title="The three pillars in detail"
+          lead="More than a catchy name. Each pillar is a concrete commitment."
+        />
+        <div className="mt-12 space-y-8">
+          {pillarDetails.map((pillar) => {
+            const Icon = pillar.icon;
+            return (
+              <Card key={pillar.title} className="overflow-hidden">
+                <CardHeader>
+                  <div className="flex items-start gap-3">
+                    <Icon
+                      className="mt-1 h-5 w-5 shrink-0 text-navy-400"
+                      aria-hidden
+                    />
+                    <div>
+                      <CardTitle className="font-display text-2xl">
+                        {pillar.title}
+                      </CardTitle>
+                      <CardDescription className="mt-2 text-base">
+                        {pillar.description}
+                      </CardDescription>
                     </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <ul className="list-disc space-y-2 pl-6 text-slate-600">
-                      {pillar.bullets.map((bullet) => (
-                        <li key={bullet}>{bullet}</li>
-                      ))}
-                    </ul>
-                    <p className="rounded-lg bg-emerald-50 p-4 text-slate-800 font-medium">
-                      {pillar.result}
-                    </p>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <ul className="list-disc space-y-2 pl-6 text-navy-600">
+                    {pillar.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                  <p className="rounded-xl bg-brand-50 p-4 font-medium text-navy-800">
+                    {pillar.result}
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
-      </section>
+      </Section>
 
       <section id="offer-breakdown" className="scroll-mt-24">
         <OfferBreakdown />
       </section>
 
       {/* Why Open-Book? */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Why Open-Book?
-          </h2>
-          <p className="mt-4 max-w-3xl text-lg text-slate-600">
+      <Section>
+        <SectionHeading title="Why Open-Book?" />
+        <div className="mt-6 max-w-3xl space-y-4 text-lg leading-relaxed text-navy-600">
+          <p>
             Most house buyers operate in the dark. They throw out a number, hope you
             accept, and sometimes come back at closing with a lower offer or new
             conditions. That erodes trust and wastes everyone&apos;s time.
           </p>
-          <p className="mt-4 max-w-3xl text-lg text-slate-600">
-            We believe you deserve better. When you see the math—how we value your
-            home, what it costs to renovate, and why we make the offer we do—you can
-            make an informed decision. When we lock a closing date, you can plan your
-            life. When we back it with a pledge, you can rest easy.
+          <p>
+            We believe you deserve better. When you see the math behind your offer, how
+            we value your home, what it costs to renovate, and why we land where we do,
+            you can make an informed decision. When we lock a closing date, you can plan
+            your life. When we back it with a pledge, you can rest easy.
           </p>
-          <p className="mt-4 max-w-3xl text-lg text-slate-600">
+          <p>
             That&apos;s the Open-Book Certainty Offer. It&apos;s not a marketing gimmick.
             It&apos;s how we do business.
           </p>
         </div>
-      </section>
+      </Section>
 
       <PledgeBox />
       <ProcessTimeline />

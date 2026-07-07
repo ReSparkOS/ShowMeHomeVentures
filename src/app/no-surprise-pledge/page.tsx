@@ -2,6 +2,7 @@ import { Hero, CtaSection } from "@/components/sections";
 import { JsonLd } from "@/components/seo";
 import { createMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/utils";
+import { Section, SectionHeading } from "@/components/ui/section";
 import {
   Card,
   CardContent,
@@ -13,9 +14,9 @@ import { testimonials } from "@/data/testimonials";
 import { Star } from "lucide-react";
 
 export const metadata = createMetadata({
-  title: "The No Surprise Re-Trade Pledge | Show-Me Home Ventures",
+  title: "The No Surprise Pledge, No Re-Trades",
   description:
-    "Our pledge: the offer we agree on is the offer you get. No last-minute re-trades, no invented fees. Clear exceptions and full transparency.",
+    "Our pledge: the offer we agree on is the offer you get. No last-minute re-trades, no invented fees. Clear exceptions, explained upfront, with full transparency.",
   path: "/no-surprise-pledge",
 });
 
@@ -71,7 +72,7 @@ export default function NoSurprisePledgePage() {
       <Hero
         heading="The No Surprise Re-Trade Pledge"
         subheading="The offer we agree on is the offer you get. No last-minute re-trades, no invented fees, no new conditions."
-        primaryCta={{ text: "Get My Open-Book Offer", href: "/contact" }}
+        primaryCta={{ text: "Get My Cash Offer", href: "/get-offer" }}
         secondaryCta={{
           text: "See the Full Offer",
           href: "/open-book-certainty-offer",
@@ -79,22 +80,22 @@ export default function NoSurprisePledgePage() {
       />
 
       {/* Full pledge text in prominent card */}
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="border-emerald-200 bg-white shadow-lg overflow-hidden">
-            <CardHeader className="bg-emerald-50/50 border-b border-emerald-100">
-              <CardTitle className="text-2xl sm:text-3xl text-slate-900">
-                The Pledge
+      <Section tone="paper">
+        <div className="mx-auto max-w-4xl">
+          <Card className="overflow-hidden">
+            <CardHeader className="border-b border-navy-100 bg-navy-50">
+              <CardTitle className="font-display text-2xl text-navy-950 sm:text-3xl">
+                The pledge
               </CardTitle>
-              <CardDescription className="text-base text-slate-600 mt-2">
+              <CardDescription className="mt-2 text-base">
                 Our commitment to you, in writing
               </CardDescription>
             </CardHeader>
-            <CardContent className="py-8 px-6 sm:px-8">
-              <p className="text-xl leading-relaxed text-slate-800 font-medium">
+            <CardContent className="px-6 py-8 sm:px-8">
+              <p className="text-xl font-medium leading-relaxed text-navy-800">
                 {pledgeText}
               </p>
-              <p className="mt-6 text-sm text-slate-600">
+              <p className="mt-6 text-sm text-navy-600">
                 Even in the rare cases where we need to adjust (see exceptions
                 below), we explain what changed and give you the option to walk
                 away with no penalty.
@@ -102,71 +103,56 @@ export default function NoSurprisePledgePage() {
             </CardContent>
           </Card>
         </div>
-      </section>
+      </Section>
 
       {/* Detailed exceptions */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Clear, Honest Exceptions
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            We don&apos;t use exceptions as a loophole. These are rare situations
-            where new information—that couldn&apos;t reasonably have been known
-            upfront—changes the basis of our offer. In every case, we discuss
-            openly and you retain the right to walk away.
-          </p>
+      <Section>
+        <div className="mx-auto max-w-4xl">
+          <SectionHeading
+            title="Clear, honest exceptions"
+            lead="We don't use exceptions as a loophole. These are rare situations where new information, that couldn't reasonably have been known upfront, changes the basis of our offer. In every case, we discuss openly and you retain the right to walk away."
+          />
           <div className="mt-12 space-y-6">
             {exceptions.map((ex) => (
-              <Card key={ex.title} className="border-slate-200">
+              <Card key={ex.title}>
                 <CardHeader>
-                  <CardTitle className="text-lg">{ex.title}</CardTitle>
+                  <CardTitle className="font-display text-lg">{ex.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <p className="text-slate-600">{ex.content}</p>
+                  <p className="text-navy-600">{ex.content}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* What This Means for You */}
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            What This Means for You
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            The No Surprise Pledge isn&apos;t just words—it&apos;s a commitment
-            that shapes how we do business.
-          </p>
+      <Section tone="paper">
+        <div className="mx-auto max-w-4xl">
+          <SectionHeading
+            title="What this means for you"
+            lead="The No Surprise Pledge isn't just words. It's a commitment that shapes how we do business."
+          />
           <ul className="mt-8 space-y-4">
             {benefits.map((benefit) => (
-              <li
-                key={benefit}
-                className="flex items-start gap-3 text-slate-700"
-              >
-                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-emerald-600" />
+              <li key={benefit} className="flex items-start gap-3 text-navy-700">
+                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-600" />
                 {benefit}
               </li>
             ))}
           </ul>
         </div>
-      </section>
+      </Section>
 
       {/* What Happens If Something Changes */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            What Happens If Something Changes
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            In the rare event that one of our exceptions applies—a hidden
-            foundation issue, an undisclosed lien, or a material misrepresentation—here&apos;s
-            what happens:
-          </p>
-          <ol className="mt-8 space-y-4 list-decimal list-inside text-slate-700">
+      <Section>
+        <div className="mx-auto max-w-4xl">
+          <SectionHeading
+            title="What happens if something changes"
+            lead="In the rare event that one of our exceptions applies, a hidden foundation issue, an undisclosed lien, or a material misrepresentation, here's what happens:"
+          />
+          <ol className="mt-8 list-decimal list-inside space-y-4 text-navy-700">
             <li>
               <strong>We tell you immediately.</strong> No delay, no hiding. We
               explain what we found and how it affects the offer.
@@ -182,47 +168,43 @@ export default function NoSurprisePledgePage() {
               accept a changed offer.
             </li>
           </ol>
-          <p className="mt-8 text-slate-600">
+          <p className="mt-8 text-navy-600">
             Our goal is always a fair outcome. We don&apos;t use exceptions as a
-            bargaining tool—we use them only when new, material facts truly
+            bargaining tool. We use them only when new, material facts truly
             change the deal. And even then, you&apos;re in control.
           </p>
         </div>
-      </section>
+      </Section>
 
       {/* Testimonial about pledge */}
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            What Homeowners Say About the Pledge
-          </h2>
-          <Card className="mt-12 border-slate-200 bg-white">
-            <CardContent className="pt-8 pb-8">
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: pledgeTestimonial.rating }).map(
-                  (_, i) => (
-                    <Star
-                      key={i}
-                      className="h-5 w-5 fill-amber-400 text-amber-400"
-                    />
-                  )
-                )}
+      <Section tone="paper">
+        <div className="mx-auto max-w-4xl">
+          <SectionHeading title="What homeowners say about the pledge" />
+          <Card className="mt-12">
+            <CardContent className="py-8">
+              <div className="mb-4 flex gap-1">
+                {Array.from({ length: pledgeTestimonial.rating }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className="h-5 w-5 fill-gold-400 text-gold-400"
+                  />
+                ))}
               </div>
-              <blockquote className="text-lg text-slate-700 leading-relaxed">
+              <blockquote className="text-lg leading-relaxed text-navy-700">
                 &ldquo;{pledgeTestimonial.quote}&rdquo;
               </blockquote>
               <footer className="mt-6">
-                <p className="font-medium text-slate-900">
+                <p className="font-medium text-navy-950">
                   {pledgeTestimonial.name}
                 </p>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-navy-600">
                   {pledgeTestimonial.location} · {pledgeTestimonial.situation}
                 </p>
               </footer>
             </CardContent>
           </Card>
         </div>
-      </section>
+      </Section>
 
       <CtaSection />
     </>

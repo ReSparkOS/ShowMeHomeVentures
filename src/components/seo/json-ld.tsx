@@ -57,15 +57,25 @@ export function organizationSchema(options?: OrganizationSchemaOptions) {
       postalCode: address.zip,
       addressCountry: "US",
     },
-    areaServed: {
-      "@type": "GeoCircle",
-      geoMidpoint: {
-        "@type": "GeoCoordinates",
-        latitude: 37.2090,
-        longitude: -93.2923,
+    areaServed: [
+      { "@type": "City", name: "Springfield", sameAs: "https://en.wikipedia.org/wiki/Springfield,_Missouri" },
+      { "@type": "City", name: "Nixa", sameAs: "https://en.wikipedia.org/wiki/Nixa,_Missouri" },
+      { "@type": "City", name: "Ozark", sameAs: "https://en.wikipedia.org/wiki/Ozark,_Missouri" },
+      { "@type": "City", name: "Republic", sameAs: "https://en.wikipedia.org/wiki/Republic,_Missouri" },
+      { "@type": "City", name: "Battlefield", sameAs: "https://en.wikipedia.org/wiki/Battlefield,_Missouri" },
+      { "@type": "City", name: "Rogersville", sameAs: "https://en.wikipedia.org/wiki/Rogersville,_Missouri" },
+      { "@type": "AdministrativeArea", name: "Greene County, Missouri" },
+      { "@type": "AdministrativeArea", name: "Christian County, Missouri" },
+      {
+        "@type": "GeoCircle",
+        geoMidpoint: {
+          "@type": "GeoCoordinates",
+          latitude: 37.2090,
+          longitude: -93.2923,
+        },
+        geoRadius: "50000",
       },
-      geoRadius: "50000",
-    },
+    ],
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -78,7 +88,6 @@ export function organizationSchema(options?: OrganizationSchemaOptions) {
     ],
     image: `${url}/opengraph-image`,
     logo: `${url}/icon.svg`,
-    sameAs: [siteConfig.social.facebook, siteConfig.social.google].filter(Boolean),
     priceRange: "$$",
     openingHoursSpecification: [
       {
@@ -187,42 +196,6 @@ export interface ArticleSchemaOptions {
   image?: string;
 }
 
-export interface ReviewItem {
-  name: string;
-  location: string;
-  rating: number;
-  quote: string;
-}
-
-export function reviewSchema(reviews: ReviewItem[]) {
-  const totalRating =
-    reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${siteConfig.url}/#organization`,
-    name: siteConfig.name,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: totalRating.toFixed(1),
-      reviewCount: reviews.length,
-      bestRating: "5",
-      worstRating: "1",
-    },
-    review: reviews.map((r) => ({
-      "@type": "Review",
-      author: { "@type": "Person", name: r.name },
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: r.rating,
-        bestRating: "5",
-      },
-      reviewBody: r.quote,
-    })),
-  };
-}
-
 export function articleSchema({
   title,
   description,
@@ -249,7 +222,10 @@ export function articleSchema({
     author: {
       "@type": "Organization",
       name: author,
+      url: siteConfig.url,
     },
+    publisher: { "@id": `${siteConfig.url}/#organization` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": fullUrl },
     url: fullUrl,
     ...(imageUrl && { image: imageUrl }),
   };

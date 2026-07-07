@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Show-Me Home Ventures — Sell Your House Fast in Springfield, MO";
+export const alt =
+  "Show-Me Home Ventures — Sell your Springfield house for cash and see every number";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -10,85 +11,81 @@ export default function OgImage() {
     (
       <div
         style={{
-          background: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1d4ed8 100%)",
+          background: "#0e1c2b",
           width: "100%",
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          padding: "80px",
-          fontFamily: "Inter, sans-serif",
+          justifyContent: "space-between",
+          padding: "72px 80px",
+          fontFamily: "Georgia, 'Times New Roman', serif",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "16px",
-            marginBottom: "32px",
-          }}
+        <svg
+          width="104"
+          height="104"
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="32" height="32" rx="6" fill="#3b82f6" />
-            <path
-              d="M16 6L6 14v12a2 2 0 002 2h5v-8h6v8h5a2 2 0 002-2V14L16 6z"
-              fill="#ffffff"
-            />
-          </svg>
-          <span style={{ color: "#93c5fd", fontSize: "24px", fontWeight: 600 }}>
-            Show-Me Home Ventures
-          </span>
-        </div>
-        <div
-          style={{
-            color: "#ffffff",
-            fontSize: "56px",
-            fontWeight: 700,
-            lineHeight: 1.15,
-            maxWidth: "900px",
-          }}
-        >
-          An Offer You Can Understand. A Close Date You Can Trust.
-        </div>
-        <div
-          style={{
-            color: "#94a3b8",
-            fontSize: "24px",
-            marginTop: "24px",
-            maxWidth: "700px",
-            lineHeight: 1.4,
-          }}
-        >
-          Open-Book Certainty Offer™ — Springfield, MO &amp; the Ozarks
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "24px",
-            marginTop: "40px",
-          }}
-        >
+          <rect
+            x="0.5"
+            y="0.5"
+            width="39"
+            height="39"
+            rx="9"
+            fill="#0e1c2b"
+            stroke="#344d6a"
+            strokeWidth="1"
+          />
+          <path
+            d="M8.5 21.5 20 11l11.5 10.5"
+            stroke="#ffffff"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <path
+            d="M12.5 20.5V29a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-8.5"
+            stroke="#ffffff"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <rect x="17.8" y="23.4" width="4.4" height="6.6" rx="0.9" fill="#d9b654" />
+        </svg>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              background: "#3b82f6",
               color: "#ffffff",
-              padding: "12px 32px",
-              borderRadius: "8px",
-              fontSize: "20px",
+              fontSize: "84px",
               fontWeight: 600,
+              letterSpacing: "-2px",
+              lineHeight: 1.05,
+              maxWidth: "1020px",
             }}
           >
-            Get Your Free Offer
+            Show-Me Home Ventures
           </div>
-          <span style={{ color: "#64748b", fontSize: "18px" }}>
-            (417) 258-5577
-          </span>
+          <div
+            style={{
+              color: "#a1b8d0",
+              fontSize: "32px",
+              lineHeight: 1.4,
+              marginTop: "28px",
+              maxWidth: "880px",
+            }}
+          >
+            Sell your Springfield house for cash — and see every number.
+          </div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <div style={{ width: "40px", height: "3px", background: "#d9b654" }} />
+          <div style={{ color: "#d9b654", fontSize: "26px", letterSpacing: "1px" }}>
+            showmehv.com
+          </div>
         </div>
       </div>
     ),

@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { areas } from "@/data/areas";
+import { ArrowRight } from "lucide-react";
+import { areas, type Area } from "@/data/areas";
 import { Hero } from "@/components/sections/hero";
 import { CtaSection } from "@/components/sections/cta-section";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
-import {
-  JsonLd,
-  organizationSchema,
-  serviceSchema,
-  faqSchema,
-  breadcrumbSchema,
-} from "@/components/seo/json-ld";
+import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo/json-ld";
 import { createMetadata } from "@/lib/metadata";
-import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
+import { Section, SectionHeading } from "@/components/ui/section";
+import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
 
 interface AreaPageProps {
   params: Promise<{ slug: string }>;
@@ -35,46 +31,71 @@ export function generateMetadata({ params }: AreaPageProps): Promise<Metadata> {
   });
 }
 
-function getAreaFaqs(city: string, county: string) {
+/**
+ * Builds visible FAQ answers that vary per city using the area data —
+ * county, real local landmarks, and actual neighboring towns — so no two
+ * city pages share find-and-replace answers.
+ */
+function getAreaFaqs(area: Area, nearbyCities: string[]) {
+  const { city, county, neighborhoods } = area;
+  const first = neighborhoods[0];
+  const second = neighborhoods[1] ?? neighborhoods[0];
+  const last = neighborhoods[neighborhoods.length - 1];
+  const nearbyList = nearbyCities.slice(0, 3).join(", ");
+
   return [
     {
       question: `Do you really buy houses in ${city}?`,
-      answer: `Yes. We actively buy houses throughout ${city} and ${county}. We're familiar with the neighborhoods, the market, and the types of properties that come up for sale. Whether you're near the center of town or on the edges, we provide the same Open-Book Certainty Offer™: transparent numbers, a real closing date, and no surprise fees.`,
+      answer: `Yes. We actively buy across ${city} and ${county}, from ${first} to ${second}. We know the local market and the kinds of homes that come up here, and every seller gets the same Open-Book offer: transparent numbers, a real closing date, and no surprise fees.`,
     },
     {
       question: `What kinds of properties do you buy in ${city}?`,
-      answer: `We buy single-family homes, duplexes, and small multi-family properties in ${city} and the surrounding area. We buy as-is—inherited houses, rentals with tenants, foreclosure situations, homes that need repairs, code violations, vacant properties, and more. If you're ready to sell, we're ready to make an offer.`,
+      answer: `We buy single-family homes, duplexes, and small multi-family properties throughout ${city} and ${county}. We buy as-is: inherited houses, rentals with tenants, homes that need repairs, code violations, and vacant properties. If it sits in the ${last} area or anywhere nearby, we will take a look.`,
     },
     {
       question: `How fast can you close on a house in ${city}?`,
-      answer: `We can typically close in two to four weeks. The closing date is part of our Open-Book Certainty Offer™—you'll know exactly when we'll close before you sign anything. We work with local title companies and can coordinate with your timeline.`,
+      answer: `Usually two to four weeks. Your closing date is part of the offer, so you know it before you sign. We coordinate with title companies that handle ${county} closings and can match your timeline.`,
     },
     {
-      question: `Do I need to make repairs before selling?`,
-      answer: `No. We buy homes in any condition throughout ${city}. No repairs, no staging, no inspections required on your end. We evaluate the property, factor in the cost of any needed work, and provide a clear offer. You see the numbers before you decide.`,
+      question: `Do I need to make repairs before selling in ${city}?`,
+      answer: `No. We buy homes in any condition across ${city}, with no repairs, no staging, and no inspections on your end. We factor the cost of any work into the offer and show you that math before you decide.`,
     },
     {
       question: `Is there any obligation to accept your offer?`,
-      answer: `None. We'll provide an Open-Book Certainty Offer™ so you can see your options. You're never obligated to accept. We believe you deserve clarity—no pressure, no strings attached. If our offer doesn't work for you, you walk away.`,
+      answer: `None. We put an Open-Book offer in front of you so you can weigh your options with no pressure. If the number does not work for your ${city} property, you walk away with no strings attached.`,
     },
     {
       question: `What areas near ${city} do you serve?`,
-      answer: `We buy houses throughout the Springfield metro and Ozarks region, including ${city}, neighboring communities, and the surrounding ${county} area. If you're in a nearby town, reach out—we may be able to help or refer you to someone who can.`,
+      answer: `Beyond ${city} itself, we buy across ${county} and nearby towns like ${nearbyList}. If you are just outside our core footprint, reach out and we will tell you honestly whether we can help.`,
     },
   ];
 }
+
+const situationLinks = [
+  { label: "Inherited property", href: "/situations/inherited-house" },
+  { label: "Houses needing repairs", href: "/situations/house-needs-repairs" },
+  { label: "Foreclosure", href: "/situations/foreclosure-options" },
+  { label: "Divorce", href: "/situations/divorce" },
+  { label: "Tenant-occupied rentals", href: "/situations/tenants" },
+  { label: "Vacant properties", href: "/situations/vacant-property" },
+  { label: "Hoarder houses", href: "/situations/hoarder-house" },
+  { label: "Code violations", href: "/situations/code-violations" },
+];
 
 export default async function AreaPage({ params }: AreaPageProps) {
   const { slug } = await params;
   const area = areas.find((a) => a.slug === slug);
   if (!area) notFound();
 
-  const areaFaqs = getAreaFaqs(area.city, area.county);
+  const siblings = areas.filter((a) => a.slug !== area.slug);
+  const areaFaqs = getAreaFaqs(
+    area,
+    siblings.map((a) => a.city)
+  );
   const areaServed = `${area.city}, ${area.state}`;
 
   return (
     <>
-      <JsonLd data={organizationSchema()} />
       <JsonLd
         data={serviceSchema({
           name: `We Buy Houses in ${area.city}, ${area.state}`,
@@ -82,11 +103,10 @@ export default async function AreaPage({ params }: AreaPageProps) {
           areaServed,
         })}
       />
-      <JsonLd data={faqSchema(areaFaqs)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", url: "/" },
-          { name: "Areas We Serve", url: "/areas" },
+          { name: "Service Areas", url: "/service-areas" },
           { name: area.city, url: `/areas/${area.slug}` },
         ])}
       />
@@ -94,86 +114,74 @@ export default async function AreaPage({ params }: AreaPageProps) {
       <Hero
         heading={area.heroHeading}
         subheading={area.heroSubheading}
-        primaryCta={{ text: "Get My Open-Book Offer", href: "/get-offer" }}
-        secondaryCta={{
-          text: "How It Works",
-          href: "/how-it-works",
-        }}
-        primaryCtaSlot={
-          <LeadFormDialog triggerText="Get My Open-Book Offer" triggerSize="lg" />
-        }
+        primaryCta={{ text: "Get My Cash Offer", href: "/get-offer" }}
+        secondaryCta={{ text: "How It Works", href: "/how-it-works" }}
       />
 
-      <section className="py-20 lg:py-28">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg text-slate-600 max-w-none">
-            {area.description.split("\n\n").map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
-          </div>
+      <Section>
+        <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-navy-600">
+          {area.description.split("\n\n").map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Neighborhoods We Serve in {area.city}
-          </h2>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
-            We buy houses throughout {area.city} and {area.county}, including
-            these neighborhoods and surrounding areas.
-          </p>
-          <ul className="mt-8 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      <AnimateOnScroll animation="fade-up">
+        <Section tone="paper">
+          <SectionHeading
+            eyebrow="On the ground"
+            title={`Where we buy in ${area.city}`}
+            lead={`We buy houses across ${area.city} and ${area.county}, including these local areas and landmarks.`}
+          />
+          <div className="mt-8 flex flex-wrap gap-2.5">
             {area.neighborhoods.map((neighborhood) => (
-              <li
-                key={neighborhood}
-                className="flex items-center gap-2 text-slate-700"
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
-                {neighborhood}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Zip Codes
-          </h2>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
-            We buy houses in {area.city} and the surrounding {area.county}{" "}
-            area. Our service area includes these zip codes:
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            {area.zipCodes.map((zip) => (
               <span
-                key={zip}
-                className="rounded-lg bg-slate-100 px-4 py-2 font-mono text-slate-800"
+                key={neighborhood}
+                className="rounded-full border border-navy-200 bg-white px-4 py-1.5 text-sm font-medium text-navy-700"
               >
-                {zip}
+                {neighborhood}
               </span>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            The Open-Book Certainty Offer in {area.city}
-          </h2>
-          <div className="mt-8 max-w-3xl space-y-6 text-lg text-slate-600">
+          <div className="mt-12 border-t border-navy-100 pt-8">
+            <h3 className="font-display text-xl font-semibold tracking-tight text-navy-950">
+              Zip codes we cover
+            </h3>
+            <p className="mt-2 max-w-2xl text-navy-600">
+              Our {area.city} service area includes these zip codes and the
+              surrounding {area.county} area.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              {area.zipCodes.map((zip) => (
+                <span
+                  key={zip}
+                  className="rounded-lg bg-navy-50 px-4 py-2 font-mono text-navy-800"
+                >
+                  {zip}
+                </span>
+              ))}
+            </div>
+          </div>
+        </Section>
+      </AnimateOnScroll>
+
+      <AnimateOnScroll animation="fade-up">
+        <Section>
+          <SectionHeading
+            eyebrow="How the offer works"
+            title={`The Open-Book Certainty Offer in ${area.city}`}
+          />
+          <div className="mt-8 max-w-3xl space-y-6 text-lg leading-relaxed text-navy-600">
             <p>
-              The same transparent process we use everywhere applies in {area.city}.
-              Our Open-Book Certainty Offer™ shows you exactly how we arrive at
-              our number—after-repair value, renovation costs, holding expenses,
-              and a modest risk buffer. You see the math. You get a guaranteed
-              closing date. And our{" "}
+              The same transparent process we use everywhere applies in{" "}
+              {area.city}. Our Open-Book offer shows you exactly how we arrive at
+              our number: after-repair value, renovation costs, holding expenses,
+              and a modest risk buffer. You see the math, you get a real closing
+              date, and our{" "}
               <Link
                 href="/no-surprise-pledge"
-                className="text-blue-700 font-medium hover:underline"
+                className="font-medium text-brand-700 hover:underline"
               >
                 No Surprise Pledge
               </Link>{" "}
@@ -183,54 +191,89 @@ export default async function AreaPage({ params }: AreaPageProps) {
               Learn more about our approach in the{" "}
               <Link
                 href="/open-book-certainty-offer"
-                className="text-blue-700 font-medium hover:underline"
+                className="font-medium text-brand-700 hover:underline"
               >
                 Open-Book Certainty Offer
               </Link>{" "}
               and{" "}
               <Link
                 href="/how-it-works"
-                className="text-blue-700 font-medium hover:underline"
+                className="font-medium text-brand-700 hover:underline"
               >
                 how it works
               </Link>
               .
             </p>
           </div>
-        </div>
-      </section>
+        </Section>
+      </AnimateOnScroll>
 
-      <section className="py-16 border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl font-bold text-slate-900">
-            Common Selling Situations in {area.city}
-          </h2>
-          <p className="mt-2 text-sm text-slate-600">
-            No matter your situation, we can help. We buy houses in {area.city} from homeowners dealing with:
-          </p>
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            <Link href="/situations/inherited-house" className="text-blue-700 hover:underline">Inherited property</Link>
-            <Link href="/situations/house-needs-repairs" className="text-blue-700 hover:underline">Houses needing repairs</Link>
-            <Link href="/situations/foreclosure-options" className="text-blue-700 hover:underline">Foreclosure</Link>
-            <Link href="/situations/divorce" className="text-blue-700 hover:underline">Divorce</Link>
-            <Link href="/situations/tenants" className="text-blue-700 hover:underline">Tenant-occupied rentals</Link>
-            <Link href="/situations/vacant-property" className="text-blue-700 hover:underline">Vacant properties</Link>
-            <Link href="/situations/hoarder-house" className="text-blue-700 hover:underline">Hoarder houses</Link>
-            <Link href="/situations/code-violations" className="text-blue-700 hover:underline">Code violations</Link>
-            <Link href="/situations" className="font-medium text-blue-700 hover:underline">View all situations →</Link>
+      <AnimateOnScroll animation="fade-up">
+        <Section tone="paper">
+          <SectionHeading
+            eyebrow="Every situation"
+            title={`Common selling situations in ${area.city}`}
+            lead={`We buy houses in ${area.city} from homeowners working through all kinds of circumstances.`}
+          />
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-base">
+            {situationLinks.map((situation) => (
+              <Link
+                key={situation.href}
+                href={situation.href}
+                className="font-medium text-brand-700 hover:underline"
+              >
+                {situation.label}
+              </Link>
+            ))}
+            <Link
+              href="/situations"
+              className="inline-flex items-center gap-1.5 font-semibold text-brand-700 hover:underline"
+            >
+              View all situations
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
           </div>
-        </div>
-      </section>
+        </Section>
+      </AnimateOnScroll>
 
-      <FaqAccordion
-        faqs={areaFaqs}
-        title={`Frequently Asked Questions About Selling in ${area.city}`}
-      />
+      <AnimateOnScroll animation="fade-up">
+        <FaqAccordion
+          faqs={areaFaqs}
+          title={`Common questions about selling in ${area.city}`}
+        />
+      </AnimateOnScroll>
+
+      <AnimateOnScroll animation="fade-up">
+        <Section tone="paper">
+          <SectionHeading
+            eyebrow="Nearby communities"
+            title="We also buy across the Springfield metro"
+            lead="Selling somewhere close by? We cover these communities across the Ozarks too."
+          />
+          <div className="mt-8 flex flex-wrap gap-3">
+            {siblings.map((sibling) => (
+              <Link
+                key={sibling.slug}
+                href={`/areas/${sibling.slug}`}
+                className="rounded-full border border-navy-200 bg-white px-5 py-2 text-sm font-medium text-navy-800 transition-colors hover:border-brand-400 hover:text-brand-700"
+              >
+                {sibling.city}, {sibling.state}
+              </Link>
+            ))}
+            <Link
+              href="/service-areas"
+              className="rounded-full bg-navy-950 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-navy-800"
+            >
+              All service areas
+            </Link>
+          </div>
+        </Section>
+      </AnimateOnScroll>
 
       <CtaSection
-        heading={`Ready to Sell Your House in ${area.city}?`}
-        subheading={`Get your Open-Book Certainty Offer™—transparent numbers, a real closing date, and no surprises. We buy houses throughout ${area.city} and ${area.county}.`}
-        ctaText="Get My Open-Book Offer"
+        heading={`Ready to sell your house in ${area.city}?`}
+        subheading={`Get your Open-Book offer with transparent numbers, a real closing date, and no surprises. We buy houses throughout ${area.city} and ${area.county}.`}
+        ctaText="Get My Cash Offer"
         ctaHref="/get-offer"
       />
     </>

@@ -6,27 +6,17 @@ import {
   SituationsGrid,
   ProofBar,
 } from "@/components/sections";
-import {
-  JsonLd,
-  serviceSchema,
-  faqSchema,
-  breadcrumbSchema,
-} from "@/components/seo";
+import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo";
 import { createMetadata } from "@/lib/metadata";
 import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
 import { LeadForm } from "@/components/forms/lead-form";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { CheckCircle2, Clock, DollarSign, FileText, Home, Shield } from "lucide-react";
+import { Section, SectionHeading } from "@/components/ui/section";
+import { Check } from "lucide-react";
 
 export const metadata = createMetadata({
-  title: "Sell Your House Fast in Springfield, MO | Cash Offer in 24 Hours",
+  title: "Sell House Fast in Springfield, MO",
   description:
-    "Need to sell your house fast in Springfield, MO? Get a fair cash offer within 24 hours. No repairs, no commissions, no hassle. Close in as few as 14 days with our Open-Book Certainty Offer™.",
+    "Need to sell your house fast in Springfield, MO? Get a fair cash offer within 24 hours and close in as few as 14 days. No repairs, no fees, no waiting.",
   path: "/sell-your-house-fast",
   keywords: [
     "sell my house fast Springfield MO",
@@ -47,7 +37,7 @@ const faqs = [
   {
     question: "How fast can I sell my house in Springfield, MO?",
     answer:
-      "We can make a cash offer within 24 hours of your initial contact and close in as few as 14 days. You choose the closing date that works for your timeline—we put it in writing and stick to it.",
+      "We can make a cash offer within 24 hours of your initial contact and close in as few as 14 days. You choose the closing date that works for your timeline, and we put it in writing.",
   },
   {
     question: "Do I need to make repairs before selling?",
@@ -57,7 +47,7 @@ const faqs = [
   {
     question: "How is your offer different from other 'we buy houses' companies?",
     answer:
-      "Most cash buyers give you a number with no explanation. We show you exactly how we calculated your offer with our Open-Book Certainty Offer™—the after-repair value, renovation costs, carrying costs, and our margin. Full transparency. Plus our No Surprise Pledge means the price won't change at closing.",
+      "Most cash buyers give you a number with no explanation. We show you exactly how we calculated your offer—the after-repair value, renovation costs, carrying costs, and our margin. Full transparency. Plus our No Surprise Pledge means the price we put in writing is the price you get at closing.",
   },
   {
     question: "Are there any fees or commissions?",
@@ -88,26 +78,22 @@ const faqs = [
 
 const steps = [
   {
-    icon: FileText,
-    title: "1. Tell Us About Your Property",
+    title: "Tell us about your property",
     description:
       "Fill out our quick form or call us directly. We just need a few basics—address, condition, and your timeline.",
   },
   {
-    icon: Home,
-    title: "2. We Evaluate & Present Your Offer",
+    title: "We evaluate and send your offer",
     description:
-      "We'll review the property and present an Open-Book Certainty Offer™ with every line item explained. You see the same math we use.",
+      "We review the property and present an Open-Book offer with every line item explained. You see the same math we use.",
   },
   {
-    icon: Clock,
-    title: "3. Pick Your Closing Date",
+    title: "Pick your closing date",
     description:
-      "Choose a closing date that works for you—as soon as 14 days or months out. We put it in writing with our No Surprise Pledge.",
+      "Choose a closing date that works for you—as soon as 14 days or months out. We put it in writing, backed by our No Surprise Pledge.",
   },
   {
-    icon: DollarSign,
-    title: "4. Close & Get Paid",
+    title: "Close and get paid",
     description:
       "Sign at a local title company, get your cash, and move on. No repairs, no showings, no waiting.",
   },
@@ -131,10 +117,9 @@ export default function SellYourHouseFastPage() {
         data={serviceSchema({
           name: "Sell Your House Fast in Springfield, MO",
           description:
-            "Fast cash home buying service in Springfield, MO. Get a fair Open-Book Certainty Offer™ within 24 hours and close in as few as 14 days. No repairs, no commissions.",
+            "Fast cash home buying service in Springfield, MO. Get a fair Open-Book Certainty Offer within 24 hours and close in as few as 14 days. No repairs, no commissions.",
         })}
       />
-      <JsonLd data={faqSchema(faqs)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", url: "/" },
@@ -154,146 +139,155 @@ export default function SellYourHouseFastPage() {
           <LeadFormDialog
             triggerText="Get My Cash Offer"
             triggerSize="lg"
-            triggerClassName="bg-slate-900 hover:bg-slate-800"
+            triggerClassName="bg-brand-600 hover:bg-brand-700"
           />
         }
       />
 
       <ProofBar />
 
+      {/* Related pages */}
+      <Section compact tone="paper" className="border-b border-navy-100 !py-8">
+        <p className="text-base leading-relaxed text-navy-700">
+          Selling for a different reason? See how{" "}
+          <Link
+            href="/we-buy-houses-springfield-mo"
+            className="font-semibold text-brand-700 hover:underline"
+          >
+            we buy houses in any condition
+          </Link>
+          , learn{" "}
+          <Link
+            href="/cash-home-buyers-springfield-mo"
+            className="font-semibold text-brand-700 hover:underline"
+          >
+            how to compare cash home buyers
+          </Link>{" "}
+          in Springfield, browse{" "}
+          <Link href="/situations" className="font-semibold text-brand-700 hover:underline">
+            common selling situations
+          </Link>
+          , check our{" "}
+          <Link href="/service-areas" className="font-semibold text-brand-700 hover:underline">
+            service areas
+          </Link>
+          , or{" "}
+          <Link href="/get-offer" className="font-semibold text-brand-700 hover:underline">
+            get your cash offer
+          </Link>
+          .
+        </p>
+      </Section>
+
       {/* How it works */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            How to Sell Your House Fast in Springfield
-          </h2>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
-            Four simple steps. No listing, no waiting, no uncertainty.
-          </p>
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step) => {
-              const Icon = step.icon;
-              return (
-                <Card key={step.title} className="border-slate-200 bg-white">
-                  <CardHeader>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-700">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="mt-4 text-lg">{step.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-slate-600">{step.description}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-          <p className="mt-10 text-center">
-            <Link
-              href="/how-it-works"
-              className="font-semibold text-blue-700 hover:text-blue-800 hover:underline"
-            >
-              Learn more about our process →
-            </Link>
-          </p>
-        </div>
-      </section>
+      <Section>
+        <SectionHeading
+          eyebrow="The fast track"
+          title="How to sell your house fast in Springfield"
+          lead="Four simple steps. No listing, no waiting, no uncertainty."
+        />
+        <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 sm:gap-8">
+          {steps.map((step, i) => (
+            <li key={step.title}>
+              <span className="font-display flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-950 text-lg font-semibold text-white">
+                {i + 1}
+              </span>
+              <h3 className="font-display mt-5 text-lg font-semibold tracking-tight text-navy-950">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-navy-600">
+                {step.description}
+              </p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-10">
+          <Link
+            href="/how-it-works"
+            className="inline-flex items-center gap-1.5 font-semibold text-brand-700 hover:underline"
+          >
+            Learn more about our process →
+          </Link>
+        </p>
+      </Section>
 
       {/* Benefits grid */}
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Why Homeowners in Springfield Choose Us
-          </h2>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
-            We&apos;re not like other &quot;we buy houses&quot; companies. Here&apos;s what
-            makes the Open-Book Certainty Offer™ different.
-          </p>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {benefits.map((benefit) => (
-              <li
-                key={benefit}
-                className="flex items-start gap-3 rounded-lg bg-white p-4 shadow-sm"
-              >
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
-                <span className="text-sm font-medium text-slate-800">
-                  {benefit}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <Section tone="paper">
+        <SectionHeading
+          title="Why homeowners in Springfield choose us"
+          lead="We're not like other cash-buying companies. Here's what makes the Open-Book offer different."
+        />
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {benefits.map((benefit) => (
+            <li
+              key={benefit}
+              className="flex items-start gap-3 rounded-xl border border-navy-100 bg-white p-4"
+            >
+              <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" aria-hidden />
+              <span className="text-sm font-medium text-navy-800">{benefit}</span>
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       {/* Inline lead form */}
-      <section id="get-offer" className="py-20 lg:py-28 scroll-mt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Get Your Cash Offer — It Takes 2 Minutes
-            </h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Tell us about your property. We&apos;ll reach out within 2 hours
-              during business hours with a transparent offer.
-            </p>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <LeadForm />
-          </div>
+      <Section id="get-offer" className="scroll-mt-24">
+        <SectionHeading
+          align="center"
+          title="Get your cash offer — it takes 2 minutes"
+          lead="Tell us about your property. We'll reach out within 2 business hours with a transparent offer."
+        />
+        <div className="mx-auto mt-12 max-w-4xl">
+          <LeadForm />
         </div>
-      </section>
+      </Section>
 
       {/* Trust: No Surprise Pledge */}
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Shield className="mx-auto h-12 w-12 text-blue-700" />
-          <h2 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            The No Surprise Pledge
-          </h2>
-          <p className="mt-6 text-lg text-slate-600">
-            Our offer won&apos;t change at closing. What we agree to is what you get.
-            No re-trades, no invented fees, no last-minute adjustments. We put it
-            in writing because you deserve certainty.
+      <Section tone="paper">
+        <div className="mx-auto max-w-3xl text-center">
+          <SectionHeading align="center" title="The No Surprise Pledge" />
+          <p className="mt-6 text-lg leading-relaxed text-navy-600">
+            The number we agree on is the number you get. No re-trades, no invented
+            fees, and no last-minute deductions—we put it in writing because you
+            deserve certainty.
           </p>
           <p className="mt-6">
             <Link
               href="/no-surprise-pledge"
-              className="font-semibold text-blue-700 hover:text-blue-800 hover:underline"
+              className="font-semibold text-brand-700 hover:underline"
             >
               Read the full No Surprise Pledge →
             </Link>
           </p>
         </div>
-      </section>
+      </Section>
 
       {/* Situations we handle */}
       <SituationsGrid />
 
       {/* Internal linking to area pages */}
-      <section className="py-16 border-y border-slate-200 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl font-bold text-slate-900">
-            We Buy Houses Throughout Southwest Missouri
-          </h2>
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            <Link href="/areas/springfield-mo" className="text-blue-700 hover:underline">Springfield, MO</Link>
-            <Link href="/areas/ozark-mo" className="text-blue-700 hover:underline">Ozark, MO</Link>
-            <Link href="/areas/nixa-mo" className="text-blue-700 hover:underline">Nixa, MO</Link>
-            <Link href="/areas/republic-mo" className="text-blue-700 hover:underline">Republic, MO</Link>
-            <Link href="/areas/battlefield-mo" className="text-blue-700 hover:underline">Battlefield, MO</Link>
-            <Link href="/areas" className="font-medium text-blue-700 hover:underline">View all areas →</Link>
-          </div>
+      <Section compact tone="paper" className="border-y border-navy-100">
+        <h2 className="font-display text-xl font-semibold tracking-tight text-navy-950">
+          We buy houses throughout Southwest Missouri
+        </h2>
+        <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <Link href="/areas/springfield-mo" className="text-brand-700 hover:underline">Springfield, MO</Link>
+          <Link href="/areas/ozark-mo" className="text-brand-700 hover:underline">Ozark, MO</Link>
+          <Link href="/areas/nixa-mo" className="text-brand-700 hover:underline">Nixa, MO</Link>
+          <Link href="/areas/republic-mo" className="text-brand-700 hover:underline">Republic, MO</Link>
+          <Link href="/areas/battlefield-mo" className="text-brand-700 hover:underline">Battlefield, MO</Link>
+          <Link href="/service-areas" className="font-medium text-brand-700 hover:underline">View all service areas →</Link>
         </div>
-      </section>
+      </Section>
 
       <FaqAccordion
         faqs={faqs}
-        title="Frequently Asked Questions About Selling Your House Fast"
+        title="Frequently asked questions about selling your house fast"
       />
 
       <CtaSection
-        heading="Ready to Sell Your House Fast?"
-        subheading="Get your Open-Book Certainty Offer™ today—transparent numbers, a real closing date, and no surprises."
+        heading="Ready to sell your house fast?"
+        subheading="Get your Open-Book offer today—transparent numbers, a closing date we put in writing, and no surprises."
         ctaText="Get My Cash Offer"
         ctaHref="/get-offer"
       />

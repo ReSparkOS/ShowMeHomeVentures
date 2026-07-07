@@ -3,6 +3,7 @@ import { createMetadata } from "@/lib/metadata";
 import { LeadForm } from "@/components/forms/lead-form";
 import { siteConfig } from "@/lib/utils";
 import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo";
+import { Section } from "@/components/ui/section";
 import {
   Phone,
   Mail,
@@ -12,9 +13,9 @@ import {
 } from "lucide-react";
 
 export const metadata = createMetadata({
-  title: "Contact Us | Get Your Open-Book Offer",
+  title: "Contact a Springfield Home Buyer",
   description:
-    "Get in touch with Show-Me Home Ventures. Request your free, no-obligation Open-Book Certainty Offer. We respond within 2 hours during business hours.",
+    "Contact Show-Me Home Ventures for a free, no-obligation cash offer on your Springfield, MO house. We respond within two hours during business hours.",
   path: "/contact",
   keywords: [
     "contact Springfield home buyer",
@@ -25,7 +26,7 @@ export const metadata = createMetadata({
 
 const trustBoosters = [
   "Free, no-obligation evaluation",
-  "Local Springfield team—not a call center",
+  "Local Springfield team, not a call center",
   "Response within 2 hours during business hours",
   "We show you the math before you commit",
 ];
@@ -49,110 +50,105 @@ export default function ContactPage() {
         ])}
       />
       <Hero
-        heading="Let's Talk About Your Property"
+        heading="Let's talk about your property"
         subheading="Tell us about your situation. We'll respond within 2 hours during business hours with a transparent offer and next steps."
-        primaryCta={{ text: "Get My Open-Book Offer", href: "#lead-form" }}
+        primaryCta={{ text: "Get My Cash Offer", href: "#lead-form" }}
         secondaryCta={{
           text: "Read the No Surprise Pledge",
           href: "/no-surprise-pledge",
         }}
       />
 
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Left: Lead Form */}
-            <div id="lead-form" className="scroll-mt-24">
-              <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-                Get Your Open-Book Offer
-              </h2>
-              <p className="mt-2 text-slate-600">
-                Fill out the form and we&apos;ll get back to you within 2 hours
-                during business hours.
-              </p>
-              <div className="mt-8">
-                <LeadForm />
-              </div>
+      <Section tone="paper">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Left: Lead Form */}
+          <div id="lead-form" className="scroll-mt-24">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-navy-950 sm:text-3xl">
+              Get your Open-Book offer
+            </h2>
+            <p className="mt-2 text-navy-600">
+              Fill out the form and we&apos;ll get back to you within 2 hours
+              during business hours.
+            </p>
+            <div className="mt-8">
+              <LeadForm />
+            </div>
+          </div>
+
+          {/* Right: Contact Info + Map */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="font-display text-lg font-semibold tracking-tight text-navy-950">
+                Contact information
+              </h3>
+              <ul className="mt-4 space-y-4">
+                <li className="flex items-start gap-3">
+                  <Phone className="mt-0.5 h-5 w-5 shrink-0 text-navy-400" aria-hidden />
+                  <a
+                    href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
+                    className="text-navy-700 hover:text-brand-700"
+                  >
+                    {siteConfig.phone}
+                  </a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Mail className="mt-0.5 h-5 w-5 shrink-0 text-navy-400" aria-hidden />
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    className="text-navy-700 hover:text-brand-700"
+                  >
+                    {siteConfig.email}
+                  </a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-navy-400" aria-hidden />
+                  <address className="not-italic text-navy-700">
+                    {fullAddress}
+                  </address>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Clock className="mt-0.5 h-5 w-5 shrink-0 text-navy-400" aria-hidden />
+                  <div className="text-navy-700">
+                    <p>{siteConfig.businessHours?.weekday || "Mon–Fri 8am–6pm"}</p>
+                    <p>{siteConfig.businessHours?.saturday || "Sat 9am–2pm"}</p>
+                    <p>{siteConfig.businessHours?.sunday || "Sun Closed"}</p>
+                  </div>
+                </li>
+              </ul>
             </div>
 
-            {/* Right: Contact Info + Map */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900">
-                  Contact Information
-                </h3>
-                <ul className="mt-4 space-y-4">
-                  <li className="flex items-start gap-3">
-                    <Phone className="h-5 w-5 shrink-0 text-blue-700 mt-0.5" />
-                    <a
-                      href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
-                      className="text-slate-700 hover:text-blue-700"
-                    >
-                      {siteConfig.phone}
-                    </a>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Mail className="h-5 w-5 shrink-0 text-blue-700 mt-0.5" />
-                    <a
-                      href={`mailto:${siteConfig.email}`}
-                      className="text-slate-700 hover:text-blue-700"
-                    >
-                      {siteConfig.email}
-                    </a>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 shrink-0 text-blue-700 mt-0.5" />
-                    <address className="not-italic text-slate-700">
-                      {fullAddress}
-                    </address>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Clock className="h-5 w-5 shrink-0 text-blue-700 mt-0.5" />
-                    <div className="text-slate-700">
-                      <p>{siteConfig.businessHours?.weekday || "Mon–Fri 8am–6pm"}</p>
-                      <p>{siteConfig.businessHours?.saturday || "Sat 9am–2pm"}</p>
-                      <p>{siteConfig.businessHours?.sunday || "Sun Closed"}</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+            <div className="overflow-hidden rounded-xl border border-navy-100 bg-navy-50">
+              <iframe
+                title="Show-Me Home Ventures Office Location"
+                src="https://www.google.com/maps?q=1619+E+Independence+St,+Springfield,+MO+65804&output=embed"
+                className="aspect-video w-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
 
-              <div className="overflow-hidden rounded-lg border border-slate-200 bg-slate-100">
-                <iframe
-                  title="Show-Me Home Ventures Office Location"
-                  src="https://www.google.com/maps?q=1619+E+Independence+St,+Springfield,+MO+65804&output=embed"
-                  className="aspect-video w-full"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-
-              {/* Trust boosters */}
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900">
-                  Why reach out?
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {trustBoosters.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-2 text-slate-700"
-                    >
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-blue-700" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {/* Trust boosters */}
+            <div>
+              <h3 className="font-display text-lg font-semibold tracking-tight text-navy-950">
+                Why reach out?
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {trustBoosters.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-2 text-navy-700"
+                  >
+                    <CheckCircle2 className="h-5 w-5 shrink-0 text-brand-600" aria-hidden />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <CtaSection
-        ctaHref="#lead-form"
-        ctaText="Get Your Open-Book Offer"
-      />
+      <CtaSection ctaText="Get My Cash Offer" ctaHref="#lead-form" />
     </>
   );
 }

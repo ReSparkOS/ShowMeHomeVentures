@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Section } from "@/components/ui/section";
 
 const exceptions = [
   {
@@ -37,26 +37,24 @@ const exceptions = [
 
 export function PledgeBox() {
   return (
-    <section className="py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="relative overflow-hidden border-emerald-200 bg-white shadow-lg">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-emerald-600 to-blue-600" />
+    <Section>
+      <Card className="border-navy-100 bg-white">
           <CardHeader>
-            <Badge variant="default" className="w-fit bg-emerald-700 hover:bg-emerald-800">
-              Our Pledge
+            <Badge variant="default" className="w-fit">
+              Our pledge
             </Badge>
-            <CardTitle className="mt-3 text-2xl sm:text-3xl">
+            <CardTitle className="mt-3 font-display text-2xl tracking-tight sm:text-3xl">
               The No Surprise Re-Trade Pledge
             </CardTitle>
-            <CardDescription className="text-base text-slate-600">
+            <CardDescription className="text-base text-navy-600">
               When we make you an offer, that&apos;s the number. We don&apos;t
               come back at closing with a lower price, invented fees, or new
               conditions. The offer we agree on is the offer you get.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <h3 className="font-semibold text-slate-900">
-              Clear, Honest Exceptions
+            <h3 className="font-display font-semibold tracking-tight text-navy-950">
+              Clear, honest exceptions
             </h3>
             <Accordion type="single" collapsible className="w-full">
               {exceptions.map((item, index) => (
@@ -64,13 +62,13 @@ export function PledgeBox() {
                   <AccordionTrigger className="text-left">
                     {item.title}
                   </AccordionTrigger>
-                  <AccordionContent className="text-slate-600">
+                  <AccordionContent className="text-navy-600">
                     {item.content}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-navy-600">
               Even in these rare cases, we explain what changed and give you the
               option to walk away with no penalty.
             </p>
@@ -80,8 +78,7 @@ export function PledgeBox() {
               <Link href="/no-surprise-pledge">Read the full pledge →</Link>
             </Button>
           </CardFooter>
-        </Card>
-      </div>
-    </section>
+      </Card>
+    </Section>
   );
 }

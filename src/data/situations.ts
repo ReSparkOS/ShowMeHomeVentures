@@ -25,7 +25,7 @@ export const situations: Situation[] = [
       "When you inherit a home in Springfield or the Ozarks, the last thing you need is pressure or confusion. You're already managing grief, probate, and family dynamics. Our Open-Book Certainty Offer™ gives you a clear, transparent number and a timeline you can count on—so you can focus on what matters.",
     metaTitle: "Sell an Inherited House in Springfield, MO | No Pressure, Clear Numbers",
     metaDescription:
-      "Selling an inherited house in Springfield, MO? Get an honest offer with our Open-Book Certainty Offer™—transparent numbers, real closing dates, no agent fees. We buy as-is.",
+      "Selling an inherited house in Springfield, MO? Get an honest as-is cash offer with transparent numbers, a real closing date, and no agent fees.",
     heroHeading: "Selling an Inherited House in Springfield, MO",
     heroSubheading:
       "No pressure. No agent fees. Just a clear offer and a closing date you can trust—so you can focus on what matters.",
@@ -81,7 +81,7 @@ export const situations: Situation[] = [
       "Roof leaks, foundation issues, outdated systems—selling a house that needs work on the traditional market can be stressful and expensive. We buy homes as-is and show you exactly how we arrive at our offer. No repair loans, no staging, no waiting months for the right buyer.",
     metaTitle: "Sell a House That Needs Repairs in Springfield, MO | As-Is Cash Offer",
     metaDescription:
-      "Sell your house that needs repairs in Springfield, MO—as-is, no repairs required. Get a transparent Open-Book Certainty Offer™ with a real closing date. No agent commissions.",
+      "Sell a house that needs repairs in Springfield, MO as-is. Get a transparent cash offer with a real closing date, no commissions, no repair costs.",
     heroHeading: "Sell a House That Needs Repairs in Springfield, MO",
     heroSubheading:
       "Skip the repairs, skip the waiting. Get a clear offer and a closing date—no surprises.",
@@ -137,7 +137,7 @@ export const situations: Situation[] = [
       "Selling a rental with tenants in Springfield or the Ozarks can be complicated—lease terms, showings, and Missouri landlord-tenant law all add stress. We buy rental properties with tenants in place. You get a clear offer and closing date; we handle the transition.",
     metaTitle: "Sell a Rental Property with Tenants in Springfield, MO | Tenant-Occupied",
     metaDescription:
-      "Sell your rental property with tenants in Springfield, MO—no evictions required. Get an Open-Book Certainty Offer™ and a closing date that works. We buy tenant-occupied homes as-is.",
+      "Sell a tenant-occupied rental in Springfield, MO with no evictions. Get a clear cash offer and a closing date that works. We buy rentals as-is.",
     heroHeading: "Sell a Rental Property with Tenants in Springfield, MO",
     heroSubheading:
       "We buy tenant-occupied rentals. No evictions, no showings—just a clear offer and a closing date.",
@@ -193,7 +193,7 @@ export const situations: Situation[] = [
       "Foreclosure is stressful and time-sensitive. If you're behind on payments in Springfield or the Ozarks, you have options—and we're one of them. We can often close quickly and help you avoid foreclosure on your record. Our Open-Book Certainty Offer™ gives you a real number and date so you can make an informed choice.",
     metaTitle: "Facing Foreclosure in Springfield, MO? Sell Fast | Avoid Foreclosure",
     metaDescription:
-      "Facing foreclosure in Springfield, MO? Sell your home fast with our Open-Book Certainty Offer™. Avoid foreclosure, get a clear offer and closing date. No judgment—just options.",
+      "Facing foreclosure in Springfield, MO? Sell your home fast for cash, avoid foreclosure, and get a clear offer and closing date. No judgment, just options.",
     heroHeading: "Facing Foreclosure? Options in Springfield, MO",
     heroSubheading:
       "You have options. Get a clear offer and a closing date—before time runs out.",
@@ -249,7 +249,7 @@ export const situations: Situation[] = [
       "Selling a home during divorce in Springfield or the Ozarks adds complexity to an already difficult time. You need a buyer who can close on schedule and a process that doesn't drag on. Our Open-Book Certainty Offer™ gives both parties a clear number and a guaranteed closing date—so you can move forward.",
     metaTitle: "Sell a House During Divorce in Springfield, MO | Fast, Clear Closing",
     metaDescription:
-      "Selling a house during divorce in Springfield, MO? Get an Open-Book Certainty Offer™ with a real closing date. No waiting for buyers—close on your timeline and move on.",
+      "Selling a house during divorce in Springfield, MO? Get a clear cash offer and a real closing date, so you can close on your timeline and move on.",
     heroHeading: "Selling a House During Divorce in Springfield, MO",
     heroSubheading:
       "A clear offer. A real closing date. One less thing to argue about.",
@@ -305,7 +305,7 @@ export const situations: Situation[] = [
       "Selling a hoarder house in Springfield or the Ozarks can feel overwhelming—cleanout costs, judgment, and uncertainty about who will even buy it. We buy hoarder homes as-is. No cleanout required, no shame. Our Open-Book Certainty Offer™ shows you exactly what we're offering and when we'll close.",
     metaTitle: "Sell a Hoarder House in Springfield, MO | No Cleanout Required",
     metaDescription:
-      "Sell a hoarder house in Springfield, MO—as-is, no cleanout required. Get an honest Open-Book Certainty Offer™ with a closing date. We've helped many families move forward with dignity.",
+      "Sell a hoarder house in Springfield, MO as-is, no cleanout required. Get an honest cash offer and a closing date. We buy homes in any condition.",
     heroHeading: "Sell a Hoarder House in Springfield, MO",
     heroSubheading:
       "No cleanout. No judgment. Just a clear offer and a path forward.",
@@ -361,7 +361,7 @@ export const situations: Situation[] = [
       "Code violations in Springfield or Greene County can make traditional sales difficult—or impossible. Buyers and lenders often walk away. We buy houses with code violations as-is. Our Open-Book Certainty Offer™ shows you the numbers so you can close and move on instead of fighting city hall.",
     metaTitle: "Sell a House with Code Violations in Springfield, MO | As-Is Cash Offer",
     metaDescription:
-      "Sell a house with code violations in Springfield, MO—as-is. Get an Open-Book Certainty Offer™ and close without fixing citations. We buy properties with code issues.",
+      "Sell a house with code violations in Springfield, MO as-is. Get a clear cash offer and close without fixing the citations yourself. We buy as-is.",
     heroHeading: "Sell a House with Code Violations in Springfield, MO",
     heroSubheading:
       "We buy homes with code violations. No fixes required—just a clear offer and a closing date.",
@@ -417,7 +417,7 @@ export const situations: Situation[] = [
       "Vacant houses in Springfield and the Ozarks can drain your wallet—insurance, utilities, taxes, and worry about vandalism or decay. We buy vacant properties as-is. Get a clear offer and a closing date with our Open-Book Certainty Offer™, and stop paying to hold a property you don't want.",
     metaTitle: "Sell a Vacant Property in Springfield, MO | Stop Paying, Close Fast",
     metaDescription:
-      "Sell your vacant property in Springfield, MO—as-is, fast. Get an Open-Book Certainty Offer™ and stop paying insurance, taxes, and utilities. We buy vacant homes.",
+      "Sell a vacant property in Springfield, MO as-is and fast. Get a clear cash offer and stop paying insurance, taxes, and utilities. We buy vacant homes.",
     heroHeading: "Sell a Vacant Property in Springfield, MO",
     heroSubheading:
       "Stop paying to hold a vacant house. Get a clear offer and a closing date.",

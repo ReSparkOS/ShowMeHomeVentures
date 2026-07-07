@@ -23,6 +23,34 @@ const nextConfig: NextConfig = {
         destination: "/privacy",
         permanent: true,
       },
+      {
+        // /areas duplicated /service-areas as an area hub; keep one.
+        source: "/areas",
+        destination: "/service-areas",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "show-me-home-ventures.vercel.app",
+          },
+        ],
+        destination: "https://showmehv.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.showmehv.com",
+          },
+        ],
+        destination: "https://showmehv.com/:path*",
+        permanent: true,
+      },
     ];
   },
   images: {

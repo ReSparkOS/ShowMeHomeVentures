@@ -13,7 +13,7 @@ export interface StickyMobileCtaProps {
 }
 
 export function StickyMobileCta({
-  ctaText = "Get My Open-Book Offer",
+  ctaText = "Get My Cash Offer",
   ctaHref = "/get-offer",
   scrollToId,
 }: StickyMobileCtaProps) {
@@ -33,45 +33,42 @@ export function StickyMobileCta({
   const phoneDigits = siteConfig.phone.replace(/\D/g, "");
 
   return (
-    <div
-      className="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 px-4 py-3 shadow-lg lg:hidden"
-      role="complementary"
-      aria-label="Quick actions"
-    >
-      <div className="mx-auto flex max-w-sm items-center gap-3">
-        <Button
-          asChild
-          size="lg"
-          className="flex-1 bg-blue-700 hover:bg-blue-800 text-white shadow-lg"
-        >
-          {scrollToId ? (
-            <a href={`#${scrollToId}`} onClick={handleClick}>
-              {ctaText}
-            </a>
-          ) : (
-            <Link href={ctaHref} onClick={handleClick}>
-              {ctaText}
-            </Link>
-          )}
-        </Button>
-        <Button
-          asChild
-          size="lg"
-          variant="outline"
-          className="shrink-0 border-slate-600 bg-transparent text-white hover:bg-slate-800 hover:text-white"
-        >
-          <a
-            href={`tel:${phoneDigits}`}
-            onClick={handlePhoneClick}
-            aria-label={`Call us at ${siteConfig.phone}`}
+    <>
+      {/* In-flow spacer so the fixed bar never covers the end of the page */}
+      <div className="h-[72px] lg:hidden" aria-hidden />
+      <div
+        className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-navy-950/95 px-4 py-3 backdrop-blur lg:hidden"
+        role="complementary"
+        aria-label="Quick actions"
+      >
+        <div className="mx-auto flex max-w-sm items-center gap-3">
+          <Button asChild variant="accent" size="lg" className="flex-1">
+            {scrollToId ? (
+              <a href={`#${scrollToId}`} onClick={handleClick}>
+                {ctaText}
+              </a>
+            ) : (
+              <Link href={ctaHref} onClick={handleClick}>
+                {ctaText}
+              </Link>
+            )}
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="shrink-0 border-white/25 bg-transparent text-white hover:bg-white/10 hover:text-white"
           >
-            <Phone className="h-5 w-5" />
-          </a>
-        </Button>
+            <a
+              href={`tel:${phoneDigits}`}
+              onClick={handlePhoneClick}
+              aria-label={`Call us at ${siteConfig.phone}`}
+            >
+              <Phone className="h-5 w-5" />
+            </a>
+          </Button>
+        </div>
       </div>
-      <p className="mt-1.5 text-center text-xs text-slate-400">
-        No obligation · Free · Call or request online
-      </p>
-    </div>
+    </>
   );
 }

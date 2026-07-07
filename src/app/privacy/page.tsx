@@ -14,14 +14,14 @@ export default function PrivacyPage() {
   return (
     <div className="py-16 lg:py-24">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900">
+        <h1 className="font-display text-4xl font-semibold tracking-tight text-navy-950">
           Privacy Policy
         </h1>
-        <p className="mt-4 text-slate-600">
+        <p className="mt-4 text-navy-600">
           Last updated: February 2025
         </p>
 
-        <div className="mt-12 prose prose-slate max-w-none prose-headings:font-semibold prose-headings:text-slate-900 prose-p:text-slate-600 prose-li:text-slate-600">
+        <div className="mt-12 prose prose-slate max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:text-navy-950 prose-p:text-navy-700 prose-li:text-navy-700">
           <p>
             {siteConfig.name} (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;)
             operates the website {siteConfig.url}. This Privacy Policy describes
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             visit our website or use our services.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             Information We Collect
           </h2>
           <p>
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             How We Use Your Information
           </h2>
           <p>We use the information we collect to:</p>
@@ -72,7 +72,7 @@ export default function PrivacyPage() {
               consent, where required by law)</li>
           </ul>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             Information Sharing
           </h2>
           <p>
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             Data Security
           </h2>
           <p>
@@ -109,7 +109,7 @@ export default function PrivacyPage() {
             and we cannot guarantee absolute security.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             Your Rights
           </h2>
           <p>
@@ -127,14 +127,14 @@ export default function PrivacyPage() {
             To exercise these rights, please contact us at{" "}
             <a
               href={`mailto:${siteConfig.email}`}
-              className="text-emerald-700 hover:underline"
+              className="text-brand-700 hover:underline"
             >
               {siteConfig.email}
             </a>
             . We will respond to your request in accordance with applicable law.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             Cookies
           </h2>
           <p>
@@ -162,7 +162,7 @@ export default function PrivacyPage() {
             website.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             Changes to This Policy
           </h2>
           <p>
@@ -172,7 +172,7 @@ export default function PrivacyPage() {
             to review this policy periodically for any changes.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-12 mb-4 text-slate-900">
+          <h2 className="font-display text-2xl font-semibold mt-12 mb-4 text-navy-950">
             Contact Us
           </h2>
           <p>
@@ -187,7 +187,7 @@ export default function PrivacyPage() {
             Phone:{" "}
             <a
               href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
-              className="text-emerald-700 hover:underline"
+              className="text-brand-700 hover:underline"
             >
               {siteConfig.phone}
             </a>
@@ -195,7 +195,7 @@ export default function PrivacyPage() {
             Email:{" "}
             <a
               href={`mailto:${siteConfig.email}`}
-              className="text-emerald-700 hover:underline"
+              className="text-brand-700 hover:underline"
             >
               {siteConfig.email}
             </a>

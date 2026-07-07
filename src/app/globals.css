@@ -1,15 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdfdfc;
+  --foreground: #16283c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, monospace;
+
+  /* Brand navy — primary ink and dark surfaces */
+  --color-navy-50: #f3f6fa;
+  --color-navy-100: #e7edf4;
+  --color-navy-200: #c9d7e6;
+  --color-navy-300: #a1b8d0;
+  --color-navy-400: #7594b5;
+  --color-navy-500: #54779c;
+  --color-navy-600: #405f82;
+  --color-navy-700: #344d6a;
+  --color-navy-800: #263a51;
+  --color-navy-900: #1a2b3e;
+  --color-navy-950: #0e1c2b;
+
+  /* Brand green — single conversion accent */
+  --color-brand-50: #effaf4;
+  --color-brand-100: #d9f2e4;
+  --color-brand-200: #b3e4cb;
+  --color-brand-300: #7fceac;
+  --color-brand-400: #4ab387;
+  --color-brand-500: #27986c;
+  --color-brand-600: #187e57;
+  --color-brand-700: #146648;
+  --color-brand-800: #13513b;
+  --color-brand-900: #114331;
+  --color-brand-950: #08281d;
+
+  /* Gold — ratings and fine accents only */
+  --color-gold-300: #e6cd80;
+  --color-gold-400: #d9b654;
+  --color-gold-500: #c49f31;
+  --color-gold-600: #a38225;
+
+  /* Warm paper surfaces */
+  --color-paper: #faf9f7;
+  --color-paper-dark: #f3f1ed;
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
@@ -82,8 +119,18 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
-  color: #0f172a; /* slate-900 */
+}
+
+/* Display typography — serif headings with optical sizing */
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+}
+
+::selection {
+  background: #d9f2e4; /* brand-100 */
+  color: #0e1c2b;
 }
 
 /* Custom scrollbar */
@@ -93,16 +140,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9; /* slate-100 */
+  background: #f3f1ed;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #94a3b8; /* slate-400 */
+  background: #a1b8d0; /* navy-300 */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748b; /* slate-500 */
+  background: #54779c; /* navy-500 */
 }
 
 /* Accordion animation utilities */

@@ -75,6 +75,27 @@ const TRUST_BOOSTERS = [
   "We lock a real close date",
 ];
 
+const STEP1_FIELD_ORDER = [
+  "propertyAddress",
+  "propertyType",
+  "propertyCondition",
+  "timeline",
+] as const;
+
+const STEP2_FIELD_ORDER = ["name", "phone", "email", "contactMethod"] as const;
+
+/** Moves keyboard focus to the first invalid field so errors are discoverable. */
+function focusFirstError(
+  errs: Record<string, string[]>,
+  order: readonly string[]
+) {
+  const firstKey = order.find((k) => errs[k]?.length) ?? Object.keys(errs)[0];
+  if (!firstKey) return;
+  requestAnimationFrame(() => {
+    document.getElementById(firstKey)?.focus();
+  });
+}
+
 function SubmitButton({
   children,
   pending,
@@ -85,8 +106,9 @@ function SubmitButton({
   return (
     <Button
       type="submit"
+      variant="accent"
       disabled={pending}
-      className="w-full bg-emerald-700 hover:bg-emerald-800"
+      className="w-full"
     >
       {pending ? (
         <>
@@ -102,12 +124,14 @@ function SubmitButton({
 
 export interface LeadFormProps {
   className?: string;
+  /** Prefills the property address (e.g. from the hero address capture). */
+  initialAddress?: string;
 }
 
-export function LeadForm({ className }: LeadFormProps) {
+export function LeadForm({ className, initialAddress }: LeadFormProps) {
   const [step, setStep] = useState<Step>(1);
   const [step1Data, setStep1Data] = useState<Step1Data>({
-    propertyAddress: "",
+    propertyAddress: initialAddress ?? "",
     propertyType: "",
     propertyCondition: "",
     timeline: "",
@@ -155,6 +179,7 @@ export function LeadForm({ className }: LeadFormProps) {
         errs[path].push(issue.message);
       }
       setErrors(errs);
+      focusFirstError(errs, STEP1_FIELD_ORDER);
       return;
     }
     const data = {
@@ -195,6 +220,7 @@ export function LeadForm({ className }: LeadFormProps) {
         errs[path].push(issue.message);
       }
       setErrors(errs);
+      focusFirstError(errs, STEP2_FIELD_ORDER);
       return;
     }
     const data = {
@@ -227,7 +253,10 @@ export function LeadForm({ className }: LeadFormProps) {
       if (res.success) {
         trackFormSubmit("lead_form", { source: "inline" });
       }
-      if (res.errors) setErrors(res.errors);
+      if (res.errors) {
+        setErrors(res.errors);
+        focusFirstError(res.errors, STEP2_FIELD_ORDER);
+      }
     });
   };
 
@@ -235,18 +264,18 @@ export function LeadForm({ className }: LeadFormProps) {
     return (
       <div
         className={cn(
-          "rounded-lg border border-emerald-200 bg-emerald-50 p-6 text-center",
+          "rounded-xl border border-brand-200 bg-brand-50 p-6 text-center",
           className
         )}
       >
         <CheckCircle2
-          className="mx-auto h-12 w-12 text-emerald-600"
+          className="mx-auto h-12 w-12 text-brand-600"
           aria-hidden
         />
-        <h3 className="mt-3 text-lg font-semibold text-slate-900">
-          Thank you!
+        <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-navy-950">
+          Thank you
         </h3>
-        <p className="mt-2 text-slate-600">{submitResult.message}</p>
+        <p className="mt-2 text-navy-600">{submitResult.message}</p>
       </div>
     );
   }
@@ -255,7 +284,7 @@ export function LeadForm({ className }: LeadFormProps) {
     return (
       <div
         className={cn(
-          "rounded-lg border border-red-200 bg-red-50 p-6 text-center",
+          "rounded-xl border border-red-200 bg-red-50 p-6 text-center",
           className
         )}
       >
@@ -263,10 +292,10 @@ export function LeadForm({ className }: LeadFormProps) {
           className="mx-auto h-12 w-12 text-red-600"
           aria-hidden
         />
-        <h3 className="mt-3 text-lg font-semibold text-slate-900">
+        <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-navy-950">
           Something went wrong
         </h3>
-        <p className="mt-2 text-slate-600">{submitResult.message}</p>
+        <p className="mt-2 text-navy-600">{submitResult.message}</p>
         <Button
           type="button"
           variant="outline"
@@ -292,41 +321,41 @@ export function LeadForm({ className }: LeadFormProps) {
               <div className={cn(
                 "flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors duration-300",
                 step >= 1
-                  ? "bg-emerald-700 text-white"
-                  : "bg-slate-200 text-slate-500"
+                  ? "bg-brand-600 text-white"
+                  : "bg-navy-100 text-navy-500"
               )}>
                 {step > 1 ? (
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 ) : "1"}
               </div>
-              <span className={cn("text-sm font-medium", step >= 1 ? "text-slate-900" : "text-slate-400")}>
-                Property Info
+              <span className={cn("text-sm font-medium", step >= 1 ? "text-navy-900" : "text-navy-400")}>
+                Property info
               </span>
             </div>
             <div className={cn(
               "h-0.5 flex-1 rounded-full transition-colors duration-500",
-              step >= 2 ? "bg-emerald-700" : "bg-slate-200"
+              step >= 2 ? "bg-brand-600" : "bg-navy-100"
             )} />
             <div className="flex items-center gap-2">
               <div className={cn(
                 "flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors duration-300",
                 step >= 2
-                  ? "bg-emerald-700 text-white"
-                  : "bg-slate-200 text-slate-500"
+                  ? "bg-brand-600 text-white"
+                  : "bg-navy-100 text-navy-500"
               )}>
                 2
               </div>
-              <span className={cn("text-sm font-medium", step >= 2 ? "text-slate-900" : "text-slate-400")}>
-                Your Details
+              <span className={cn("text-sm font-medium", step >= 2 ? "text-navy-900" : "text-navy-400")}>
+                Your details
               </span>
             </div>
           </div>
         </div>
 
         {step === 1 ? (
-          <form onSubmit={handleStep1Continue} className="space-y-4">
+          <form onSubmit={handleStep1Continue} className="space-y-4" noValidate>
             <input
               type="text"
               name="website"
@@ -344,9 +373,17 @@ export function LeadForm({ className }: LeadFormProps) {
                 placeholder="123 Main St, Springfield, MO"
                 className="mt-1"
                 defaultValue={step1Data.propertyAddress}
+                aria-invalid={!!errors.propertyAddress}
+                aria-describedby={
+                  errors.propertyAddress ? "propertyAddress-error" : undefined
+                }
               />
               {errors.propertyAddress && (
-                <p className="mt-1 text-sm text-red-600">
+                <p
+                  id="propertyAddress-error"
+                  role="alert"
+                  className="mt-1 text-sm text-red-600"
+                >
                   {errors.propertyAddress[0]}
                 </p>
               )}
@@ -360,7 +397,14 @@ export function LeadForm({ className }: LeadFormProps) {
                 }
                 required
               >
-                <SelectTrigger id="propertyType" className="mt-1">
+                <SelectTrigger
+                  id="propertyType"
+                  className="mt-1"
+                  aria-invalid={!!errors.propertyType}
+                  aria-describedby={
+                    errors.propertyType ? "propertyType-error" : undefined
+                  }
+                >
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
                 <SelectContent>
@@ -377,7 +421,11 @@ export function LeadForm({ className }: LeadFormProps) {
                 value={step1Selects.propertyType || step1Data.propertyType}
               />
               {errors.propertyType && (
-                <p className="mt-1 text-sm text-red-600">
+                <p
+                  id="propertyType-error"
+                  role="alert"
+                  className="mt-1 text-sm text-red-600"
+                >
                   {errors.propertyType[0]}
                 </p>
               )}
@@ -391,7 +439,16 @@ export function LeadForm({ className }: LeadFormProps) {
                 }
                 required
               >
-                <SelectTrigger id="propertyCondition" className="mt-1">
+                <SelectTrigger
+                  id="propertyCondition"
+                  className="mt-1"
+                  aria-invalid={!!errors.propertyCondition}
+                  aria-describedby={
+                    errors.propertyCondition
+                      ? "propertyCondition-error"
+                      : undefined
+                  }
+                >
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
                 <SelectContent>
@@ -408,7 +465,11 @@ export function LeadForm({ className }: LeadFormProps) {
                 value={step1Selects.propertyCondition || step1Data.propertyCondition}
               />
               {errors.propertyCondition && (
-                <p className="mt-1 text-sm text-red-600">
+                <p
+                  id="propertyCondition-error"
+                  role="alert"
+                  className="mt-1 text-sm text-red-600"
+                >
                   {errors.propertyCondition[0]}
                 </p>
               )}
@@ -422,7 +483,14 @@ export function LeadForm({ className }: LeadFormProps) {
                 }
                 required
               >
-                <SelectTrigger id="timeline" className="mt-1">
+                <SelectTrigger
+                  id="timeline"
+                  className="mt-1"
+                  aria-invalid={!!errors.timeline}
+                  aria-describedby={
+                    errors.timeline ? "timeline-error" : undefined
+                  }
+                >
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
                 <SelectContent>
@@ -439,7 +507,11 @@ export function LeadForm({ className }: LeadFormProps) {
                 value={step1Selects.timeline || step1Data.timeline}
               />
               {errors.timeline && (
-                <p className="mt-1 text-sm text-red-600">
+                <p
+                  id="timeline-error"
+                  role="alert"
+                  className="mt-1 text-sm text-red-600"
+                >
                   {errors.timeline[0]}
                 </p>
               )}
@@ -457,9 +529,9 @@ export function LeadForm({ className }: LeadFormProps) {
                       name="situations"
                       value={tag.value}
                       defaultChecked={step1Data.situations.includes(tag.value)}
-                      className="h-4 w-4 rounded border-slate-300 text-emerald-700 focus:ring-emerald-700"
+                      className="h-4 w-4 rounded border-navy-300 text-brand-600 focus:ring-brand-600"
                     />
-                    <span className="text-sm text-slate-700">{tag.label}</span>
+                    <span className="text-sm text-navy-700">{tag.label}</span>
                   </label>
                 ))}
               </div>
@@ -469,7 +541,7 @@ export function LeadForm({ className }: LeadFormProps) {
             </Button>
           </form>
         ) : (
-          <form onSubmit={handleStep2Submit} className="space-y-4">
+          <form onSubmit={handleStep2Submit} className="space-y-4" noValidate>
             <input
               type="text"
               name="website"
@@ -495,9 +567,13 @@ export function LeadForm({ className }: LeadFormProps) {
                 placeholder="Your name"
                 className="mt-1"
                 defaultValue={step2Data.name}
+                aria-invalid={!!errors.name}
+                aria-describedby={errors.name ? "name-error" : undefined}
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name[0]}</p>
+                <p id="name-error" role="alert" className="mt-1 text-sm text-red-600">
+                  {errors.name[0]}
+                </p>
               )}
             </div>
             <div>
@@ -510,9 +586,13 @@ export function LeadForm({ className }: LeadFormProps) {
                 placeholder="(417) 555-0123"
                 className="mt-1"
                 defaultValue={step2Data.phone}
+                aria-invalid={!!errors.phone}
+                aria-describedby={errors.phone ? "phone-error" : undefined}
               />
               {errors.phone && (
-                <p className="mt-1 text-sm text-red-600">{errors.phone[0]}</p>
+                <p id="phone-error" role="alert" className="mt-1 text-sm text-red-600">
+                  {errors.phone[0]}
+                </p>
               )}
             </div>
             <div>
@@ -525,9 +605,13 @@ export function LeadForm({ className }: LeadFormProps) {
                 placeholder="you@example.com"
                 className="mt-1"
                 defaultValue={step2Data.email}
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? "email-error" : undefined}
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email[0]}</p>
+                <p id="email-error" role="alert" className="mt-1 text-sm text-red-600">
+                  {errors.email[0]}
+                </p>
               )}
             </div>
             <div>
@@ -564,7 +648,7 @@ export function LeadForm({ className }: LeadFormProps) {
                 defaultValue={step2Data.notes}
               />
             </div>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-navy-600">
               We respect your privacy. No spam, no sharing your info.
             </p>
             <div className="flex flex-col gap-3">
@@ -572,7 +656,7 @@ export function LeadForm({ className }: LeadFormProps) {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="text-sm text-emerald-700 hover:underline"
+                className="text-sm text-brand-700 hover:underline"
               >
                 ← Back
               </button>
@@ -581,11 +665,11 @@ export function LeadForm({ className }: LeadFormProps) {
         )}
       </div>
       <div className="flex shrink-0 flex-col gap-3 md:w-48">
-        <p className="text-sm font-medium text-slate-700">Why work with us:</p>
-        <ul className="space-y-2 text-sm text-slate-600">
+        <p className="text-sm font-medium text-navy-700">Why work with us:</p>
+        <ul className="space-y-2 text-sm text-navy-600">
           {TRUST_BOOSTERS.map((item) => (
             <li key={item} className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
+              <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-600" aria-hidden />
               {item}
             </li>
           ))}

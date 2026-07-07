@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { MapPin, ArrowRight } from "lucide-react";
 import { createMetadata } from "@/lib/metadata";
 import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo";
 import { Hero, CtaSection } from "@/components/sections";
-import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
+import { Section, SectionHeading } from "@/components/ui/section";
+import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
 import {
   Card,
   CardContent,
@@ -10,14 +12,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { MapPin } from "lucide-react";
 import { areas } from "@/data/areas";
 
 export const metadata = createMetadata({
-  title:
-    "Service Areas | Springfield, Nixa, Ozark, Republic, Battlefield, Rogersville MO",
+  title: "We Buy Houses in Springfield & SW MO",
   description:
-    "Show-Me Home Ventures buys houses in Springfield, MO and across Southwest Missouri—Nixa, Ozark, Republic, Battlefield, Rogersville, and nearby communities. Transparent cash offers and real closing dates.",
+    "We buy houses across Springfield, MO and the Ozarks — Nixa, Ozark, Republic, Battlefield, and Rogersville. Transparent cash offers with real closing dates.",
   path: "/service-areas",
   keywords: [
     "service areas Springfield MO",
@@ -47,27 +47,18 @@ export default function ServiceAreasPage() {
       />
       <Hero
         heading="Serving Springfield and Southwest Missouri"
-        subheading="We buy houses across the Springfield metro and the Ozarks—from Greene and Christian County hubs to Webster County and nearby towns. Same transparent process wherever we can help."
-        primaryCta={{ text: "Get My Open-Book Offer", href: "/get-offer" }}
-        secondaryCta={{
-          text: "How It Works",
-          href: "/how-it-works",
-        }}
-        primaryCtaSlot={
-          <LeadFormDialog triggerText="Get My Open-Book Offer" triggerSize="lg" />
-        }
+        subheading="We buy houses across the Springfield metro and the Ozarks — from Greene and Christian County hubs to Webster County and nearby towns. Same transparent process wherever we can help."
+        primaryCta={{ text: "Get My Cash Offer", href: "/get-offer" }}
+        secondaryCta={{ text: "How It Works", href: "/how-it-works" }}
       />
 
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Where We Buy Houses
-          </h2>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
-            Explore our core service areas below. Don&apos;t see your town? We
-            still may be able to help—especially in Rogersville, Highlandville,
-            Ash Grove, Strafford, and across SW Missouri.
-          </p>
+      <AnimateOnScroll animation="fade-up">
+        <Section tone="paper">
+          <SectionHeading
+            eyebrow="Where we buy"
+            title="Cities and counties we serve"
+            lead="Explore our core service areas below. Don't see your town? We may still be able to help across Greene, Christian, and Webster counties and the wider Ozarks."
+          />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {areas.map((area) => (
               <Link
@@ -75,60 +66,43 @@ export default function ServiceAreasPage() {
                 href={`/areas/${area.slug}`}
                 className="group"
               >
-                <Card className="h-full border-slate-200 bg-white transition-shadow hover:shadow-md group-hover:border-emerald-200">
+                <Card className="h-full transition-all hover:border-brand-300 hover:shadow-md">
                   <CardHeader>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 transition-colors group-hover:bg-emerald-700 group-hover:text-white">
-                      <MapPin className="h-6 w-6" />
+                    <div className="flex items-center gap-2">
+                      <MapPin
+                        className="h-5 w-5 text-navy-400 transition-colors group-hover:text-brand-600"
+                        aria-hidden
+                      />
+                      <CardTitle className="font-display text-lg transition-colors group-hover:text-brand-700">
+                        {area.city}, {area.state}
+                      </CardTitle>
                     </div>
-                    <CardTitle className="mt-3 text-lg transition-colors group-hover:text-emerald-700">
-                      {area.city}, {area.state}
-                    </CardTitle>
-                    <CardDescription className="text-slate-600">
-                      {area.county}
-                    </CardDescription>
+                    <CardDescription>{area.county}</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <span className="inline-block text-sm font-medium text-emerald-700 group-hover:underline">
-                      Learn more about {area.city} →
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 group-hover:underline">
+                      Explore {area.city}
+                      <ArrowRight
+                        className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
                     </span>
                   </CardContent>
                 </Card>
               </Link>
             ))}
-            <Link href="/contact" className="group">
-              <Card className="h-full border-slate-200 bg-white transition-shadow hover:shadow-md group-hover:border-emerald-200">
-                <CardHeader>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 transition-colors group-hover:bg-emerald-700 group-hover:text-white">
-                    <MapPin className="h-6 w-6" />
-                  </div>
-                  <CardTitle className="mt-3 text-lg transition-colors group-hover:text-emerald-700">
-                    Rogersville, MO
-                  </CardTitle>
-                  <CardDescription className="text-slate-600">
-                    Webster County
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <span className="inline-block text-sm font-medium text-emerald-700 group-hover:underline">
-                    Contact us about Rogersville →
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
           </div>
-        </div>
-      </section>
+        </Section>
+      </AnimateOnScroll>
 
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Springfield Area at a Glance
-          </h2>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
-            We&apos;re based in the Springfield metro and buy throughout the
-            surrounding region.
-          </p>
-          <div className="mt-8 overflow-hidden rounded-lg border border-slate-200 bg-slate-100">
+      <AnimateOnScroll animation="fade-up">
+        <Section>
+          <SectionHeading
+            eyebrow="On the map"
+            title="Springfield area at a glance"
+            lead="We're based in the Springfield metro and buy throughout the surrounding region."
+          />
+          <div className="mt-8 overflow-hidden rounded-xl border border-navy-100 bg-navy-50">
             <iframe
               title="Springfield MO and surrounding service area map"
               src="https://www.google.com/maps?q=Springfield,+MO&output=embed"
@@ -137,22 +111,23 @@ export default function ServiceAreasPage() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-        </div>
-      </section>
+        </Section>
+      </AnimateOnScroll>
 
-      <section className="py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Expanding Our Service Area
-          </h2>
-          <div className="mt-8 max-w-3xl space-y-6 text-lg text-slate-600">
+      <AnimateOnScroll animation="fade-up">
+        <Section tone="paper">
+          <SectionHeading
+            eyebrow="Beyond the map"
+            title="Expanding our service area"
+          />
+          <div className="mt-8 max-w-3xl space-y-6 text-lg leading-relaxed text-navy-600">
             <p>
               We&apos;re rooted in Springfield and the Ozarks, and we buy in
               towns well beyond the list above.{" "}
-              <span className="font-medium text-slate-900">
-                Rogersville, Highlandville, Ash Grove, Strafford
-              </span>
-              , and other Southwest Missouri communities are on our radar—if
+              <span className="font-medium text-navy-900">
+                Highlandville, Ash Grove, and Strafford
+              </span>{" "}
+              and other Southwest Missouri communities are on our radar. If
               you&apos;re nearby, reach out and we&apos;ll tell you honestly
               whether we can make an offer.
             </p>
@@ -165,20 +140,20 @@ export default function ServiceAreasPage() {
             <p>
               Our Open-Book Certainty Offer™ works the same wherever we buy:
               transparent numbers, a real closing date, and the No Surprise
-              Pledge—backed by local knowledge of{" "}
-              <span className="text-blue-700">Greene</span>,{" "}
-              <span className="text-blue-700">Christian</span>, and{" "}
-              <span className="text-blue-700">Webster</span> counties and the
-              wider <span className="text-emerald-700">Ozarks</span> market.
+              Pledge, backed by local knowledge of{" "}
+              <span className="font-medium text-navy-900">Greene</span>,{" "}
+              <span className="font-medium text-navy-900">Christian</span>, and{" "}
+              <span className="font-medium text-navy-900">Webster</span>{" "}
+              counties and the wider Ozarks market.
             </p>
           </div>
-        </div>
-      </section>
+        </Section>
+      </AnimateOnScroll>
 
       <CtaSection
-        heading="Ready for an Offer in Your Town?"
-        subheading="Get your Open-Book Certainty Offer™—whether you&apos;re in Springfield, Nixa, Ozark, Republic, Battlefield, Rogersville, or another SW Missouri community we serve."
-        ctaText="Get My Open-Book Offer"
+        heading="Ready for an offer in your town?"
+        subheading="Get your Open-Book offer with transparent numbers and a real closing date. We buy houses across Springfield and the wider Ozarks region."
+        ctaText="Get My Cash Offer"
         ctaHref="/get-offer"
       />
     </>

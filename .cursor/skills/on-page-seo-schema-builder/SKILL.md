@@ -62,7 +62,7 @@ FAQ content must answer real searcher questions. Source ideas from:
   "@type": ["LocalBusiness", "RealEstateAgent"],
   "name": "Show Me Home Ventures",
   "description": "We buy houses for cash in Springfield, MO and surrounding areas. Any condition, no fees, fast closing.",
-  "url": "https://showmehomeventures.com",
+  "url": "https://showmehv.com",
   "telephone": "+1-XXX-XXX-XXXX",
   "address": {
     "@type": "PostalAddress",

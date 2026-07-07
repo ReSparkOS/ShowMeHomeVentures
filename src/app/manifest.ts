@@ -1,8 +1,5 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://showmehomeventures.com";
-
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Show-Me Home Ventures",
@@ -12,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#1d4ed8",
+    theme_color: "#0e1c2b",
     icons: [
       {
         src: "/icon.svg",

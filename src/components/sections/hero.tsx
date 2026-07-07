@@ -1,10 +1,8 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Shield } from "lucide-react";
+import { siteConfig } from "@/lib/utils";
+import { ShieldCheck, Phone } from "lucide-react";
 
 export interface HeroProps {
   heading: string;
@@ -14,6 +12,74 @@ export interface HeroProps {
   showForm?: boolean;
   formSlot?: React.ReactNode;
   primaryCtaSlot?: React.ReactNode;
+  /** Renders the address-capture offer card beside the copy. */
+  addressCapture?: boolean;
+  /** Overrides the badge line above the heading. */
+  badge?: string;
+}
+
+const heroChecks = ["No fees or commissions", "No repairs needed", "Close on your timeline"];
+
+function AddressCaptureCard() {
+  return (
+    <div className="w-full rounded-2xl border border-white/10 bg-white p-6 shadow-2xl shadow-navy-950/40 sm:p-7">
+      <p className="font-display text-xl font-semibold tracking-tight text-navy-950">
+        See what your house is worth
+      </p>
+      <p className="mt-1.5 text-sm leading-relaxed text-navy-600">
+        Free, no-obligation cash offer with every number explained.
+      </p>
+      <form action="/get-offer" method="get" className="mt-5">
+        <label
+          htmlFor="hero-address"
+          className="block text-xs font-semibold uppercase tracking-wide text-navy-700"
+        >
+          Property address
+        </label>
+        <input
+          id="hero-address"
+          name="address"
+          type="text"
+          autoComplete="street-address"
+          placeholder="123 Main St, Springfield, MO"
+          className="mt-1.5 h-12 w-full rounded-lg border border-navy-200 bg-white px-4 text-base text-navy-900 placeholder:text-navy-400 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600/30"
+        />
+        <Button type="submit" variant="accent" size="lg" className="mt-3 w-full">
+          Get My Cash Offer
+        </Button>
+      </form>
+      <ul className="mt-5 space-y-2 border-t border-navy-100 pt-4">
+        {[
+          "Response within 2 business hours",
+          "See the full math behind your offer",
+          "Pick a closing date we put in writing",
+        ].map((item) => (
+          <li key={item} className="flex items-start gap-2 text-sm text-navy-700">
+            <svg
+              className="mt-0.5 h-4 w-4 shrink-0 text-brand-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 text-center text-sm text-navy-500">
+        Prefer to talk?{" "}
+        <a
+          href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
+          className="inline-flex items-center gap-1 font-semibold text-brand-700 hover:underline"
+        >
+          <Phone className="h-3.5 w-3.5" aria-hidden />
+          {siteConfig.phone}
+        </a>
+      </p>
+    </div>
+  );
 }
 
 export function Hero({
@@ -24,95 +90,90 @@ export function Hero({
   showForm = false,
   formSlot,
   primaryCtaSlot,
+  addressCapture = false,
+  badge = "Backed by our No Surprise Pledge",
 }: HeroProps) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const hasAside = addressCapture || (showForm && formSlot);
 
   return (
-    <section
-      className={cn(
-        "relative w-full overflow-hidden py-24 lg:py-32",
-        showForm && "lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center"
-      )}
-    >
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900" />
-      {/* Subtle grid pattern */}
+    <section className="relative w-full overflow-hidden bg-navy-950">
+      {/* Soft depth: single restrained glow, no gradient soup */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
+        aria-hidden
+        className="pointer-events-none absolute -top-40 right-[-10%] h-[480px] w-[640px] rounded-full bg-navy-700/30 blur-3xl"
       />
-      {/* Radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-500/10 blur-3xl rounded-full" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/10"
+      />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row lg:gap-12 lg:items-center">
-        <div className={cn("max-w-3xl", showForm && "lg:max-w-2xl")}>
-          {/* Trust badge */}
-          <div
-            className={cn(
-              "inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-200 backdrop-blur-sm transition-all duration-700",
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-            )}
-          >
-            <Shield className="h-4 w-4" />
-            Backed by Our No Surprise Pledge
-          </div>
-
-          <h1
-            className={cn(
-              "mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl transition-all duration-700 delay-100",
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            )}
-          >
-            {heading}
-          </h1>
-          <p
-            className={cn(
-              "mt-6 text-lg text-slate-300 sm:text-xl transition-all duration-700 delay-200",
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            )}
-          >
-            {subheading}
-          </p>
-          <div
-            className={cn(
-              "mt-10 flex flex-col gap-4 sm:flex-row sm:gap-6 transition-all duration-700 delay-300",
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            )}
-          >
-            {primaryCtaSlot ? (
-              primaryCtaSlot
-            ) : (
-              <Button asChild size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-900/25">
-                <Link href={primaryCta.href}>{primaryCta.text}</Link>
-              </Button>
-            )}
-            <Button asChild variant="outline" size="lg" className="border-slate-500 text-slate-200 hover:bg-white/10 hover:text-white">
-              <Link href={secondaryCta.href}>{secondaryCta.text}</Link>
-            </Button>
-          </div>
-          <div
-            className={cn(
-              "mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-400 transition-all duration-700 delay-[400ms]",
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            )}
-          >
-            {["No obligation", "Free, honest evaluation", "Close on your timeline"].map((item, i) => (
-              <span key={item} className="flex items-center gap-2">
-                {i > 0 && <span className="hidden sm:inline text-slate-600">·</span>}
-                <svg className="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-        {showForm && formSlot && (
-          <div className="mt-12 lg:mt-0 lg:flex-1 lg:max-w-md">{formSlot}</div>
+      <div
+        className={cn(
+          "relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8",
+          hasAside ? "py-16 lg:py-24" : "py-16 lg:py-20"
         )}
+      >
+        <div
+          className={cn(
+            hasAside &&
+              "grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-16"
+          )}
+        >
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm text-navy-100">
+              <ShieldCheck className="h-4 w-4 text-gold-400" aria-hidden />
+              {badge}
+            </div>
+
+            <h1 className="font-display mt-6 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-[3.4rem] lg:leading-[1.08]">
+              {heading}
+            </h1>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-navy-200 sm:text-xl">
+              {subheading}
+            </p>
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+              {primaryCtaSlot ? (
+                primaryCtaSlot
+              ) : (
+                <Button asChild variant="accent" size="lg">
+                  <Link href={primaryCta.href}>{primaryCta.text}</Link>
+                </Button>
+              )}
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-white/25 bg-transparent text-white hover:border-white/40 hover:bg-white/10"
+              >
+                <Link href={secondaryCta.href}>{secondaryCta.text}</Link>
+              </Button>
+            </div>
+
+            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-navy-300">
+              {heroChecks.map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <svg
+                    className="h-4 w-4 text-brand-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {hasAside && (
+            <div className="w-full lg:justify-self-end">
+              {showForm && formSlot ? formSlot : <AddressCaptureCard />}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

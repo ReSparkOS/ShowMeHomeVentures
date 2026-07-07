@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
@@ -16,10 +16,17 @@ const inter = Inter({
   display: "swap",
 });
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz"],
+});
+
 const defaultMetadata = createMetadata({
-  title: "Show-Me Home Ventures",
+  title: "Show-Me Home Ventures | Local Cash Home Buyer in Springfield, MO",
   description:
-    "An Offer You Can Understand. A Close Date You Can Trust. Get your Open-Book Certainty Offer™ from our local Springfield team.",
+    "An offer you can understand and a close date you can trust. Show-Me Home Ventures buys houses across Springfield, MO with transparent, open-book offers.",
   path: "/",
 });
 
@@ -67,8 +74,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="min-h-screen antialiased bg-white text-slate-900">
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+      <body className="min-h-screen antialiased bg-background text-navy-900">
         <AnalyticsScript />
         <a
           href="#main-content"

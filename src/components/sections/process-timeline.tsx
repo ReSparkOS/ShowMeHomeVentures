@@ -1,34 +1,27 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { Section, SectionHeading } from "@/components/ui/section";
 
 const steps = [
   {
     number: 1,
-    title: "Tell Us About Your Property",
+    title: "Tell us about your property",
     description:
       "Fill out our quick form or give us a call. We'll ask a few questions to understand your situation.",
   },
   {
     number: 2,
-    title: "Get Your Open-Book Offer",
+    title: "Get your Open-Book offer",
     description:
       "We walk you through the numbers: after-repair value, renovation costs, and how we arrived at your offer. No hidden math.",
   },
   {
     number: 3,
-    title: "Pick Your Close Date",
+    title: "Pick your closing date",
     description:
-      "Choose the closing date that works for your schedule—often in as few as 14 days. We lock it in writing.",
+      "Choose the closing date that works for your schedule, often in as few as 14 days. We lock it in writing.",
   },
   {
     number: 4,
-    title: "Close with Certainty",
+    title: "Close with certainty",
     description:
       "We handle the paperwork, pay standard closing costs, and wire your funds. No surprises, no last-minute renegotiation.",
   },
@@ -36,74 +29,30 @@ const steps = [
 
 export function ProcessTimeline() {
   return (
-    <section className="py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          How It Works
-        </h2>
-        <p className="mt-4 max-w-2xl text-lg text-slate-600">
-          Four simple steps to a transparent, stress-free sale.
-        </p>
-
-        {/* Mobile: vertical timeline */}
-        <div className="mt-12 lg:hidden">
-          <div className="relative">
-            <div className="absolute left-[19px] top-0 bottom-0 w-px bg-slate-200" />
-            <div className="space-y-8">
-              {steps.map((step) => (
-                <div key={step.number} className="relative flex gap-6">
-                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-emerald-700 bg-white text-base font-bold text-emerald-700">
-                    {step.number}
-                  </div>
-                  <Card className="flex-1 border-slate-200">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-lg">{step.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <CardDescription className="text-base text-slate-600">
-                        {step.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
+    <Section tone="paper">
+      <SectionHeading
+        eyebrow="The process"
+        title="How it works"
+        lead="Four simple steps to a transparent, stress-free sale."
+      />
+      <ol className="mt-12 grid gap-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
+        {steps.map((step, index) => (
+          <li key={step.number} className="relative">
+            <div className="flex items-center gap-4">
+              <span className="font-display flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-950 text-lg font-semibold text-white">
+                {step.number}
+              </span>
+              {index < steps.length - 1 && (
+                <span className="hidden h-px flex-1 bg-navy-200 lg:block" aria-hidden />
+              )}
             </div>
-          </div>
-        </div>
-
-        {/* Desktop: horizontal timeline */}
-        <div className="mt-16 hidden lg:block">
-          <div className="relative">
-            <div className="absolute left-0 right-0 top-[19px] h-px bg-slate-200" />
-            <div className="grid grid-cols-4 gap-6">
-              {steps.map((step, index) => (
-                <div key={step.number} className="relative flex flex-col items-center">
-                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-emerald-700 bg-white text-base font-bold text-emerald-700">
-                    {step.number}
-                  </div>
-                  {index < steps.length - 1 && (
-                    <div
-                      className="absolute left-1/2 top-[19px] h-px w-full bg-slate-200"
-                      style={{ transform: "translateX(25%)" }}
-                      aria-hidden
-                    />
-                  )}
-                  <Card className="mt-6 w-full border-slate-200">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-base">{step.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <CardDescription className="text-sm text-slate-600">
-                        {step.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            <h3 className="font-display mt-5 text-xl font-semibold tracking-tight text-navy-950">
+              {step.title}
+            </h3>
+            <p className="mt-2 leading-relaxed text-navy-600">{step.description}</p>
+          </li>
+        ))}
+      </ol>
+    </Section>
   );
 }

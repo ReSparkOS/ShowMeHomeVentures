@@ -21,7 +21,11 @@ export function AnimateOnScroll({
   once = true,
 }: AnimateOnScrollProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  // "idle" renders children fully visible (server HTML, no-JS, reduced motion,
+  // and anything already in the viewport at hydration). Only elements still
+  // below the fold get hidden and animated in — so SEO crawlers and the LCP
+  // never see opacity-0 content.
+  const [state, setState] = useState<"idle" | "hidden" | "shown">("idle");
 
   useEffect(() => {
     const el = ref.current;
@@ -30,28 +34,36 @@ export function AnimateOnScroll({
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (prefersReducedMotion) {
-      setIsVisible(true);
-      return;
-    }
+    if (prefersReducedMotion) return;
 
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.95) return;
+
+    // Defer to the next frame so we're not setting state synchronously in the
+    // effect body. Below-fold elements aren't on screen, so the one-frame flash
+    // of visible content before it hides is imperceptible.
+    const raf = requestAnimationFrame(() => setState("hidden"));
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setState("shown");
           if (once) observer.unobserve(el);
         } else if (!once) {
-          setIsVisible(false);
+          setState("hidden");
         }
       },
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+    };
   }, [once]);
 
   const baseStyles = "transition-all duration-700 ease-out";
+  const isVisible = state !== "hidden";
 
   const animationStyles = {
     "fade-up": isVisible

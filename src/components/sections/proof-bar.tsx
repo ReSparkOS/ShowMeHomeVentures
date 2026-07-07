@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
-import { MapPin, Clock, Eye, DollarSign, Home, LucideIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export interface ProofStat {
-  icon: LucideIcon;
   value: number;
   prefix?: string;
   suffix?: string;
@@ -14,28 +12,24 @@ export interface ProofStat {
 
 const defaultStats: ProofStat[] = [
   {
-    icon: Home,
     value: 50,
     suffix: "+",
-    label: "Homes Purchased",
+    label: "Homes purchased",
   },
   {
-    icon: Clock,
     value: 14,
-    label: "Avg. Days to Close",
+    suffix: "-day",
+    label: "Average close",
   },
   {
-    icon: Eye,
+    value: 0,
+    prefix: "$",
+    label: "Fees or commissions",
+  },
+  {
     value: 100,
     suffix: "%",
-    label: "Transparent Pricing",
-  },
-  {
-    icon: DollarSign,
-    value: 2,
-    prefix: "$",
-    suffix: "M+",
-    label: "In Offers Made",
+    label: "Of offers explained line by line",
   },
 ];
 
@@ -50,28 +44,33 @@ function AnimatedCounter({
   suffix?: string;
   active: boolean;
 }) {
-  const [display, setDisplay] = useState(0);
+  // Server-render (and no-JS) shows the real value; the count-up only runs
+  // client-side once the bar scrolls into view.
+  const [display, setDisplay] = useState(value);
+  const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
-    if (!active) return;
-    const duration = 1500;
-    const steps = 40;
+    if (!active || value === 0) return;
+    setAnimating(true);
+    const duration = 1200;
+    const steps = 30;
     const increment = value / steps;
-    let current = 0;
     let step = 0;
     const timer = setInterval(() => {
       step++;
-      current = Math.min(Math.round(increment * step), value);
-      setDisplay(current);
-      if (step >= steps) clearInterval(timer);
+      setDisplay(Math.min(Math.round(increment * step), value));
+      if (step >= steps) {
+        clearInterval(timer);
+        setAnimating(false);
+      }
     }, duration / steps);
     return () => clearInterval(timer);
   }, [active, value]);
 
   return (
-    <span>
+    <span className={cn(animating && "tabular-nums")}>
       {prefix}
-      {active ? display : 0}
+      {display}
       {suffix}
     </span>
   );
@@ -89,6 +88,10 @@ export function ProofBar({ stats = defaultStats, className }: ProofBarProps) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -105,44 +108,29 @@ export function ProofBar({ stats = defaultStats, className }: ProofBarProps) {
   return (
     <section
       ref={ref}
-      className={cn(
-        "border-y border-slate-200 bg-white py-8 sm:py-10",
-        className
-      )}
+      className={cn("border-y border-navy-100 bg-paper py-10 sm:py-12", className)}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-12">
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <div
-                key={index}
-                className={cn(
-                  "flex flex-col items-center text-center transition-all duration-700",
-                  inView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4"
-                )}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <p className="mt-3 text-3xl font-bold text-slate-900 tabular-nums">
-                  <AnimatedCounter
-                    value={stat.value}
-                    prefix={stat.prefix}
-                    suffix={stat.suffix}
-                    active={inView}
-                  />
-                </p>
-                <p className="mt-1 text-sm font-medium text-slate-600">
-                  {stat.label}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 sm:gap-10">
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center sm:items-start sm:text-left"
+            >
+              <dd className="font-display text-4xl font-semibold tracking-tight text-navy-950 sm:text-[2.6rem]">
+                <AnimatedCounter
+                  value={stat.value}
+                  prefix={stat.prefix}
+                  suffix={stat.suffix}
+                  active={inView}
+                />
+              </dd>
+              <dt className="mt-2 text-sm font-medium text-navy-600">
+                {stat.label}
+              </dt>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

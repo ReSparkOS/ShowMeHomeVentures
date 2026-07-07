@@ -5,7 +5,7 @@ description: Create and optimize pages for local SEO in Springfield MO and nearb
 
 # Local SEO Agent
 
-You are a **Local SEO Specialist** for Show-Me Home Ventures (showmehomeventures.com), a cash home buyer in Springfield, MO.
+You are a **Local SEO Specialist** for Show-Me Home Ventures (showmehv.com), a cash home buyer in Springfield, MO.
 
 ## Site Architecture (Current)
 
@@ -105,7 +105,7 @@ The site already uses JSON-LD via `src/components/seo/json-ld.tsx`. Available he
 {
   "@type": "LocalBusiness",
   "name": "Show-Me Home Ventures",
-  "url": "https://showmehomeventures.com",
+  "url": "https://showmehv.com",
   "telephone": "[phone]",
   "address": {
     "@type": "PostalAddress",
@@ -137,7 +137,7 @@ When asked about GBP optimization, output:
 - [ ] Secondary categories: "Real Estate Consultant"
 - [ ] Service area set: Springfield, Ozark, Nixa, Republic, Branson + surrounding
 - [ ] Description includes: Open-Book Certainty Offer, No Surprise Pledge, Springfield MO
-- [ ] Website URL: https://showmehomeventures.com
+- [ ] Website URL: https://showmehv.com
 - [ ] Photos: office/team, before-after projects, branding
 - [ ] Posts: publish weekly (case studies, tips, situation-specific)
 - [ ] Q&A: seed with top FAQs from site

@@ -2,58 +2,36 @@ import Link from "next/link";
 import {
   Hero,
   ProofBar,
-  ProcessTimeline,
   OfferBreakdown,
-  PledgeBox,
   TestimonialGrid,
   FaqAccordion,
-  CaseStudyCards,
-  SituationsGrid,
   CtaSection,
 } from "@/components/sections";
 import { JsonLd, serviceSchema, faqSchema, breadcrumbSchema } from "@/components/seo";
 import { createMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/utils";
-import { LeadForm } from "@/components/forms/lead-form";
-import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
 import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
+import { Section, SectionHeading } from "@/components/ui/section";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Eye,
-  Calendar,
-  Shield,
-  MapPin,
-  Phone,
-  ClipboardList,
-  DollarSign,
-  CalendarCheck,
   Home,
   Wrench,
   Users,
   AlertTriangle,
   HeartCrack,
-  Scale,
   Building2,
+  ArrowRight,
 } from "lucide-react";
 
 export const metadata = createMetadata({
-  title: "Sell Your House Fast in Springfield, MO | Cash Offer, No Repairs",
+  title: "Show-Me Home Ventures | Local Cash Home Buyer in Springfield, MO",
   description:
-    "Get a fair, transparent cash offer from a local Springfield, MO homebuyer. No repairs, no agent commissions, no pressure. Close in as few as 14 days with our Open-Book Certainty Offer™.",
+    "Show-Me Home Ventures buys houses across Springfield, MO and the Ozarks with the Open-Book Certainty Offer: transparent math, a written closing date, and no fees.",
   path: "/",
   keywords: [
-    "sell house fast Springfield MO",
     "cash offer for house Springfield",
-    "we buy houses Springfield MO",
     "local home buyer Springfield Missouri",
     "sell house as-is Springfield",
-    "cash home buyers near me",
+    "open book home offer",
   ],
 });
 
@@ -100,65 +78,57 @@ const homepageFaqs = [
   },
 ];
 
-const trustBarItems = [
-  { icon: MapPin, label: "Local" },
-  { icon: Eye, label: "Transparent" },
-  { icon: Calendar, label: "Flexible Closing" },
-  { icon: Home, label: "We Buy As-Is" },
-];
-
 const howItWorksSteps = [
   {
-    number: 1,
-    icon: ClipboardList,
-    title: "Tell Us About Your Property",
+    title: "Tell us about your property",
     description:
       "Fill out our quick form or give us a call. We'll ask a few questions about your home and your situation—no pressure, no obligation.",
   },
   {
-    number: 2,
-    icon: DollarSign,
-    title: "Get Your Offer",
+    title: "See your offer, with the math",
     description:
-      "We'll walk you through our Open-Book Certainty Offer™—after-repair value, renovation costs, and how we arrived at your number. Every line item, explained.",
+      "We walk you through the Open-Book Certainty Offer: after-repair value, renovation costs, and how we arrived at your number. Every line item, explained.",
   },
   {
-    number: 3,
-    icon: CalendarCheck,
-    title: "Pick Your Closing Date",
+    title: "Pick your closing date",
     description:
       "Choose the date that works for your schedule—often in as few as 14 days. We lock it in writing, handle the paperwork, and wire your funds.",
   },
 ];
 
 const situationsList = [
-  { icon: Home, label: "Inherited Houses", href: "/situations/inherited-house" },
-  { icon: Wrench, label: "Repairs Needed", href: "/situations/house-needs-repairs" },
-  { icon: Users, label: "Landlords & Tenants", href: "/situations/tenants" },
-  { icon: Scale, label: "Probate", href: "/situations/inherited-house" },
+  { icon: Home, label: "Inherited house", href: "/situations/inherited-house" },
+  { icon: Wrench, label: "House needs repairs", href: "/situations/house-needs-repairs" },
+  { icon: Users, label: "Rental with tenants", href: "/situations/tenants" },
+  { icon: AlertTriangle, label: "Facing foreclosure", href: "/situations/foreclosure-options" },
   { icon: HeartCrack, label: "Divorce", href: "/situations/divorce" },
-  { icon: AlertTriangle, label: "Foreclosure", href: "/situations/foreclosure-options" },
-  { icon: Building2, label: "Vacant Homes", href: "/situations/vacant-property" },
+  { icon: Building2, label: "Vacant property", href: "/situations/vacant-property" },
+];
+
+const areaLinks = [
+  { label: "Springfield", href: "/areas/springfield-mo" },
+  { label: "Ozark", href: "/areas/ozark-mo" },
+  { label: "Nixa", href: "/areas/nixa-mo" },
+  { label: "Republic", href: "/areas/republic-mo" },
+  { label: "Battlefield", href: "/areas/battlefield-mo" },
+  { label: "Rogersville", href: "/areas/rogersville-mo" },
 ];
 
 const pillars = [
   {
-    title: "Open-Book Numbers",
+    title: "Open-book numbers",
     description:
-      "We show you exactly how we calculate your offer. After-repair value, renovation costs, carrying costs—every line item, explained in plain language.",
-    icon: Eye,
+      "We show you exactly how we calculate your offer—after-repair value, renovation costs, carrying costs—every line item in plain language.",
   },
   {
-    title: "A Real Close Date",
+    title: "A real close date",
     description:
       "We don't string you along. Pick a closing date—often in as few as 14 days—and we put it in writing.",
-    icon: Calendar,
   },
   {
     title: "The No Surprise Pledge",
     description:
       "Our offer won't change at the last minute. What we agree to is what you get. Period.",
-    icon: Shield,
   },
 ];
 
@@ -178,7 +148,7 @@ export default function HomePage() {
     <>
       <JsonLd
         data={serviceSchema({
-          name: "Sell Your House Fast in Springfield, MO",
+          name: "Open-Book Home Buying in Springfield, MO",
           description:
             "Local Springfield home-buying service with transparent Open-Book Certainty Offers, no surprise re-trades, and flexible closing timelines.",
         })}
@@ -189,311 +159,198 @@ export default function HomePage() {
 
       {/* Hero */}
       <Hero
-        heading="Sell Your House Fast in Springfield, MO"
-        subheading="Get a fair, transparent cash offer from a local homebuyer. No repairs, no agent commissions, no pressure."
-        primaryCta={{ text: "Get My Cash Offer", href: "/contact" }}
-        secondaryCta={{
-          text: "See How It Works",
-          href: "/how-it-works",
-        }}
-        primaryCtaSlot={
-          <LeadFormDialog
-            triggerText="Get My Cash Offer"
-            triggerSize="lg"
-            triggerClassName="bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-900/25"
-          />
-        }
+        heading="Sell your Springfield house for cash — and see every number."
+        subheading="We're a local home-buying company, not a lead broker. Get a written cash offer with the math explained, and a closing date we put in writing."
+        primaryCta={{ text: "Get My Cash Offer", href: "/get-offer" }}
+        secondaryCta={{ text: "See How It Works", href: "/how-it-works" }}
+        addressCapture
       />
-
-      {/* Trust Bar */}
-      <section className="border-y border-slate-200 bg-white py-4 sm:py-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:gap-x-12">
-            {trustBarItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.label}
-                  className="flex items-center gap-2 text-sm font-medium text-slate-700"
-                >
-                  <Icon className="h-4 w-4 text-emerald-600" />
-                  {item.label}
-                </div>
-              );
-            })}
-            <a
-              href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
-              className="flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-800"
-            >
-              <Phone className="h-4 w-4" />
-              {siteConfig.phone}
-            </a>
-          </div>
-        </div>
-      </section>
 
       <ProofBar />
 
-      {/* Internal linking bar */}
-      <section className="py-8 border-b border-slate-200 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-base text-slate-700">
-            Serving homeowners across Springfield and Southwest Missouri. Explore{" "}
-            <Link href="/service-areas" className="font-semibold text-blue-700 hover:underline">
-              areas we serve
+      {/* Internal linking strip */}
+      <Section compact tone="paper" className="border-b border-navy-100 !py-8">
+        <p className="text-base leading-relaxed text-navy-700">
+          Need to{" "}
+          <Link href="/sell-your-house-fast" className="font-semibold text-brand-700 hover:underline">
+            sell your house fast
+          </Link>
+          ? Comparing{" "}
+          <Link href="/cash-home-buyers-springfield-mo" className="font-semibold text-brand-700 hover:underline">
+            cash home buyers in Springfield
+          </Link>
+          ? Start with how our{" "}
+          <Link href="/we-buy-houses-springfield-mo" className="font-semibold text-brand-700 hover:underline">
+            we-buy-houses process
+          </Link>{" "}
+          works, browse{" "}
+          <Link href="/situations" className="font-semibold text-brand-700 hover:underline">
+            common selling situations
+          </Link>
+          , or read our{" "}
+          <Link href="/faq" className="font-semibold text-brand-700 hover:underline">
+            FAQ
+          </Link>
+          .
+        </p>
+      </Section>
+
+      {/* How It Works */}
+      <AnimateOnScroll animation="fade-up">
+        <Section>
+          <SectionHeading
+            eyebrow="How it works"
+            title="Three steps to a transparent cash offer"
+            lead="No listings, no showings, no waiting on financing. Here's the entire process."
+          />
+          <ol className="mt-12 grid gap-10 sm:grid-cols-3 sm:gap-8">
+            {howItWorksSteps.map((step, i) => (
+              <li key={step.title} className="relative">
+                <div className="flex items-center gap-4">
+                  <span className="font-display flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-950 text-lg font-semibold text-white">
+                    {i + 1}
+                  </span>
+                  {i < howItWorksSteps.length - 1 && (
+                    <span className="hidden h-px flex-1 bg-navy-200 sm:block" aria-hidden />
+                  )}
+                </div>
+                <h3 className="font-display mt-5 text-xl font-semibold tracking-tight text-navy-950">
+                  {step.title}
+                </h3>
+                <p className="mt-2 leading-relaxed text-navy-600">{step.description}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-10">
+            <Link
+              href="/how-it-works"
+              className="inline-flex items-center gap-1.5 font-semibold text-brand-700 hover:underline"
+            >
+              See the full process in detail
+              <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            , browse common{" "}
-            <Link href="/situations" className="font-semibold text-blue-700 hover:underline">
-              selling situations
-            </Link>
-            , or read our{" "}
-            <Link href="/faq" className="font-semibold text-blue-700 hover:underline">
-              frequently asked questions
-            </Link>
-            .
           </p>
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-600">
-            <span className="font-medium text-slate-900">We buy houses in:</span>
-            <Link href="/areas/springfield-mo" className="text-blue-700 hover:underline">Springfield</Link>
-            <Link href="/areas/ozark-mo" className="text-blue-700 hover:underline">Ozark</Link>
-            <Link href="/areas/nixa-mo" className="text-blue-700 hover:underline">Nixa</Link>
-            <Link href="/areas/republic-mo" className="text-blue-700 hover:underline">Republic</Link>
-            <Link href="/areas/battlefield-mo" className="text-blue-700 hover:underline">Battlefield</Link>
-            <span className="text-blue-700">Rogersville</span>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works — 3 Steps */}
-      <AnimateOnScroll animation="fade-up">
-        <section className="py-20 lg:py-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                How It Works
-              </h2>
-              <p className="mt-4 text-lg text-slate-600">
-                Three simple steps to a fair, transparent cash offer on your Springfield home.
-              </p>
-            </div>
-            <div className="mt-12 grid gap-8 sm:grid-cols-3">
-              {howItWorksSteps.map((step, i) => {
-                const Icon = step.icon;
-                return (
-                  <AnimateOnScroll key={step.number} animation="fade-up" delay={i * 150}>
-                    <Card className="h-full border-slate-200 bg-white">
-                      <CardHeader>
-                        <div className="flex items-center gap-4">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-emerald-700 bg-white text-base font-bold text-emerald-700">
-                            {step.number}
-                          </div>
-                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700">
-                            <Icon className="h-5 w-5" />
-                          </div>
-                        </div>
-                        <CardTitle className="mt-4 text-lg">{step.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <CardDescription className="text-base text-slate-600">
-                          {step.description}
-                        </CardDescription>
-                      </CardContent>
-                    </Card>
-                  </AnimateOnScroll>
-                );
-              })}
-            </div>
-            <p className="mt-8 text-center">
-              <Link
-                href="/how-it-works"
-                className="font-semibold text-blue-700 hover:text-blue-800 hover:underline"
-              >
-                See the full process in detail →
-              </Link>
-            </p>
-          </div>
-        </section>
+        </Section>
       </AnimateOnScroll>
 
-      {/* Situations We Help With */}
+      {/* Open-Book Certainty Offer */}
       <AnimateOnScroll animation="fade-up">
-        <section className="py-20 lg:py-28 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              We Buy Houses in Every Situation
-            </h2>
-            <p className="mt-4 max-w-2xl text-lg text-slate-600">
-              Whatever you&apos;re going through, we can help. No judgment, no pressure—just a fair offer
-              from a local Springfield buyer.
-            </p>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {situationsList.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <Link key={item.label} href={item.href} className="group">
-                    <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-4 transition-all hover:shadow-md hover:border-emerald-200 group-hover:bg-emerald-50/50">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 transition-colors group-hover:bg-emerald-700 group-hover:text-white">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <span className="font-medium text-slate-900 group-hover:text-emerald-700 transition-colors">
-                        {item.label}
-                      </span>
+        <Section tone="paper">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <SectionHeading
+                eyebrow="The Open-Book Certainty Offer™"
+                title="Most buyers give you a number. We show you the math."
+                lead="Our offer comes with the full calculation—after-repair value, renovation budget, carrying costs—so you can judge it for yourself instead of taking our word for it."
+              />
+              <dl className="mt-10 space-y-8">
+                {pillars.map((pillar, i) => (
+                  <div key={pillar.title} className="flex gap-5">
+                    <span className="font-display flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-brand-600 text-sm font-semibold text-brand-700">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <dt className="font-display text-lg font-semibold tracking-tight text-navy-950">
+                        {pillar.title}
+                      </dt>
+                      <dd className="mt-1.5 leading-relaxed text-navy-600">
+                        {pillar.description}
+                      </dd>
                     </div>
-                  </Link>
-                );
-              })}
-            </div>
-            <p className="mt-8 text-center">
-              <Link
-                href="/situations"
-                className="font-semibold text-blue-700 hover:text-blue-800 hover:underline"
-              >
-                View all selling situations →
-              </Link>
-            </p>
-          </div>
-        </section>
-      </AnimateOnScroll>
-
-      {/* Lead form section */}
-      <AnimateOnScroll animation="fade-up">
-        <section
-          id="get-offer"
-          className="py-20 lg:py-28 scroll-mt-24"
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                Get Your Fair Cash Offer Today
-              </h2>
-              <p className="mt-4 text-lg text-slate-600">
-                Tell us about your property. We&apos;ll respond within 2 hours
-                during business hours with a transparent offer and a closing plan.
-              </p>
-              <p className="mt-2 text-sm text-slate-500">
-                Or call us directly at{" "}
-                <a href={`tel:${siteConfig.phone.replace(/\D/g, "")}`} className="font-semibold text-blue-700 hover:underline">
-                  {siteConfig.phone}
-                </a>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-10">
+                <Link
+                  href="/open-book-certainty-offer"
+                  className="inline-flex items-center gap-1.5 font-semibold text-brand-700 hover:underline"
+                >
+                  Learn how the offer works
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
               </p>
             </div>
-            <div className="max-w-4xl mx-auto">
-              <LeadForm />
+            <div className="lg:pt-4">
+              <OfferBreakdown embedded />
             </div>
           </div>
-        </section>
+        </Section>
       </AnimateOnScroll>
 
-      {/* Open-Book Certainty Offer — 3 Pillars */}
+      {/* Situations */}
       <AnimateOnScroll animation="fade-up">
-        <section className="py-20 lg:py-28 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              The Open-Book Certainty Offer™
-            </h2>
-            <p className="mt-4 max-w-3xl text-lg text-slate-600">
-              Most cash buyers give you a number with no explanation. We do the opposite.
-              Our Open-Book Certainty Offer™ shows you exactly how we calculate your offer—after-repair value,
-              renovation costs, carrying costs—so you can see the math and decide for yourself.
-            </p>
-            <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {pillars.map((pillar, i) => {
-                const Icon = pillar.icon;
-                return (
-                  <AnimateOnScroll key={pillar.title} animation="fade-up" delay={i * 150}>
-                    <Card className="h-full border-slate-200 bg-white group">
-                      <CardHeader>
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-700 transition-colors group-hover:bg-blue-700 group-hover:text-white">
-                          <Icon className="h-6 w-6" />
-                        </div>
-                        <CardTitle className="mt-4 text-xl">{pillar.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <CardDescription className="text-base text-slate-600">
-                          {pillar.description}
-                        </CardDescription>
-                      </CardContent>
-                    </Card>
-                  </AnimateOnScroll>
-                );
-              })}
-            </div>
-            <p className="mt-10 text-center">
-              <Link
-                href="/open-book-certainty-offer"
-                className="font-semibold text-blue-700 hover:text-blue-800 hover:underline"
-              >
-                Learn more about the Open-Book Certainty Offer →
-              </Link>
-            </p>
+        <Section>
+          <SectionHeading
+            eyebrow="Every situation"
+            title="Whatever the reason, we can help"
+            lead="No judgment and no pressure—just a fair, explained offer from a local Springfield buyer."
+          />
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {situationsList.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="group flex items-center justify-between gap-3 rounded-xl border border-navy-100 bg-white px-5 py-4 transition-colors hover:border-brand-300 hover:bg-brand-50/40"
+                >
+                  <span className="flex items-center gap-3">
+                    <Icon className="h-5 w-5 text-navy-400 transition-colors group-hover:text-brand-700" aria-hidden />
+                    <span className="font-medium text-navy-900 transition-colors group-hover:text-brand-800">
+                      {item.label}
+                    </span>
+                  </span>
+                  <ArrowRight
+                    className="h-4 w-4 text-navy-300 transition-all group-hover:translate-x-0.5 group-hover:text-brand-600"
+                    aria-hidden
+                  />
+                </Link>
+              );
+            })}
           </div>
-        </section>
-      </AnimateOnScroll>
-
-      <AnimateOnScroll animation="fade-up">
-        <OfferBreakdown />
-      </AnimateOnScroll>
-      <AnimateOnScroll animation="fade-up">
-        <PledgeBox />
-      </AnimateOnScroll>
-
-      {/* Trust Section */}
-      <AnimateOnScroll animation="fade-up">
-        <section className="py-20 lg:py-28 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Springfield Trusts Show-Me Home Ventures
-            </h2>
-            <p className="mt-4 max-w-2xl text-lg text-slate-600">
-              We&apos;re a local business serving our neighbors in Southwest Missouri. Here&apos;s what the numbers look like.
-            </p>
-            <div className="mt-12 grid gap-8 sm:grid-cols-3">
-              <div className="text-center">
-                <p className="text-4xl font-bold text-emerald-700">50+</p>
-                <p className="mt-2 text-sm font-medium text-slate-600">Deals Closed</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-emerald-700">5+</p>
-                <p className="mt-2 text-sm font-medium text-slate-600">Years in Business</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-emerald-700">4.9★</p>
-                <p className="mt-2 text-sm font-medium text-slate-600">Average Review Rating</p>
-              </div>
-            </div>
-          </div>
-        </section>
+          <p className="mt-8">
+            <Link
+              href="/situations"
+              className="inline-flex items-center gap-1.5 font-semibold text-brand-700 hover:underline"
+            >
+              View all selling situations
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </p>
+        </Section>
       </AnimateOnScroll>
 
       <AnimateOnScroll animation="fade-up">
         <TestimonialGrid limit={3} featuredOnly />
       </AnimateOnScroll>
 
+      {/* Service areas */}
       <AnimateOnScroll animation="fade-up">
-        <SituationsGrid
-          heading="Common Selling Situations in Springfield"
-          description="We buy houses in a range of situations across Springfield and Southwest Missouri—no judgment, no pressure."
-        />
+        <Section tone="paper">
+          <SectionHeading
+            eyebrow="Where we buy"
+            title="Serving Springfield and Southwest Missouri"
+            lead="Greene County, Christian County, and the surrounding communities of the Ozarks."
+          />
+          <div className="mt-8 flex flex-wrap gap-3">
+            {areaLinks.map((area) => (
+              <Link
+                key={area.href}
+                href={area.href}
+                className="rounded-full border border-navy-200 bg-white px-5 py-2 text-sm font-medium text-navy-800 transition-colors hover:border-brand-400 hover:text-brand-700"
+              >
+                {area.label}, MO
+              </Link>
+            ))}
+            <Link
+              href="/service-areas"
+              className="rounded-full bg-navy-950 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-navy-800"
+            >
+              All service areas
+            </Link>
+          </div>
+        </Section>
       </AnimateOnScroll>
-
-      {/* Phone CTA */}
-      <section className="py-12 bg-emerald-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-lg font-semibold text-white">
-            Ready to talk? Call us today.
-          </p>
-          <a
-            href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
-            className="mt-2 inline-flex items-center gap-2 text-2xl font-bold text-white hover:text-emerald-100 transition-colors"
-          >
-            <Phone className="h-6 w-6" />
-            {siteConfig.phone}
-          </a>
-          <p className="mt-2 text-sm text-emerald-100">
-            {siteConfig.businessHours.weekday} · {siteConfig.businessHours.saturday}
-          </p>
-        </div>
-      </section>
 
       <AnimateOnScroll animation="fade-up">
         <FaqAccordion faqs={homepageFaqs} title="Frequently Asked Questions" />

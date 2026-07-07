@@ -14,7 +14,6 @@ export interface CaseStudy {
   afterValue: string;
   renovationCost: string;
   offerPrice: string;
-  images: string[];
   featured: boolean;
 }
 
@@ -39,10 +38,6 @@ export const caseStudies: CaseStudy[] = [
     afterValue: "$170,000 (after renovation)",
     renovationCost: "$40,000",
     offerPrice: "$79,000 (70% of $170K minus $40K repairs)",
-    images: [
-      "/images/case-studies/phelps-grove-before.jpg",
-      "/images/case-studies/phelps-grove-after.jpg",
-    ],
     featured: true,
   },
   {
@@ -65,10 +60,6 @@ export const caseStudies: CaseStudy[] = [
     afterValue: "$150,000 (after repairs)",
     renovationCost: "$30,000",
     offerPrice: "$75,000 (70% of $150K minus $30K repairs)",
-    images: [
-      "/images/case-studies/westside-duplex-exterior.jpg",
-      "/images/case-studies/westside-duplex-interior.jpg",
-    ],
     featured: true,
   },
   {
@@ -91,9 +82,6 @@ export const caseStudies: CaseStudy[] = [
     afterValue: "$135,000 (after repairs)",
     renovationCost: "$25,000",
     offerPrice: "$69,500 (70% of $135K minus $25K repairs)",
-    images: [
-      "/images/case-studies/grant-beach-before.jpg",
-    ],
     featured: false,
   },
   {
@@ -116,10 +104,6 @@ export const caseStudies: CaseStudy[] = [
     afterValue: "$160,000 (after full rehab)",
     renovationCost: "$50,000",
     offerPrice: "$62,000 (70% of $160K minus $50K repairs)",
-    images: [
-      "/images/case-studies/roundtree-before.jpg",
-      "/images/case-studies/roundtree-after.jpg",
-    ],
     featured: true,
   },
 ];

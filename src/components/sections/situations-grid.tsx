@@ -8,17 +8,11 @@ import {
   Package,
   FileWarning,
   Building2,
+  ArrowRight,
   LucideIcon,
 } from "lucide-react";
 import { situations } from "@/data/situations";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { Section, SectionHeading } from "@/components/ui/section";
 
 const iconMap: Record<string, LucideIcon> = {
   Home,
@@ -37,50 +31,38 @@ export interface SituationsGridProps {
 }
 
 export function SituationsGrid({
-  heading = "Your Situation, Our Solution",
-  description = "We buy houses in a range of situations—no judgment, no pressure.",
+  heading = "Common selling situations",
+  description = "We buy houses in a range of situations, with no judgment and no pressure.",
 }: SituationsGridProps = {}) {
   return (
-    <section className="py-20 lg:py-28 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          {heading}
-        </h2>
-        <p className="mt-4 max-w-2xl text-lg text-slate-600">
-          {description}
-        </p>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {situations.map((situation) => {
-            const IconComponent = iconMap[situation.icon] ?? Home;
-            return (
-              <Link
-                key={situation.slug}
-                href={`/situations/${situation.slug}`}
-                className="group"
-              >
-                <Card className="h-full border-slate-200 bg-white transition-shadow hover:shadow-md group-hover:border-emerald-200">
-                  <CardHeader>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 group-hover:bg-emerald-700 group-hover:text-white transition-colors">
-                      <IconComponent className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="mt-3 text-lg group-hover:text-emerald-700 transition-colors">
-                      {situation.shortTitle}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <CardDescription className="text-slate-600 line-clamp-2">
-                      {situation.description}
-                    </CardDescription>
-                    <span className="mt-2 inline-block text-sm font-medium text-emerald-700 group-hover:underline">
-                      Learn more →
-                    </span>
-                  </CardContent>
-                </Card>
-              </Link>
-            );
-          })}
-        </div>
+    <Section tone="paper">
+      <SectionHeading eyebrow="Every situation" title={heading} lead={description} />
+      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {situations.map((situation) => {
+          const Icon = iconMap[situation.icon] ?? Home;
+          return (
+            <Link
+              key={situation.slug}
+              href={`/situations/${situation.slug}`}
+              className="group flex items-center justify-between gap-3 rounded-xl border border-navy-100 bg-white px-5 py-4 transition-colors hover:border-brand-300 hover:bg-brand-50/40"
+            >
+              <span className="flex items-center gap-3">
+                <Icon
+                  className="h-5 w-5 shrink-0 text-navy-400 transition-colors group-hover:text-brand-700"
+                  aria-hidden
+                />
+                <span className="font-medium text-navy-900 transition-colors group-hover:text-brand-800">
+                  {situation.shortTitle}
+                </span>
+              </span>
+              <ArrowRight
+                className="h-4 w-4 shrink-0 text-navy-300 transition-all group-hover:translate-x-0.5 group-hover:text-brand-600"
+                aria-hidden
+              />
+            </Link>
+          );
+        })}
       </div>
-    </section>
+    </Section>
   );
 }

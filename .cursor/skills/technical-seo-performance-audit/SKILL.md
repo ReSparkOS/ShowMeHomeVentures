@@ -97,7 +97,7 @@ Use `next-sitemap` or Next.js built-in `app/sitemap.ts`:
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://showmehomeventures.com'
+  const baseUrl = 'https://showmehv.com'
   
   const staticPages = [
     '', '/about', '/how-it-works', '/testimonials', '/contact',
@@ -140,7 +140,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/', '/thank-you/'],
     },
-    sitemap: 'https://showmehomeventures.com/sitemap.xml',
+    sitemap: 'https://showmehv.com/sitemap.xml',
   }
 }
 ```
@@ -151,7 +151,7 @@ export default function robots(): MetadataRoute.Robots {
 // In page metadata
 export const metadata = {
   alternates: {
-    canonical: 'https://showmehomeventures.com/sell-my-house-fast',
+    canonical: 'https://showmehv.com/sell-my-house-fast',
   },
 }
 ```
