@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -129,6 +130,7 @@ export interface LeadFormProps {
 }
 
 export function LeadForm({ className, initialAddress }: LeadFormProps) {
+  const router = useRouter();
   const [step, setStep] = useState<Step>(1);
   const [step1Data, setStep1Data] = useState<Step1Data>({
     propertyAddress: initialAddress ?? "",
@@ -249,10 +251,16 @@ export function LeadForm({ className, initialAddress }: LeadFormProps) {
       submitData.set("website", (formData.get("website") as string) ?? "");
 
       const res = await submitLead(submitData);
-      setSubmitResult({ success: res.success, message: res.message });
       if (res.success) {
         trackFormSubmit("lead_form", { source: "inline" });
+        // Redirect to a dedicated confirmation URL. This gives ad platforms a
+        // distinct "conversion" page that only loads after a real submission,
+        // and is the trigger point for Google Ads conversion tracking.
+        setSubmitResult({ success: true, message: res.message });
+        router.push("/get-offer/thank-you");
+        return;
       }
+      setSubmitResult({ success: res.success, message: res.message });
       if (res.errors) {
         setErrors(res.errors);
         focusFirstError(res.errors, STEP2_FIELD_ORDER);
