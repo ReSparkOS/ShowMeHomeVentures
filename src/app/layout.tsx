@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -43,29 +42,35 @@ function AnalyticsScript() {
   // A single gtag.js load configures Google Ads (always) plus GA4 when set.
   const gtagIds = [GOOGLE_ADS_ID, gaId].filter(Boolean) as string[];
 
+  // Plain <script> tags (not next/script) so the Google tag is a real script
+  // in the served HTML: crawler-detectable (so Google's tag check passes) and
+  // loaded early, which matters for a conversion tag. React hoists the async
+  // library tag into <head>.
   return (
     <>
       {gtagIds.length > 0 && (
         <>
-          <Script
+          <script
+            async
             src={`https://www.googletagmanager.com/gtag/js?id=${gtagIds[0]}`}
-            strategy="afterInteractive"
           />
-          <Script id="gtag-init" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              ${gtagIds.map((id) => `gtag('config', '${id}');`).join("\n              ")}
-            `}
-          </Script>
+          <script
+            id="gtag-init"
+            dangerouslySetInnerHTML={{
+              __html:
+                "window.dataLayer=window.dataLayer||[];" +
+                "function gtag(){dataLayer.push(arguments);}" +
+                "gtag('js',new Date());" +
+                gtagIds.map((id) => `gtag('config','${id}');`).join(""),
+            }}
+          />
         </>
       )}
       {plausibleDomain && (
-        <Script
+        <script
+          defer
           src="https://plausible.io/js/script.js"
           data-domain={plausibleDomain}
-          strategy="afterInteractive"
         />
       )}
     </>
