@@ -22,8 +22,17 @@ export function trackFormSubmit(formName: string, extra?: EventParams) {
   trackEvent("form_submit", { form_name: formName, ...extra });
 }
 
+/** Google Ads conversion event name for a phone/contact click. */
+const ADS_CONTACT_EVENT =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_CONTACT_EVENT ||
+  "ads_conversion_Contact_Us_1";
+
 export function trackPhoneClick(location: string) {
   trackEvent("phone_click", { click_location: location });
+  // Report a phone tap as a Google Ads "Contact" conversion.
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", ADS_CONTACT_EVENT);
+  }
 }
 
 export function trackCtaClick(ctaLabel: string, location: string) {

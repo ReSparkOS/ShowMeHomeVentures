@@ -2,28 +2,34 @@
 
 import { useEffect } from "react";
 
-const ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-18305817967";
-const CONVERSION_LABEL = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL;
+// Google Ads conversion event name for a completed lead-form submission.
+// Registered as a conversion action in the Google Ads account and linked to
+// the site's Google tag (AW-18305817967), so firing it reports the conversion.
+const LEAD_FORM_EVENT =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_EVENT ||
+  "ads_conversion_Submit_lead_form_1";
 
 /**
  * Fires the Google Ads lead conversion once on mount. Rendered on the
- * thank-you page, which is only reached after a successful form submission —
- * so firing here (via client-side navigation) is the reliable signal, rather
- * than relying on a URL-based rule that a single-page transition wouldn't trip.
- *
- * Requires the conversion label from the Google Ads conversion action's event
- * snippet (the part after "AW-XXXX/"). No-ops until that is provided, so the
- * base tag can ship independently.
+ * thank-you page, which is only reached after a successful form submission.
+ * Uses the standard gtag queue-stub so the event is recorded even if the
+ * gtag.js library hasn't finished loading yet — it processes the queue on load.
  */
 export function AdsConversion() {
   useEffect(() => {
-    if (!CONVERSION_LABEL) return;
-    if (typeof window === "undefined" || typeof window.gtag !== "function") {
-      return;
+    if (typeof window === "undefined") return;
+    const w = window as typeof window & {
+      dataLayer?: unknown[];
+      gtag?: (...args: unknown[]) => void;
+    };
+    w.dataLayer = w.dataLayer || [];
+    if (typeof w.gtag !== "function") {
+      w.gtag = function () {
+        // eslint-disable-next-line prefer-rest-params
+        w.dataLayer!.push(arguments);
+      };
     }
-    window.gtag("event", "conversion", {
-      send_to: `${ADS_ID}/${CONVERSION_LABEL}`,
-    });
+    w.gtag("event", LEAD_FORM_EVENT);
   }, []);
 
   return null;
