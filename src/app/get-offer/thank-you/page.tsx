@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { siteConfig, formatPhone } from "@/lib/utils";
+import { AdsConversion } from "@/components/seo/ads-conversion";
 import { CheckCircle2, Phone } from "lucide-react";
 
 // Conversion-only confirmation page: reached only after a successful lead
@@ -25,6 +26,9 @@ export default function ThankYouPage() {
 
   return (
     <>
+      {/* Reports the completed-lead conversion to Google Ads. */}
+      <AdsConversion />
+
       {/* Confirmation band */}
       <div className="relative overflow-hidden bg-navy-950 py-16 text-center sm:py-20">
         <div

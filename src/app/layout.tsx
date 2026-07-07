@@ -32,40 +32,44 @@ const defaultMetadata = createMetadata({
 
 export const metadata: Metadata = defaultMetadata;
 
+// Public Google Ads tag for showmehv.com (a page-level tag, not a secret).
+const GOOGLE_ADS_ID =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-18305817967";
+
 function AnalyticsScript() {
   const gaId = process.env.NEXT_PUBLIC_GA4_ID;
   const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
-  if (gaId) {
-    return (
-      <>
+  // A single gtag.js load configures Google Ads (always) plus GA4 when set.
+  const gtagIds = [GOOGLE_ADS_ID, gaId].filter(Boolean) as string[];
+
+  return (
+    <>
+      {gtagIds.length > 0 && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${gtagIds[0]}`}
+            strategy="afterInteractive"
+          />
+          <Script id="gtag-init" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              ${gtagIds.map((id) => `gtag('config', '${id}');`).join("\n              ")}
+            `}
+          </Script>
+        </>
+      )}
+      {plausibleDomain && (
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+          src="https://plausible.io/js/script.js"
+          data-domain={plausibleDomain}
           strategy="afterInteractive"
         />
-        <Script id="ga4-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${gaId}');
-          `}
-        </Script>
-      </>
-    );
-  }
-
-  if (plausibleDomain) {
-    return (
-      <Script
-        src="https://plausible.io/js/script.js"
-        data-domain={plausibleDomain}
-        strategy="afterInteractive"
-      />
-    );
-  }
-
-  return null;
+      )}
+    </>
+  );
 }
 
 export default function RootLayout({
