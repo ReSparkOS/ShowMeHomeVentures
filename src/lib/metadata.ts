@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://showmehv.com";
-const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+// Google Search Console verification token (public meta tag, not a secret).
+const GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+  "6Po_D_g2jI05CS3zgYVw5iWAZ9G-QooQOMtLKmMWFI4";
 
 export interface CreateMetadataOptions {
   title: string;
