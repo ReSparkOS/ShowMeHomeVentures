@@ -37,13 +37,14 @@ export function Footer() {
               </p>
             </div>
             <div className="flex items-center gap-5">
-              <a
-                href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
+              <PhoneTracker
+                phone={siteConfig.phone}
+                location="footer_cta"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-brand-300"
               >
                 <Phone className="h-4 w-4 text-brand-400" aria-hidden />
                 {formatPhone(siteConfig.phone)}
-              </a>
+              </PhoneTracker>
               <Link
                 href="/get-offer"
                 className="inline-flex h-11 items-center rounded-lg bg-brand-600 px-6 text-sm font-semibold text-white transition-colors hover:bg-brand-500"

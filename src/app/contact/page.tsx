@@ -2,7 +2,7 @@ import { Hero, CtaSection } from "@/components/sections";
 import { createMetadata } from "@/lib/metadata";
 import { LeadForm } from "@/components/forms/lead-form";
 import { siteConfig } from "@/lib/utils";
-import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo";
+import { JsonLd, serviceSchema, breadcrumbSchema, PhoneTracker } from "@/components/seo";
 import { Section } from "@/components/ui/section";
 import {
   Phone,
@@ -84,12 +84,13 @@ export default function ContactPage() {
               <ul className="mt-4 space-y-4">
                 <li className="flex items-start gap-3">
                   <Phone className="mt-0.5 h-5 w-5 shrink-0 text-navy-400" aria-hidden />
-                  <a
-                    href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
+                  <PhoneTracker
+                    phone={siteConfig.phone}
+                    location="contact_page"
                     className="text-navy-700 hover:text-brand-700"
                   >
                     {siteConfig.phone}
-                  </a>
+                  </PhoneTracker>
                 </li>
                 <li className="flex items-start gap-3">
                   <Mail className="mt-0.5 h-5 w-5 shrink-0 text-navy-400" aria-hidden />

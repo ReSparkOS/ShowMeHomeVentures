@@ -1,5 +1,6 @@
 import { createMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/utils";
+import { PhoneTracker } from "@/components/seo/click-trackers";
 
 export const metadata = createMetadata({
   title: "Privacy Policy",
@@ -185,12 +186,13 @@ export default function PrivacyPage() {
             {fullAddress}
             <br />
             Phone:{" "}
-            <a
-              href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
+            <PhoneTracker
+              phone={siteConfig.phone}
+              location="privacy_page"
               className="text-brand-700 hover:underline"
             >
               {siteConfig.phone}
-            </a>
+            </PhoneTracker>
             <br />
             Email:{" "}
             <a

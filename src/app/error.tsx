@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { formatPhone, siteConfig } from "@/lib/utils";
+import { trackPhoneClick } from "@/lib/analytics";
 
 export default function GlobalError({
   error,
@@ -30,6 +31,7 @@ export default function GlobalError({
         <a
           href={`tel:${phoneDigits}`}
           className="font-semibold text-brand-700 hover:underline"
+          onClick={() => trackPhoneClick("error_page")}
         >
           {formatPhone(siteConfig.phone)}
         </a>

@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { formatPhone, siteConfig } from "@/lib/utils";
+import { PhoneTracker } from "@/components/seo/click-trackers";
 
 export default function NotFound() {
-  const phoneDigits = siteConfig.phone.replace(/\D/g, "");
-
   return (
     <section className="flex min-h-[60vh] flex-col items-center justify-center px-4 py-24 text-center">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-700">
@@ -50,12 +49,13 @@ export default function NotFound() {
         </ul>
         <p className="mt-6 text-sm text-navy-600">
           Or call us at{" "}
-          <a
-            href={`tel:${phoneDigits}`}
+          <PhoneTracker
+            phone={siteConfig.phone}
+            location="not_found_page"
             className="font-semibold text-brand-700 hover:underline"
           >
             {formatPhone(siteConfig.phone)}
-          </a>
+          </PhoneTracker>
           .
         </p>
       </div>

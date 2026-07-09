@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 import { siteConfig } from "@/lib/utils";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, trackPhoneClick } from "@/lib/analytics";
 
 export interface StickyMobileCtaProps {
   ctaText?: string;
@@ -27,7 +27,7 @@ export function StickyMobileCta({
   };
 
   const handlePhoneClick = () => {
-    trackEvent("phone_click", { location: "sticky_mobile" });
+    trackPhoneClick("sticky_mobile");
   };
 
   const phoneDigits = siteConfig.phone.replace(/\D/g, "");

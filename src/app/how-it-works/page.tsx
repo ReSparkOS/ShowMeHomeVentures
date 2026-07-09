@@ -6,7 +6,7 @@ import {
   FaqAccordion,
   CtaSection,
 } from "@/components/sections";
-import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo";
+import { JsonLd, serviceSchema, breadcrumbSchema, PhoneTracker } from "@/components/seo";
 import { createMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/utils";
 import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
@@ -321,13 +321,14 @@ export default function HowItWorksPage() {
         <p className="text-lg font-semibold text-white">
           Questions about the process? Call us.
         </p>
-        <a
-          href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
+        <PhoneTracker
+          phone={siteConfig.phone}
+          location="how_it_works_phone_cta"
           className="mt-2 inline-flex items-center gap-2 text-2xl font-bold text-white transition-colors hover:text-brand-300"
         >
           <Phone className="h-6 w-6 text-brand-400" aria-hidden />
           {siteConfig.phone}
-        </a>
+        </PhoneTracker>
       </Section>
 
       <TestimonialGrid limit={2} featuredOnly />

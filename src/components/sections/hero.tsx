@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/utils";
+import { PhoneTracker } from "@/components/seo/click-trackers";
 import { ShieldCheck, Phone } from "lucide-react";
 
 export interface HeroProps {
@@ -70,13 +71,14 @@ function AddressCaptureCard() {
       </ul>
       <p className="mt-4 text-center text-sm text-navy-500">
         Prefer to talk?{" "}
-        <a
-          href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
+        <PhoneTracker
+          phone={siteConfig.phone}
+          location="hero_address_card"
           className="inline-flex items-center gap-1 font-semibold text-brand-700 hover:underline"
         >
           <Phone className="h-3.5 w-3.5" aria-hidden />
           {siteConfig.phone}
-        </a>
+        </PhoneTracker>
       </p>
     </div>
   );

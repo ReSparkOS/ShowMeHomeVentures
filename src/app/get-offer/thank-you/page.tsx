@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { siteConfig, formatPhone } from "@/lib/utils";
 import { AdsConversion } from "@/components/seo/ads-conversion";
+import { PhoneTracker } from "@/components/seo/click-trackers";
 import { CheckCircle2, Phone } from "lucide-react";
 
 // Conversion-only confirmation page: reached only after a successful lead
@@ -22,8 +23,6 @@ const nextSteps = [
 ];
 
 export default function ThankYouPage() {
-  const phoneDigits = siteConfig.phone.replace(/\D/g, "");
-
   return (
     <>
       {/* Reports the completed-lead conversion to Google Ads. */}
@@ -76,10 +75,10 @@ export default function ThankYouPage() {
             Don&apos;t want to wait? Call us now and we&apos;ll get started.
           </p>
           <Button asChild variant="accent" size="lg">
-            <a href={`tel:${phoneDigits}`}>
+            <PhoneTracker phone={siteConfig.phone} location="thank_you_page">
               <Phone className="mr-2 h-4 w-4" aria-hidden />
               {formatPhone(siteConfig.phone)}
-            </a>
+            </PhoneTracker>
           </Button>
           <Link
             href="/"

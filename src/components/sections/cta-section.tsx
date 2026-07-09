@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { siteConfig, formatPhone } from "@/lib/utils";
+import { PhoneTracker } from "@/components/seo/click-trackers";
 import { ArrowRight, Phone } from "lucide-react";
 
 export interface CtaSectionProps {
@@ -54,13 +55,14 @@ export function CtaSection({
                 />
               </Link>
             </Button>
-            <a
-              href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
+            <PhoneTracker
+              phone={siteConfig.phone}
+              location="cta_section"
               className="inline-flex items-center gap-2 text-base font-semibold text-white transition-colors hover:text-brand-300"
             >
               <Phone className="h-4 w-4 text-brand-400" aria-hidden />
               {formatPhone(siteConfig.phone)}
-            </a>
+            </PhoneTracker>
           </div>
           <ul className="mt-9 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-navy-300">
             {trustBullets.map((bullet) => (
