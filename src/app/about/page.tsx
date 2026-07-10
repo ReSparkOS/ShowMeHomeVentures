@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Hero, CtaSection } from "@/components/sections";
 import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo";
 import { createMetadata } from "@/lib/metadata";
@@ -137,9 +138,13 @@ export default function AboutPage() {
           <Card>
             <CardHeader className="pb-2">
               <div className="flex items-start gap-4">
-                <div className="font-display flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-950 text-sm font-semibold text-white">
-                  JR
-                </div>
+                <Image
+                  src="/images/jordan-rhodes.jpg"
+                  alt="Jordan Rhodes, founder of Show-Me Home Ventures"
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 shrink-0 rounded-full object-cover ring-2 ring-navy-100"
+                />
                 <div>
                   <CardTitle className="font-display text-xl text-navy-950">
                     Jordan Rhodes
