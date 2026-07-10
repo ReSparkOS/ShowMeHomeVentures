@@ -88,6 +88,10 @@ export function organizationSchema(options?: OrganizationSchemaOptions) {
     ],
     image: `${url}/opengraph-image`,
     logo: `${url}/icon.svg`,
+    ...(Object.values(siteConfig.social).filter(Boolean).length > 0 && {
+      sameAs: Object.values(siteConfig.social).filter(Boolean),
+    }),
+    ...(siteConfig.social.google && { hasMap: siteConfig.social.google }),
     priceRange: "$$",
     openingHoursSpecification: [
       {

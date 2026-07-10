@@ -37,7 +37,9 @@ export const siteConfig = {
     saturday: "Sat 9am–2pm",
     sunday: "Sun Closed",
   },
-  // Add real profile URLs here (Google Business Profile, Facebook) once they
-  // exist — placeholder links in schema sameAs actively hurt trust.
-  social: {} as { facebook?: string; google?: string },
+  // Real profile URLs only (placeholder links in schema sameAs actively hurt
+  // trust). google is the verified Google Business Profile share link.
+  social: {
+    google: "https://share.google/u7hhWDFwL2R3CMF9c",
+  } as { facebook?: string; google?: string },
 };
