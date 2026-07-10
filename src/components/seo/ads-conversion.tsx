@@ -2,12 +2,12 @@
 
 import { useEffect } from "react";
 
-// Google Ads conversion event name for a completed lead-form submission.
-// Registered as a conversion action in the Google Ads account and linked to
-// the site's Google tag (AW-18305817967), so firing it reports the conversion.
-const LEAD_FORM_EVENT =
-  process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_EVENT ||
-  "ads_conversion_Submit_lead_form_1";
+// Google Ads conversion label for a completed lead-form submission — the
+// "Submit lead form (tag)" conversion action created manually on the site's
+// Google tag (AW-18305817967). Must be the full send_to value.
+const LEAD_FORM_SEND_TO =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_SEND_TO ||
+  "AW-18305817967/K6LxCJGWg84cEO-68phE";
 
 /**
  * Fires the Google Ads lead conversion once on mount. Rendered on the
@@ -29,7 +29,7 @@ export function AdsConversion() {
         w.dataLayer!.push(arguments);
       };
     }
-    w.gtag("event", LEAD_FORM_EVENT);
+    w.gtag("event", "conversion", { send_to: LEAD_FORM_SEND_TO });
   }, []);
 
   return null;
